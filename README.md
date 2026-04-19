@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="assets/readme-header.svg" width="100%" alt="RWA EUDR Perú — trazabilidad verificable para café, cacao y la canasta agroexportadora" />
+<img src="landing/images/hero-campo.jpg" width="100%" alt="Plantación en laderas — café y terrazas en el contexto de trazabilidad agroexportadora" style="border-radius: 14px; max-height: 320px; object-fit: cover;" />
+
+<sub>Imagen de referencia para uso del proyecto (material divulgativo).</sub>
 
 <br />
 
