@@ -16,6 +16,12 @@ import {
   generateEvidenceHash,
   cache
 } from './services/apify-services.js';
+import {
+  getCapabilities,
+  getChecklist,
+  analyzeGaps,
+  queryCopilot
+} from './services/eudr-copilot.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -649,6 +655,46 @@ app.post('/api/cache/clear', authMiddleware, (req, res) => {
 app.get('/api/cache/status', authMiddleware, (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ error: 'Sin permisos' });
   res.json({ files: fs.existsSync(dataDir) ? fs.readdirSync(dataDir).filter(f => f.endsWith('.json')) : [] });
+});
+
+// ============== EUDR COPILOTO (preparación documental, no asesoría legal) ==============
+app.get('/api/copilot/capabilities', authMiddleware, (req, res) => {
+  try {
+    res.json(getCapabilities());
+  } catch (e) {
+    res.status(500).json({ error: String(e.message || e) });
+  }
+});
+
+app.get('/api/copilot/checklist', authMiddleware, (req, res) => {
+  try {
+    res.json(getChecklist());
+  } catch (e) {
+    res.status(500).json({ error: String(e.message || e) });
+  }
+});
+
+app.post('/api/copilot/gap-analysis', authMiddleware, (req, res) => {
+  try {
+    const lotId = req.body?.lotId;
+    const lot = lots.find((l) => l.id === lotId) || req.body?.lot || {};
+    res.json(analyzeGaps(lot));
+  } catch (e) {
+    res.status(500).json({ error: String(e.message || e) });
+  }
+});
+
+app.post('/api/copilot/query', authMiddleware, async (req, res) => {
+  try {
+    const { question, useLlm } = req.body || {};
+    if (!question || typeof question !== 'string') {
+      return res.status(400).json({ error: 'Campo question (string) requerido' });
+    }
+    const result = await queryCopilot(question.trim(), { useLlm: Boolean(useLlm) });
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: String(e.message || e) });
+  }
 });
 
 // ============== STATIC ==============

@@ -76,6 +76,12 @@ function App() {
   const [complianceSummary, setComplianceSummary] = useState({});
   const [ddsReports, setDdsReports] = useState([]);
 
+  const [copilotCaps, setCopilotCaps] = useState(null);
+  const [copilotQuestion, setCopilotQuestion] = useState('');
+  const [copilotResult, setCopilotResult] = useState(null);
+  const [copilotGap, setCopilotGap] = useState(null);
+  const [copilotBusy, setCopilotBusy] = useState(false);
+
   const [selectedLot, setSelectedLot] = useState(null);
   const [checking, setChecking] = useState(false);
   const [creatingDds, setCreatingDds] = useState(false);
@@ -132,6 +138,14 @@ function App() {
       setIsLoading(false);
     }
   }, [token, authHeaders, clearSession]);
+
+  useEffect(() => {
+    if (!token) return;
+    fetch('/api/copilot/capabilities', { headers: authHeaders(token) })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => j && setCopilotCaps(j))
+      .catch(() => setCopilotCaps(null));
+  }, [token, authHeaders]);
 
   useEffect(() => {
     if (!token) return;
@@ -234,6 +248,38 @@ function App() {
     }
   };
 
+  const handleGapAnalysis = async () => {
+    if (!selectedLot || !token) return;
+    setCopilotBusy(true);
+    setCopilotGap(null);
+    try {
+      const res = await fetch('/api/copilot/gap-analysis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...authHeaders() },
+        body: JSON.stringify({ lotId: selectedLot.id })
+      });
+      if (res.ok) setCopilotGap(await res.json());
+    } finally {
+      setCopilotBusy(false);
+    }
+  };
+
+  const handleCopilotQuery = async (useLlm) => {
+    if (!copilotQuestion.trim() || !token) return;
+    setCopilotBusy(true);
+    setCopilotResult(null);
+    try {
+      const res = await fetch('/api/copilot/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...authHeaders() },
+        body: JSON.stringify({ question: copilotQuestion.trim(), useLlm })
+      });
+      if (res.ok) setCopilotResult(await res.json());
+    } finally {
+      setCopilotBusy(false);
+    }
+  };
+
   const traceCards = useMemo(() => [
     { title: 'Estado EUDR', value: `${complianceSummary.avgScore || 0}%`, description: 'Score promedio', color: '#27ae60' },
     { title: 'Productores', value: data.producers?.length || 0, description: 'Registrados' },
@@ -262,6 +308,7 @@ function App() {
             <button onClick={() => setPanel('traceability')} className={panel === 'traceability' ? 'active' : ''}>Trazabilidad</button>
             <button onClick={() => setPanel('compliance')} className={panel === 'compliance' ? 'active' : ''}>Compliance</button>
             <button onClick={() => setPanel('alerts')} className={panel === 'alerts' ? 'active' : ''}>Alertas</button>
+            <button onClick={() => setPanel('copilot')} className={panel === 'copilot' ? 'active' : ''}>Copiloto EUDR</button>
             <button onClick={handleLogout}>Salir</button>
           </div>
         </div>
@@ -349,6 +396,109 @@ function App() {
               <strong>{a.type}</strong> - {a.message}
             </div>
           ))}
+        </section>
+      )}
+
+      {!isLoading && !error && panel === 'copilot' && (
+        <section className="panel">
+          <h3 style={{ marginTop: 0 }}>Copiloto EUDR — preparación documental</h3>
+          <div
+            className="panel-box"
+            style={{
+              background: '#fffbeb',
+              border: '1px solid #fbbf24',
+              marginBottom: 16,
+              fontSize: 13,
+              lineHeight: 1.5
+            }}
+          >
+            <strong>Aviso:</strong> {copilotCaps?.disclaimer || 'No sustituye asesoría legal. Responsabilidad del operador económico.'}{' '}
+            Base documental v{copilotCaps?.knowledgeVersion || '—'} · {copilotCaps?.chunkCount ?? '—'} fragmentos.
+            {copilotCaps?.llmAvailable ? (
+              <span> Modo asistido (LLM) disponible.</span>
+            ) : (
+              <span> Modo asistido desactivado (sin OPENAI_API_KEY en servidor).</span>
+            )}
+          </div>
+
+          <div style={{ marginBottom: 16 }}>
+            <h4>Análisis de huecos (checklist vs lote seleccionado)</h4>
+            <p style={{ color: '#666', fontSize: 14 }}>
+              Usa el mismo lote que en Compliance. Automatización mínima en demo (coordenadas); el resto es revisión manual.
+            </p>
+            <select
+              value={selectedLot?.id || ''}
+              onChange={(e) => setSelectedLot(data.lots?.find((l) => l.id === e.target.value))}
+              style={{ padding: 8, width: 320, marginRight: 8 }}
+            >
+              {data.lots?.map((lot) => (
+                <option key={lot.id} value={lot.id}>{lot.id} - {lot.product}</option>
+              ))}
+            </select>
+            <button type="button" onClick={handleGapAnalysis} disabled={copilotBusy || !selectedLot}>
+              {copilotBusy ? 'Analizando…' : 'Evaluar checklist'}
+            </button>
+          </div>
+
+          {copilotGap && (
+            <div className="panel-box" style={{ marginBottom: 16 }}>
+              <p style={{ marginTop: 0 }}><strong>Resumen:</strong> {copilotGap.summary}</p>
+              <p style={{ fontSize: 13 }}>Señal geo: {copilotGap.signals?.geoPresent ? 'presente' : 'ausente o inválida'}</p>
+              <h4>Señales automáticas (demo)</h4>
+              <ul style={{ fontSize: 13 }}>
+                {(copilotGap.automatedSignals || []).map((x) => (
+                  <li key={x.id}><strong>{x.label}</strong> — {x.status}: {x.detail}</li>
+                ))}
+              </ul>
+              <h4>Revisión manual ({copilotGap.manualReview?.length || 0} ítems)</h4>
+              <ul style={{ fontSize: 12, color: '#444' }}>
+                {(copilotGap.manualReview || []).slice(0, 6).map((x) => (
+                  <li key={x.id}>{x.label}</li>
+                ))}
+                {(copilotGap.manualReview || []).length > 6 ? <li>…</li> : null}
+              </ul>
+            </div>
+          )}
+
+          <h4>Consulta al corpus (citas obligatorias en fragmentos)</h4>
+          <textarea
+            value={copilotQuestion}
+            onChange={(e) => setCopilotQuestion(e.target.value)}
+            placeholder="Ej.: ¿Qué debe incluir la debida diligencia antes de colocar café en el mercado UE?"
+            rows={4}
+            style={{ width: '100%', maxWidth: 640, padding: 10, fontFamily: 'inherit', marginBottom: 8 }}
+          />
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
+            <button type="button" onClick={() => handleCopilotQuery(false)} disabled={copilotBusy}>
+              Recuperar fragmentos
+            </button>
+            <button
+              type="button"
+              onClick={() => handleCopilotQuery(true)}
+              disabled={copilotBusy || !copilotCaps?.llmAvailable}
+              title={!copilotCaps?.llmAvailable ? 'Configurar OPENAI_API_KEY en el servidor' : ''}
+            >
+              Modo asistido (LLM)
+            </button>
+          </div>
+
+          {copilotResult && (
+            <div className="panel-box">
+              <p style={{ fontSize: 12, color: '#666' }}>Modo: <strong>{copilotResult.mode}</strong></p>
+              {copilotResult.error && <p style={{ color: '#c0392b' }}>{copilotResult.error}</p>}
+              {copilotResult.answer && (
+                <div style={{ whiteSpace: 'pre-wrap', marginBottom: 12 }}>{copilotResult.answer}</div>
+              )}
+              <h4>Fragmentos</h4>
+              {(copilotResult.chunks || []).map((c) => (
+                <div key={c.id} style={{ borderLeft: '3px solid #0d9488', paddingLeft: 10, marginBottom: 12, fontSize: 13 }}>
+                  <strong>[{c.id}] {c.title}</strong>
+                  <div style={{ fontSize: 11, color: '#64748b' }}>{c.source_citation}</div>
+                  <p style={{ margin: '6px 0 0' }}>{c.text}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       )}
     </>

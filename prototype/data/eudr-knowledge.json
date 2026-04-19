@@ -1,0 +1,62 @@
+{
+  "version": "2026-04-19",
+  "corpus_note": "Fragmentos orientativos para preparación documental. Verificar siempre el texto oficial en EUR-Lex y la normativa peruana aplicable.",
+  "chunks": [
+    {
+      "id": "eurlex-eudr",
+      "title": "Texto jurídico de referencia",
+      "tags": ["marco", "fuente"],
+      "source_citation": "Reglamento (UE) 2023/1115 — consultar versión consolidada en EUR-Lex.",
+      "text": "El marco jurídico vinculante es el Reglamento (UE) 2023/1115 y actos delegados/complementarios publicados en el DOUE. Ningún resumen interno sustituye la lectura del texto oficial ni la interpretación por asesor legal cualificado."
+    },
+    {
+      "id": "dds-obligation",
+      "title": "Debida diligencia (concepto operativo)",
+      "tags": ["dds", "operador"],
+      "source_citation": "Reg (UE) 2023/1115 — obligaciones de operadores y comerciantes (consultar artículos aplicables en EUR-Lex).",
+      "text": "Los operadores deben aplicar un sistema de debida diligencia que incluya recopilación de información, evaluación de riesgo de deforestación y degradación forestal, y mitigación cuando proceda, antes de colocar productos en el mercado UE. La DDS se formaliza según los requisitos del sistema de información de la UE vigente."
+    },
+    {
+      "id": "geo-information",
+      "title": "Información geográfica",
+      "tags": ["geo", "parcela", "trazabilidad"],
+      "source_citation": "Reg (UE) 2023/1115 y guías de la Comisión sobre localización de parcelas.",
+      "text": "Es necesario disponer de información geográfica suficiente para localizar la producción (p. ej. coordenadas o geometrías según lo exija el sistema). La precisión debe ser coherente con lo solicitado por compradores y sistema de información; conviene acordar política interna de precisión y fuentes."
+    },
+    {
+      "id": "cutoff-2020",
+      "title": "Fecha de corte deforestación",
+      "tags": ["deforestación", "riesgo"],
+      "source_citation": "Reg (UE) 2023/1115 — definiciones y cronología aplicables.",
+      "text": "La cadena debe poder demostrar que el producto relevante no procede de tierras sometidas a deforestación tras la fecha de corte legalmente definida (referencia temporal fijada en el Reglamento). La evidencia suele combinar datos geo, histórico de uso del suelo y documentación del país de origen."
+    },
+    {
+      "id": "chain-of-custody",
+      "title": "Cadena de suministro y custodia",
+      "tags": ["custodia", "lote"],
+      "source_citation": "Buenas prácticas de trazabilidad alineadas con DDS y reclamaciones del comprador.",
+      "text": "Registrar actores, transformaciones y transferencias entre finca, acopio, industrial y exportación reduce lagunas que impiden reconstruir el lote ante auditoría. Identificadores de lote únicos y vínculos entre documentos físicos y digitales son práctica habitual."
+    },
+    {
+      "id": "annex-products",
+      "title": "Productos en el ámbito (Anexo)",
+      "tags": ["café", "cacao", "anexo"],
+      "source_citation": "Reg (UE) 2023/1115 — Anexo I y aclaraciones posteriores en actos delegados.",
+      "text": "El Reglamento enumera commodities incluidos (entre ellos café y cacao en las formas previstas). Verificar que la partida arancelaria y el producto colocado en el mercado UE corresponden a las categorías reguladas para aplicar los requisitos correctos."
+    },
+    {
+      "id": "sme-timeline",
+      "title": "Calendario de aplicación por tipo de actor",
+      "tags": ["pyme", "plazos"],
+      "source_citation": "Reg (UE) 2023/1115 y actualizaciones — verificar fechas vigentes en EUR-Lex.",
+      "text": "Las fechas plenas de obligación pueden diferir entre grandes empresas y pymes. El plan interno debe cruzar tamaño de empresa, rol (operador vs comerciante) y producto. Las fechas de referencia en documentación interna deben revisarse ante cada convocatoria o auditoría."
+    },
+    {
+      "id": "peru-alignment",
+      "title": "Alineación con Perú",
+      "tags": ["perú", "certificación"],
+      "source_citation": "Normativa nacional aplicable; iniciativas sectoriales (MIDAGRI, certificadoras).",
+      "text": "La evidencia para UE debe ser coherente con registros locales (origen, contratos, guías de remisión cuando aplique) y con esquemas voluntarios que el comprador reconozca. Evitar duplicar datos contradictorios entre sistemas internos y declaraciones externas."
+    }
+  ]
+}

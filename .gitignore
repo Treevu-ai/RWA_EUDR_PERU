@@ -22,6 +22,8 @@ Thumbs.db
 # Data (local persistence)
 prototype/data/*.json
 !prototype/data/.gitkeep
+!prototype/data/eudr-knowledge.json
+!prototype/data/eudr-checklist.json
 
 # IDE
 .vscode/

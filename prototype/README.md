@@ -33,6 +33,17 @@ Aplicación de demostración para trazabilidad agroexportadora y verificación p
 - `admin / admin123`
 - `operador / operador123`
 
+## Copiloto EUDR (preparación documental)
+
+Corpus versionado en `data/eudr-knowledge.json` y checklist en `data/eudr-checklist.json`. Opcional: `OPENAI_API_KEY` para modo asistido con LLM (`useLlm: true`). Ver [`docs/eudr-compliance-copilot.md`](../docs/eudr-compliance-copilot.md).
+
+- `GET /api/copilot/capabilities` — versiones, disclaimer, si hay LLM.
+- `GET /api/copilot/checklist` — checklist completo.
+- `POST /api/copilot/gap-analysis` — `{ "lotId": "..." }`.
+- `POST /api/copilot/query` — `{ "question": "...", "useLlm": false }`.
+
+En la UI: pestaña **Copiloto EUDR**.
+
 ## Endpoints principales
 - Auth: `POST /api/auth/login`, `GET /api/auth/me`, `POST /api/auth/logout`
 - Dashboard: `GET /api/data`, `GET /api/traces`, `GET /api/blockchain`

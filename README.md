@@ -80,6 +80,7 @@ El workflow [`.github/workflows/deploy-landing.yml`](.github/workflows/deploy-la
 - [`docs/propuesta_integral.md`](docs/propuesta_integral.md) — Propuesta blockchain y piloto.
 - [`docs/roadmap.md`](docs/roadmap.md) — Fases de desarrollo.
 - [`prototype/NEXT_STEPS.md`](prototype/NEXT_STEPS.md) — Próximos pasos técnicos sugeridos.
+- [`docs/eudr-compliance-copilot.md`](docs/eudr-compliance-copilot.md) — Copiloto EUDR (preparación documental, límites, API).
 
 ---
 
