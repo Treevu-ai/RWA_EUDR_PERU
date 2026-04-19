@@ -1,57 +1,84 @@
-# Solución de Cumplimiento Normativo y Trazabilidad para Exportaciones Agropecuarias Peruanas
+<div align="center">
 
-Este proyecto busca documentar y desarrollar una solución que facilite el cumplimiento de estándares normativos, ambientales y de trazabilidad requeridos por la Unión Europea para las importaciones de productos como café, cacao y otras mercancías del top de la canasta agroexportadora peruana.
+<img src="assets/readme-header.svg" width="100%" alt="RWA EUDR Perú — trazabilidad verificable para café, cacao y la canasta agroexportadora" />
 
-## Objetivos del Proyecto
+<br />
 
-- Documentar los requisitos regulatorios y de sostenibilidad de la UE aplicables a los productos agroexportadores peruanos.
-- Diseñar una solución tecnológica que permita: 
-  - captura de datos de origen y cadena de suministro,
-  - verificación de cumplimiento ambiental,
-  - generación de evidencia de trazabilidad,
-  - identificación y aprovechamiento del conocimiento desarrollado por actores del sector,
-  - integración de blockchain como fuente confiable de trazabilidad y evidencia.
-- Crear una plataforma que apoye a productores, cooperativas, operadores logísticos y exportadores.
+[![GitHub Pages](https://img.shields.io/badge/Pages-sitio%20informativo-0a5c4a?style=for-the-badge&logo=github&logoColor=white)](https://treevu-ai.github.io/RWA_EUDR_PERU/)
+[![Repo](https://img.shields.io/badge/Código-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/Treevu-ai/RWA_EUDR_PERU)
+[![Docs](https://img.shields.io/badge/Markdown-docs-1a6b8c?style=for-the-badge)](https://github.com/Treevu-ai/RWA_EUDR_PERU/tree/main/docs)
+[![Prototype](https://img.shields.io/badge/React_+_Express-prototype-f59e0b?style=for-the-badge&logo=react&logoColor=white)](https://github.com/Treevu-ai/RWA_EUDR_PERU/tree/main/prototype)
 
-## Alcance inicial
+### Evidencia de origen · Cadena de custodia · Debida diligencia frente a la UE
 
-- Productos foco: café y cacao, con extensión a otros productos clave de la canasta agroexportadora.
-- Cobertura: trazabilidad de la finca hasta la exportación, cumplimiento de normas de sostenibilidad y requisitos de documentación para la UE.
-- Componentes propuestos:
-  - Registro de origen y cadena de custodia.
-  - Control documental de certificaciones y permisos.
-  - Validación de criterios ambientales y sociales.
-  - Panel de seguimiento y generación de reportes de cumplimiento.
+*Documentación abierta y prototipo para orquestar trazabilidad en cadenas agroexportadoras peruanas — con foco inicial en café y cacao y en exigencias del mercado europeo (incl. marco EUDR cuando aplique).*
 
-## Estructura del Proyecto
+<br />
 
-- `docs/` - Documentación de requisitos, diseño y roadmap.
-- `docs/convocatorias/` - Checklist y plantillas para preparar postulaciones (cooperación UE / innovación).
-- `landing/` - Landing informativa estática (HTML/CSS) sobre la iniciativa y cooperación UE.
-- `src/` - Código de la solución (aplicación, APIs, integraciones).
-- `data/` - Ejemplos de datos, esquemas y casos de prueba.
+</div>
 
-## Publicación de la landing (GitHub Pages)
+---
 
-El workflow [.github/workflows/deploy-landing.yml](.github/workflows/deploy-landing.yml) despliega la carpeta `landing/` en la rama `gh-pages`. Tras el primer despliegue exitoso, en GitHub: **Settings → Pages → Build and deployment → Branch `gh-pages` / folder `/ (root)`**.
+## Por qué existe este repositorio
 
-La URL típica del sitio será `https://treevu-ai.github.io/RWA_EUDR_PERU/` (ajusta si cambias nombre del repositorio).
+Las importaciones sensibles hacia la UE requieren **documentación verificable**, **geometrías coherentes** y **trazabilidad demostrable**. Sin una capa común de datos y gobernanza, el costo lo pagan productores con baja conectividad y exportadores que arriesgan continuidad comercial.
 
-## Primeros pasos
+Este proyecto **documenta requisitos**, **propone arquitectura** y ofrece un **prototipo funcional** para validar flujos antes de escalar integraciones.
 
-1. Recopilar los requisitos normativos UE aplicables a café, cacao y otros productos.
-2. Definir los flujos de datos para trazabilidad y las entidades clave.
-3. Diseñar la arquitectura de la solución (módulos, APIs, almacenamiento, integraciones).
-4. Implementar prototipos de captura de datos y reportes de cumplimiento.
+---
+
+## Qué encontrarás aquí
+
+| Ruta | Contenido |
+|------|-----------|
+| **`assets/`** | Recursos para documentación en GitHub (p. ej. banner del README) |
+| [**`docs/`**](docs/) | Requisitos UE, propuesta integral, roadmap, pitch, diagramas |
+| [**`docs/convocatorias/`**](docs/convocatorias/) | Checklist y plantillas para postulaciones (cooperación UE / innovación) |
+| [**`landing/`**](landing/) | Sitio estático informativo (desplegado vía GitHub Pages) |
+| [**`prototype/`**](prototype/) | Demo React + Express: trazas OTLP, compliance preliminar, DDS MVP |
+
+---
+
+## Objetivos
+
+- Documentar requisitos regulatorios y de sostenibilidad de la UE aplicables a productos agroexportadores peruanos.
+- Diseñar una solución que permita captura de origen, verificación ambiental, evidencia de trazabilidad y — donde aporte valor — anclaje de evidencia en cadena.
+- Apoyar a productores, cooperativas, logística y exportadores con **paquetes de información** repetibles.
+
+---
+
+## Arranque rápido
+
+**Sitio público** → [treevu-ai.github.io/RWA_EUDR_PERU](https://treevu-ai.github.io/RWA_EUDR_PERU/)
+
+**Prototipo local** (desde `prototype/`):
+
+```bash
+npm install
+npm start          # API en un terminal
+npm run dev        # frontend Vite en otro → http://localhost:5173
+```
+
+Credenciales demo: ver [`prototype/README.md`](prototype/README.md).
+
+---
+
+## Publicación de la landing
+
+El workflow [`.github/workflows/deploy-landing.yml`](.github/workflows/deploy-landing.yml) publica `landing/` en la rama `gh-pages`. En **Settings → Pages**, fuente: rama **`gh-pages`** / raíz.
+
+---
 
 ## Documentación clave
 
-- `docs/convocatorias/README.md` - Índice de materiales para convocatorias.
-- `docs/overview.md` - Visión general de la solución y componentes.
-- `docs/requirements.md` - Requisitos regulatorios y de trazabilidad.
-- `docs/propuesta_integral.md` - Propuesta integral blockchain y plan piloto detallado.
-- `docs/roadmap.md` - Fases de desarrollo y prioridades.
-- `docs/tracing.md` - Documentación de tracing e instrumentación.
-- `prototype/README.md` - Prototipo React con backend local y panel de trazas.
-- `prototype/NEXT_STEPS.md` - Próximos pasos técnicos sugeridos para el piloto.
-- `prototype/server.js` - Backend Express con datos de muestra y receptor OTLP.
+- [`docs/overview.md`](docs/overview.md) — Visión general de la solución.
+- [`docs/requirements.md`](docs/requirements.md) — Requisitos de trazabilidad y regulatorios.
+- [`docs/propuesta_integral.md`](docs/propuesta_integral.md) — Propuesta blockchain y piloto.
+- [`docs/roadmap.md`](docs/roadmap.md) — Fases de desarrollo.
+- [`prototype/NEXT_STEPS.md`](prototype/NEXT_STEPS.md) — Próximos pasos técnicos sugeridos.
+
+---
+
+## Aviso
+
+El contenido es **divulgativo y técnico**; no sustituye asesoría legal ni las obligaciones del operador económico ante la normativa aplicable en la UE y en Perú.

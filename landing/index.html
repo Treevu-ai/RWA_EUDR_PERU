@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Iniciativa de trazabilidad y evidencia para el cumplimiento de exigencias de importación de la UE (EUDR) en cadenas agroexportadoras peruanas — cooperación UE e innovación temática."
+      content="Trazabilidad verificable y evidencia para exportaciones agropecuarias peruanas frente a exigencias UE (EUDR). Documentación abierta y prototipo."
     />
-    <title>RWA EUDR — Trazabilidad y cumplimiento para exportaciones agropecuarias</title>
+    <title>RWA EUDR Perú — Trazabilidad y cumplimiento para mercados europeos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Figtree:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -22,139 +22,200 @@
     <header class="site-header">
       <div class="wrap inner">
         <div class="brand">
-          <strong>RWA · EUDR Perú</strong>
-          <span>Evidencia, trazabilidad y cadena de custodia</span>
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-text">
+            <strong>RWA EUDR · Perú</strong>
+            <span>Trazabilidad agro · evidencia UE</span>
+          </div>
         </div>
         <nav class="nav" aria-label="Principal">
-          <a href="#enfoque">Enfoque</a>
+          <a href="#historia">Historia</a>
+          <a href="#retos">Reto</a>
+          <a href="#solucion">Solución</a>
           <a href="#piloto">Piloto</a>
-          <a href="#documentacion">Documentación</a>
-          <a href="#cooperacion">Cooperación UE</a>
-          <a href="#contacto">Contacto</a>
+          <a href="#documentacion">Docs</a>
+          <a class="nav-cta" href="https://github.com/Treevu-ai/RWA_EUDR_PERU" target="_blank" rel="noopener noreferrer">GitHub</a>
         </nav>
       </div>
     </header>
 
     <main id="contenido">
-      <section class="hero">
-        <div class="wrap hero-grid">
+      <!-- Hero -->
+      <section class="hero-mast" aria-labelledby="hero-title">
+        <div class="wrap hero-inner hero-grid">
           <div>
-            <span class="kicker">Orientado a cooperación UE · innovación temática</span>
-            <h1>Evidencia verificable para competir en mercados europeos</h1>
-            <p class="lede">
-              Esta iniciativa diseña una solución integral de <strong>trazabilidad</strong> y
-              <strong>cumplimiento</strong> para cadenas agroexportadoras peruanas, con foco inicial en
-              productos como café y cacao: desde la finca hasta la exportación, con especial atención a las
-              exigencias del marco europeo relacionadas con debida diligencia y evidencia de origen (incl.
-              Reglamento (UE) 2023/1115 — EUDR).
-            </p>
-            <div class="note" role="note">
-              <strong>Aviso:</strong> contenido divulgativo. Las obligaciones jurídicas finales dependen del
-              caso concreto, cadena de producto y legislación aplicable en la UE y en Perú. Esta página no es
-              asesoría legal.
+            <div class="kicker-row">
+              <span class="kicker"><span class="kicker-dot" aria-hidden="true"></span> iniciativa abierta</span>
+              <span class="kicker">cooperación UE · innovación temática</span>
             </div>
+            <h1 id="hero-title">
+              De la finca al puerto,<br />
+              <span class="headline-accent">con evidencia que se sostiene.</span>
+            </h1>
+            <p class="hero-lede">
+              Una línea de trabajo técnico y documental para que café, cacao y el resto de la canasta
+              agroexportadora peruana pueda reunir <strong>origen</strong>, <strong>custodia</strong> y
+              <strong>debida diligencia</strong> frente al mercado europeo — incluido el marco EUDR cuando
+              aplique — sin improvisar cada envío.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="https://github.com/Treevu-ai/RWA_EUDR_PERU" target="_blank" rel="noopener noreferrer">Explorar el repositorio</a>
+              <a class="btn btn-ghost" href="#historia">Cómo lo contamos →</a>
+            </div>
+            <p class="hero-note" role="note">
+              <strong>Aviso:</strong> material divulgativo; no sustituye asesoría legal ni las obligaciones del
+              operador económico en UE o Perú.
+            </p>
           </div>
 
-          <aside class="panel" aria-labelledby="para-quien-title">
-            <h3 id="para-quien-title">Actores que buscamos alinear</h3>
-            <ul>
-              <li>Productores y organizaciones de base</li>
-              <li>Cooperativas y operadores logísticos</li>
-              <li>Exportadores y compradores en la UE</li>
-              <li>Auditores y certificadoras (cuando aplique)</li>
+          <aside class="hero-card" aria-labelledby="para-quien-title">
+            <h2 id="para-quien-title">¿Con quién hablamos?</h2>
+            <ul class="actor-list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 3L4 9v11h16V9l-8-6z" stroke="#e8c468" stroke-width="1.8" stroke-linejoin="round"/>
+                </svg>
+                Productores y organizaciones en territorio.
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 21V7l7-4 7 4v14" stroke="#e8c468" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M9 21v-8h6v8" stroke="#e8c468" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                Cooperativas, transformación y logística.
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="#e8c468" stroke-width="1.8"/>
+                </svg>
+                Exportadores y compradores que piden pruebas claras.
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="#e8c468" stroke-width="1.8"/>
+                  <path d="M12 8v5l3 2" stroke="#e8c468" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                Auditores y certificación cuando la cadena lo requiere.
+              </li>
             </ul>
           </aside>
         </div>
       </section>
 
-      <section class="section" id="problema">
-        <div class="wrap">
-          <h2>Qué problema aborda</h2>
-          <p class="lede" style="max-width: 72ch">
-            Las importaciones sensibles hacia la UE requieren cada vez más <strong>documentación</strong>,
-            <strong>georreferencia</strong> y <strong>trazabilidad demostrable</strong>. Sin una capa común
-            de evidencia y flujo de datos, los costos de cumplimiento suben, aparecen asimetrías de
-            información y aumenta el riesgo operativo en frontera — impactando especialmente a pequeños
-            productores con baja conectividad.
-          </p>
+      <!-- Narrativa rápida -->
+      <section class="story-strip" id="historia">
+        <div class="wrap story-inner">
+          <article class="story-step">
+            <div class="story-num">01</div>
+            <h3>El mercado exige historia</h3>
+            <p>No basta «decir» origen: hay que poder <strong>mostrar</strong> geometrías, cadena de custodia y prácticas con registro repetible.</p>
+          </article>
+          <article class="story-step">
+            <div class="story-num">02</div>
+            <h3>Los datos tienen dueño</h3>
+            <p>La solución separa captura en campo, reglas de cumplimiento y paquete de evidencia para exportación — sin mezclar papel suelto con sistemas cerrados.</p>
+          </article>
+          <article class="story-step">
+            <div class="story-num">03</div>
+            <h3>Del piloto al hábito</h3>
+            <p>Un prototipo ya recorre el flujo referencial; el paso siguiente es cerrar piloto real con aliados que encajen en vuestra cadena.</p>
+          </article>
         </div>
       </section>
 
-      <section class="section" id="enfoque">
+      <section class="section alt" id="retos">
         <div class="wrap">
-          <h2>Enfoque en tres capas</h2>
+          <header class="section-head">
+            <span class="section-eyebrow">contexto</span>
+            <h2>Presión real en frontera europea</h2>
+            <p class="section-intro">
+              La UE intensifica controles sobre deforestación, cadena de suministro y evidencia para commodities
+              sensibles. Quien exporta debe preparar paquetes de información verificables: si no están listos,
+              el costo no es solo tarifa — es <strong>contrato</strong>, <strong>stock detenido</strong> y
+              <strong>desconfianza</strong> del comprador.
+            </p>
+          </header>
+        </div>
+      </section>
+
+      <section class="section" id="solucion">
+        <div class="wrap">
+          <header class="section-head">
+            <span class="section-eyebrow">enfoque</span>
+            <h2>Tres capas que funcionan en conjunto</h2>
+            <p class="section-intro">
+              Diseño modular para que campo, cumplimiento y auditoría puedan madurar a ritmos distintos sin romper la cadena lógica de evidencia.
+            </p>
+          </header>
+
           <div class="grid-3">
             <article class="card">
-              <h3>Captura y custodia</h3>
-              <p>
-                Registro de origen, movimientos de lote y cadena de custodia con foco en calidad de datos y
-                gobernanza entre actores.
-              </p>
-              <div class="tags" aria-hidden="true">
-                <span class="tag">origen</span>
-                <span class="tag">lotes</span>
-                <span class="tag">cadena</span>
+              <div class="card-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                  <path d="M12 22V12M12 12L3 7M12 12l9-5" stroke="currentColor" stroke-width="1.7"/>
+                </svg>
               </div>
+              <h3>Captura &amp; custodia</h3>
+              <p>Registrar fincas, movimientos de lote y responsables sin perder consistencia cuando la señal móvil falla.</p>
+              <div class="tags"><span class="tag">origen</span><span class="tag">cadena</span><span class="tag">geo</span></div>
             </article>
             <article class="card">
-              <h3>Cumplimiento y debida diligencia</h3>
-              <p>
-                Validaciones y paquetes de evidencia orientados a requisitos de mercado UE, incluyendo
-                preparación de reportes y documentación para auditoría.
-              </p>
-              <div class="tags" aria-hidden="true">
-                <span class="tag">EUDR</span>
-                <span class="tag">DDS</span>
-                <span class="tag">evidencia</span>
+              <div class="card-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
               </div>
+              <h3>Cumplimiento UE</h3>
+              <p>Criterios de debida diligencia y preparación de artefactos exportables antes de llamadas de auditoría improvisadas.</p>
+              <div class="tags"><span class="tag">EUDR</span><span class="tag">DDS</span><span class="tag">reportes</span></div>
             </article>
             <article class="card">
+              <div class="card-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 19V5M4 19h16M8 17v-5M12 17V8M16 17v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
               <h3>Auditabilidad</h3>
-              <p>
-                Trazabilidad técnica y trazas operativas para mejorar reproducibilidad de procesos — sin
-                sustituir el juicio legal ni las obligaciones del operador.
-              </p>
-              <div class="tags" aria-hidden="true">
-                <span class="tag">observabilidad</span>
-                <span class="tag">reportes</span>
-              </div>
+              <p>Trazas y eventos para reconstruir qué ocurrió en el sistema — complemento al juicio legal del operador, no sustituto.</p>
+              <div class="tags"><span class="tag">OTLP</span><span class="tag">trazas</span></div>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section" id="piloto">
+      <section class="section alt" id="piloto">
         <div class="wrap two-col">
-          <div class="callout">
-            <h3>Piloto y validación incremental</h3>
+          <div class="piloto-card">
+            <span class="section-eyebrow">estado</span>
+            <h3>Piloto sobre base demostrable</h3>
             <p class="small">
-              La implementación punta de lanza es un prototipo funcional orientado a demostración (
-              <code style="font-size: 0.92em">prototype/</code>
-              en el repositorio), pensado para cerrar un flujo end-to-end con datos de muestra antes de escalar
-              integraciones y endurecer modelo de datos e infraestructura.
+              El directorio <code style="font-size: 0.9em">prototype/</code> contiene una app React + API Express con datos de laboratorio y receptor OTLP: sirve para ensayar flujos antes de invertir en integraciones productivas.
             </p>
-            <div class="metrics" aria-label="Indicadores orientativos de piloto">
+            <div class="metrics" aria-label="Indicadores del piloto">
               <div class="metric">
-                <strong>Cobertura</strong>
-                <span>Fincas → lote → exportación (flujo referencial)</span>
+                <strong>Alcance</strong>
+                <span>Finca → lote → exportación (referencial)</span>
               </div>
               <div class="metric">
                 <strong>Evidencia</strong>
-                <span>Paquetes exportables y trazabilidad repetible</span>
+                <span>Paquetes repetibles para revisión</span>
               </div>
               <div class="metric">
                 <strong>Aliados</strong>
-                <span>Cooperativas, exportadores y certificación</span>
+                <span>Cooperativa + exportador piloto</span>
               </div>
             </div>
           </div>
           <div>
-            <h2 style="margin-top: 0">Innovación temática</h2>
-            <p>
-              La innovación se centra en <strong>interoperabilidad</strong>,
-              <strong>inclusión digital</strong> de productores con conectividad limitada y
-              <strong>gobernanza de datos</strong> entre actores privados y fuentes institucionales cuando el
-              piloto lo permita — reduciendo duplicación y elevando consistencia útil para auditorías.
+            <span class="section-eyebrow">innovación</span>
+            <h2>Innovación que se ve en cadena</h2>
+            <p class="section-intro" style="margin-bottom: 1rem">
+              Priorizamos interoperabilidad con sistemas que ya existen en Perú, inclusión digital para productores con conectividad irregular y acuerdos claros sobre datos entre privados y fuentes institucionales cuando el piloto lo permita.
+            </p>
+            <p class="section-intro">
+              La narrativa ante financiadores UE debe mostrar <strong>outcomes</strong> medibles — tiempo de diligencia, calidad geométrica, reducción de retrabajo — no solo pantallas bonitas.
             </p>
           </div>
         </div>
@@ -162,60 +223,67 @@
 
       <section class="section" id="documentacion">
         <div class="wrap">
-          <h2>Documentación en el repositorio</h2>
-          <p style="color: var(--muted); max-width: 72ch">
-            Los siguientes documentos están en la carpeta <code>docs/</code> del proyecto (Markdown). Abrirlos
-            desde tu editor o visor de Git; no forman parte de esta página estática.
-          </p>
-          <ul class="docs-list">
-            <li><code>docs/executive_summary.md</code> — resumen ejecutivo</li>
-            <li><code>docs/overview.md</code> — visión general</li>
-            <li><code>docs/requirements.md</code> — requisitos regulatorios y de trazabilidad</li>
-            <li><code>docs/propuesta_integral.md</code> — propuesta integral blockchain y piloto</li>
-            <li><code>docs/roadmap.md</code> — roadmap</li>
-            <li><code>docs/architecture_diagram.md</code> — diagrama de arquitectura</li>
-          </ul>
+          <header class="section-head">
+            <span class="section-eyebrow">repositorio</span>
+            <h2>Documentación ya redactada para profundizar</h2>
+            <p class="section-intro">
+              Markdown en <code>docs/</code>: úsalo como base para informes, postulaciones y mesas técnicas. La web estática resume; el detalle vive en el repo.
+            </p>
+          </header>
+          <div class="docs-grid">
+            <div class="doc-row"><code>docs/executive_summary.md</code><span>Resumen ejecutivo</span></div>
+            <div class="doc-row"><code>docs/overview.md</code><span>Visión de componentes</span></div>
+            <div class="doc-row"><code>docs/requirements.md</code><span>Requisitos regulatorios</span></div>
+            <div class="doc-row"><code>docs/propuesta_integral.md</code><span>Blockchain &amp; piloto</span></div>
+            <div class="doc-row"><code>docs/roadmap.md</code><span>Roadmap</span></div>
+            <div class="doc-row"><code>docs/convocatorias/</code><span>Plantillas para fondos UE</span></div>
+          </div>
+
+          <div class="cta-strip">
+            <div>
+              <h2>Clona o bifurca en GitHub</h2>
+              <p>Todo el material sigue versionado en abierto para transparencia ante socios y evaluadores.</p>
+            </div>
+            <a class="btn btn-primary" href="https://github.com/Treevu-ai/RWA_EUDR_PERU" target="_blank" rel="noopener noreferrer">Abrir en GitHub</a>
+          </div>
         </div>
       </section>
 
-      <section class="section lang-en" id="english" lang="en">
+      <section class="section alt lang-en" id="english" lang="en">
         <div class="wrap">
-          <h2>EU cooperation · thematic innovation (short brief)</h2>
-          <p style="color: var(--muted); max-width: 72ch">
-            This initiative focuses on <strong>verifiable traceability</strong> and
-            <strong>due diligence evidence packages</strong> for Peruvian agricultural export chains selling
-            into the EU market, starting with commodities such as coffee and cocoa. The goal is to reduce
-            compliance friction for smallholders and exporters while improving auditability — not to replace
-            legal obligations of operators.
+          <span class="section-eyebrow">English</span>
+          <h2>EU cooperation — short brief</h2>
+          <p class="section-intro">
+            We build <strong>verifiable traceability</strong> and <strong>due diligence evidence</strong> for Peruvian export chains shipping into the EU, starting with coffee and cocoa. The aim is less compliance friction for smallholders and exporters, and better audit trails — not replacing operators’ legal duties.
           </p>
-          <p style="color: var(--muted); max-width: 72ch">
-            Until a specific EU programme grant is awarded, this site does not claim EU funding. Official EU
-            emblem and mandated acknowledgement text must follow the Grant Agreement visibility rules for your
-            programme once applicable.
+          <p class="section-intro" style="margin-bottom: 0">
+            This site does not claim EU funding until a grant exists. Use your programme’s visibility rules for emblem and acknowledgement text when applicable.
           </p>
         </div>
       </section>
 
       <section class="section" id="cooperacion">
         <div class="wrap">
-          <h2>Cooperación UE y visibilidad</h2>
-          <p style="color: var(--muted); max-width: 72ch">
-            Cuando exista una convocatoria aprobada y un acuerdo de subvención, la comunicación institucional
-            debe cumplir la <strong>guía de visibilidad</strong> del programa (emblema UE, texto de
-            reconocimiento, descargos de responsabilidad). Hasta ese momento, esta landing permanece como
-            <strong>información general</strong> sobre la iniciativa y su repositorio técnico.
-          </p>
+          <header class="section-head">
+            <span class="section-eyebrow">visibilidad</span>
+            <h2>Cooperación UE</h2>
+            <p class="section-intro">
+              Cuando exista subvención aprobada, la comunicación oficial sigue la guía del programa (emblema, menciones y descargos). Hasta entonces, esta página es divulgación general alineada con buenas prácticas de transparencia.
+            </p>
+          </header>
         </div>
       </section>
 
-      <section class="section" id="contacto">
+      <section class="section alt" id="contacto">
         <div class="wrap">
-          <h2>Contacto</h2>
-          <p style="color: var(--muted); max-width: 72ch">
-            Para colaboraciones de piloto, cartas de intención o equipos técnicos, sustituye el siguiente
-            placeholder por el correo institucional real del proyecto.
-          </p>
-          <p>
+          <header class="section-head">
+            <span class="section-eyebrow">siguiente paso</span>
+            <h2>Hablemos de piloto</h2>
+            <p class="section-intro">
+              Si representas cooperativa, exportador o equipo técnico, reemplaza el correo placeholder por uno institucional en el HTML antes de campañas públicas.
+            </p>
+          </header>
+          <p class="contact-email">
             <a href="mailto:contacto@ejemplo.org">contacto@ejemplo.org</a>
           </p>
         </div>
@@ -224,22 +292,20 @@
 
     <footer class="site-footer">
       <div class="wrap footer-grid">
-        <div>
-          <strong>RWA EUDR Perú</strong>
-          <p class="small">
-            Repositorio de trabajo abierto para documentación y prototipo. La información puede actualizarse
-            sin previo aviso conforme evolucione el diseño del piloto.
-          </p>
+        <div class="footer-brand">
+          <div class="brand-mark" style="width: 36px; height: 36px" aria-hidden="true"></div>
+          <div>
+            <strong>RWA EUDR Perú</strong>
+            <p class="small" style="margin: 0.35rem 0 0">
+              Material vivo: puede cambiar con el diseño del piloto. Repositorio en GitHub para trazabilidad del contenido.
+            </p>
+          </div>
         </div>
         <div class="small">
-          <p>
-            Prototipo técnico en el repositorio Git: carpeta <code>prototype/</code> (ver
-            <code>prototype/README.md</code>).
+          <p style="margin-top: 0">
+            Prototipo técnico: carpeta <code>prototype/</code> · instrumentación descrita en <code>docs/tracing.md</code>.
           </p>
-          <p>
-            &copy; <span id="y"></span> — elaboración del material de divulgación a cargo del titular del
-            proyecto.
-          </p>
+          <p>&copy; <span id="y"></span> — titular del proyecto.</p>
         </div>
       </div>
     </footer>
