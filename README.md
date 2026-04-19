@@ -30,11 +30,6 @@ Este proyecto busca documentar y desarrollar una solución que facilite el cumpl
 - `src/` - Código de la solución (aplicación, APIs, integraciones).
 - `data/` - Ejemplos de datos, esquemas y casos de prueba.
 
-## Remotes de Git (mismo clon local)
-
-- `origin` → repositorio principal: [RWA_EUDR_PERU](https://github.com/Treevu-ai/RWA_EUDR_PERU) (push habitual: `git push origin main`).
-- `agentic` → repositorio adicional: [RWA-agentic](https://github.com/Treevu-ai/RWA-agentic) (publicar una rama o el mismo `main` solo cuando quieras: `git push agentic main`).
-
 ## Primeros pasos
 
 1. Recopilar los requisitos normativos UE aplicables a café, cacao y otros productos.
