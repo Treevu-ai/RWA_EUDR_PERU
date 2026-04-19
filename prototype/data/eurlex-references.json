@@ -1,0 +1,26 @@
+{
+  "version": "2026-04-19",
+  "note": "Referencias oficiales para lectura humana y futura ingesta RAG. URLs tipo plantilla; verificar siempre el enlace vigente en EUR-Lex.",
+  "acts": [
+    {
+      "celex": "32023R1115",
+      "short_title": "Reglamento (UE) 2023/1115 (EUDR)",
+      "url_hint": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX%3A32023R1115"
+    },
+    {
+      "celex": "32023R1116",
+      "short_title": "Reglamento (UE) 2023/1116 (ejecución / complementario — verificar denominación vigente)",
+      "url_hint": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX%3A32023R1116"
+    }
+  ],
+  "portals": [
+    {
+      "name": "EUR-Lex",
+      "url": "https://eur-lex.europa.eu/"
+    },
+    {
+      "name": "Comisión Europea — Medio ambiente",
+      "url": "https://environment.ec.europa.eu/topics/forests/deforestation_en"
+    }
+  ]
+}

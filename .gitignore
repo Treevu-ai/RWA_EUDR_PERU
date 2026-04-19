@@ -24,6 +24,13 @@ prototype/data/*.json
 !prototype/data/.gitkeep
 !prototype/data/eudr-knowledge.json
 !prototype/data/eudr-checklist.json
+!prototype/data/eurlex-references.json
+
+# Copiloto: auditoría local (no versionar)
+prototype/data/copilot-audit.jsonl
+
+# Embeddings generados (opcional: quitar esta línea y commitear el índice si se desea)
+prototype/data/eudr-knowledge.embeddings.json
 
 # IDE
 .vscode/

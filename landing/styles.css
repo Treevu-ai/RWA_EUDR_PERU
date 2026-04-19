@@ -480,6 +480,11 @@ a:hover {
   grid-template-columns: repeat(3, 1fr);
 }
 
+/* Cuatro tarjetas (p. ej. solución): columnas fluidas */
+.grid-features {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
 @media (max-width: 900px) {
   .grid-3 {
     grid-template-columns: 1fr;
@@ -742,4 +747,12 @@ a:hover {
 
 .contact-email a:hover {
   border-bottom-color: var(--sea);
+}
+
+/* Demo section — botones en fila responsive */
+.demo-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
 }

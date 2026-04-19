@@ -19,8 +19,10 @@ import {
 import {
   getCapabilities,
   getChecklist,
+  getEurlexReferences,
   analyzeGaps,
-  queryCopilot
+  queryCopilot,
+  appendCopilotAudit
 } from './services/eudr-copilot.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -678,7 +680,23 @@ app.post('/api/copilot/gap-analysis', authMiddleware, (req, res) => {
   try {
     const lotId = req.body?.lotId;
     const lot = lots.find((l) => l.id === lotId) || req.body?.lot || {};
-    res.json(analyzeGaps(lot));
+    const out = analyzeGaps(lot);
+    appendCopilotAudit({
+      event: 'gap_analysis',
+      user: req.user?.username,
+      lotId: lot.id || lotId || null,
+      checklistVersion: out.checklistVersion,
+      geoPresent: out.signals?.geoPresent
+    });
+    res.json(out);
+  } catch (e) {
+    res.status(500).json({ error: String(e.message || e) });
+  }
+});
+
+app.get('/api/copilot/eurlex-refs', authMiddleware, (req, res) => {
+  try {
+    res.json(getEurlexReferences());
   } catch (e) {
     res.status(500).json({ error: String(e.message || e) });
   }
@@ -690,7 +708,19 @@ app.post('/api/copilot/query', authMiddleware, async (req, res) => {
     if (!question || typeof question !== 'string') {
       return res.status(400).json({ error: 'Campo question (string) requerido' });
     }
-    const result = await queryCopilot(question.trim(), { useLlm: Boolean(useLlm) });
+    const q = question.trim();
+    const result = await queryCopilot(q, { useLlm: Boolean(useLlm) });
+    appendCopilotAudit({
+      event: 'copilot_query',
+      user: req.user?.username,
+      questionSha256: crypto.createHash('sha256').update(q, 'utf8').digest('hex'),
+      questionLen: q.length,
+      useLlm: Boolean(useLlm),
+      retrievalMode: result.retrievalMode,
+      mode: result.mode,
+      hybridAvailable: result.hybridAvailable,
+      chunkIds: (result.chunksUsed || result.chunks || []).map((c) => c.id).slice(0, 12)
+    });
     res.json(result);
   } catch (e) {
     res.status(500).json({ error: String(e.message || e) });

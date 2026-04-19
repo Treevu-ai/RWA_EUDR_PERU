@@ -4,7 +4,7 @@ Orden sugerido para cerrar el salto de “demo local” a “piloto creíble”.
 
 ## Corto plazo (base sólida)
 
-- **Copiloto EUDR**: implementado (corpus `data/eudr-knowledge.json`, checklist `data/eudr-checklist.json`, API y pestaña UI). Opcional: `OPENAI_API_KEY` para modo asistido. Ver `docs/eudr-compliance-copilot.md`.
+- **Copiloto EUDR**: corpus `data/eudr-knowledge.json`, checklist `data/eudr-checklist.json`, recuperación léxica + **híbrida** opcional (`npm run embed-corpus` → `eudr-knowledge.embeddings.json` + `OPENAI_API_KEY` en servidor), API (`capabilities`, `checklist`, `eurlex-refs`, `gap-analysis`, `query`), pestaña UI con enlaces EUR-Lex y auditoría append-only `data/copilot-audit.jsonl`. Ver `docs/eudr-compliance-copilot.md`.
 
 0. **Entorno**: copiar `prototype/.env.example` → `.env` y documentar puertos antes de exponer públicamente la API.
 1. **Persistencia**: salir de JSON de demo solo cuando el piloto lo requiera; definir modelo de datos (lotes, geometrías, custodia) y migración.

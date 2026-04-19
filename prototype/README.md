@@ -33,16 +33,29 @@ Aplicación de demostración para trazabilidad agroexportadora y verificación p
 - `admin / admin123`
 - `operador / operador123`
 
+## Guión breve de demo (20–40 min)
+
+1. **Login** con `operador` / `operador123`.  
+2. **Dashboard / lotes**: elegir un lote con coordenadas válidas para la narrativa.  
+3. **Compliance** (y si aplica **DDS**): mostrar flujo referencial y evidencia geo en demo.  
+4. **Copiloto EUDR**: pestaña dedicada — checklist vs lote, consulta al corpus con citas, enlaces EUR-Lex; opcional modo asistido si hay `OPENAI_API_KEY`.  
+5. **Cierre verbal**: preparación documental y datos ordenados; **no** certificación EUDR ni asesoría legal — responsabilidad del operador económico.
+
+Para una segunda opinión técnica, el evaluador puede clonar el repo y repetir el arranque en dos terminales.
+
+Runbook ampliado (checklist previa, troubleshooting): [`docs/demo-runbook.md`](../docs/demo-runbook.md).
+
 ## Copiloto EUDR (preparación documental)
 
-Corpus versionado en `data/eudr-knowledge.json` y checklist en `data/eudr-checklist.json`. Opcional: `OPENAI_API_KEY` para modo asistido con LLM (`useLlm: true`). Ver [`docs/eudr-compliance-copilot.md`](../docs/eudr-compliance-copilot.md).
+Corpus versionado en `data/eudr-knowledge.json` y checklist en `data/eudr-checklist.json`. Opcional: `OPENAI_API_KEY` para recuperación **híbrida** (embeddings de consulta + léxica) si existe `data/eudr-knowledge.embeddings.json`, y para modo asistido con LLM (`useLlm: true`). Generar el índice: `npm run embed-corpus` (requiere clave). Ver [`docs/eudr-compliance-copilot.md`](../docs/eudr-compliance-copilot.md).
 
-- `GET /api/copilot/capabilities` — versiones, disclaimer, si hay LLM.
+- `GET /api/copilot/capabilities` — versiones, disclaimer, `llmAvailable`, `hybridRetrievalReady`, referencias EUR-Lex.
 - `GET /api/copilot/checklist` — checklist completo.
+- `GET /api/copilot/eurlex-refs` — lista orientativa de actos CELEX / enlaces plantilla (lectura humana).
 - `POST /api/copilot/gap-analysis` — `{ "lotId": "..." }`.
 - `POST /api/copilot/query` — `{ "question": "...", "useLlm": false }`.
 
-En la UI: pestaña **Copiloto EUDR**.
+En la UI: pestaña **Copiloto EUDR** (bloque de enlaces EUR-Lex, checklist vs lote, consulta al corpus).
 
 ## Endpoints principales
 - Auth: `POST /api/auth/login`, `GET /api/auth/me`, `POST /api/auth/logout`

@@ -8,7 +8,8 @@
     "start": "node server.js",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "embed-corpus": "node scripts/build-embeddings.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",

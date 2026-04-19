@@ -77,6 +77,7 @@ function App() {
   const [ddsReports, setDdsReports] = useState([]);
 
   const [copilotCaps, setCopilotCaps] = useState(null);
+  const [eurlexRefs, setEurlexRefs] = useState(null);
   const [copilotQuestion, setCopilotQuestion] = useState('');
   const [copilotResult, setCopilotResult] = useState(null);
   const [copilotGap, setCopilotGap] = useState(null);
@@ -141,10 +142,21 @@ function App() {
 
   useEffect(() => {
     if (!token) return;
-    fetch('/api/copilot/capabilities', { headers: authHeaders(token) })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((j) => j && setCopilotCaps(j))
-      .catch(() => setCopilotCaps(null));
+    const h = authHeaders(token);
+    Promise.all([
+      fetch('/api/copilot/capabilities', { headers: h }),
+      fetch('/api/copilot/eurlex-refs', { headers: h })
+    ])
+      .then(async ([capsRes, refsRes]) => {
+        if (capsRes.ok) setCopilotCaps(await capsRes.json());
+        else setCopilotCaps(null);
+        if (refsRes.ok) setEurlexRefs(await refsRes.json());
+        else setEurlexRefs(null);
+      })
+      .catch(() => {
+        setCopilotCaps(null);
+        setEurlexRefs(null);
+      });
   }, [token, authHeaders]);
 
   useEffect(() => {
@@ -414,12 +426,56 @@ function App() {
           >
             <strong>Aviso:</strong> {copilotCaps?.disclaimer || 'No sustituye asesoría legal. Responsabilidad del operador económico.'}{' '}
             Base documental v{copilotCaps?.knowledgeVersion || '—'} · {copilotCaps?.chunkCount ?? '—'} fragmentos.
+            {' '}
+            Recuperación:{' '}
+            {copilotCaps?.hybridRetrievalReady ? (
+              <span>híbrida (índice + API).</span>
+            ) : copilotCaps?.embeddingIndexPresent ? (
+              <span>léxica (índice generado; falta OPENAI_API_KEY para consulta híbrida).</span>
+            ) : (
+              <span>léxica (ejecutar <code style={{ fontSize: 12 }}>npm run embed-corpus</code> para generar índice).</span>
+            )}
             {copilotCaps?.llmAvailable ? (
               <span> Modo asistido (LLM) disponible.</span>
             ) : (
               <span> Modo asistido desactivado (sin OPENAI_API_KEY en servidor).</span>
             )}
           </div>
+
+          {eurlexRefs && (eurlexRefs.acts?.length > 0 || eurlexRefs.portals?.length > 0) && (
+            <div className="panel-box" style={{ marginBottom: 16, fontSize: 13, borderLeft: '3px solid #0369a1' }}>
+              <h4 style={{ marginTop: 0 }}>Referencias EUR-Lex (texto oficial)</h4>
+              {eurlexRefs.note && (
+                <p style={{ color: '#475569', fontSize: 12, marginTop: 0 }}>{eurlexRefs.note}</p>
+              )}
+              <p style={{ fontSize: 11, color: '#94a3b8', marginBottom: 8 }}>
+                Lista interna v{eurlexRefs.version || '—'} · enlaces tipo plantilla; verificar siempre en EUR-Lex.
+              </p>
+              <ul style={{ paddingLeft: 18, margin: '0 0 12px' }}>
+                {(eurlexRefs.acts || []).map((a) => (
+                  <li key={a.celex} style={{ marginBottom: 6 }}>
+                    <a href={a.url_hint} target="_blank" rel="noopener noreferrer">
+                      {a.short_title}
+                    </a>
+                    <span style={{ color: '#94a3b8', fontSize: 11 }}> · CELEX {a.celex}</span>
+                  </li>
+                ))}
+              </ul>
+              {(eurlexRefs.portals || []).length > 0 && (
+                <p style={{ margin: 0, fontSize: 12 }}>
+                  <strong>Portales:</strong>{' '}
+                  {(eurlexRefs.portals || []).map((p, i) => (
+                    <span key={p.url}>
+                      {i > 0 ? ' · ' : ''}
+                      <a href={p.url} target="_blank" rel="noopener noreferrer">
+                        {p.name}
+                      </a>
+                    </span>
+                  ))}
+                </p>
+              )}
+            </div>
+          )}
 
           <div style={{ marginBottom: 16 }}>
             <h4>Análisis de huecos (checklist vs lote seleccionado)</h4>
@@ -484,7 +540,12 @@ function App() {
 
           {copilotResult && (
             <div className="panel-box">
-              <p style={{ fontSize: 12, color: '#666' }}>Modo: <strong>{copilotResult.mode}</strong></p>
+              <p style={{ fontSize: 12, color: '#666' }}>
+                Modo: <strong>{copilotResult.mode}</strong>
+                {copilotResult.retrievalMode ? (
+                  <> · Recuperación: <strong>{copilotResult.retrievalMode}</strong></>
+                ) : null}
+              </p>
               {copilotResult.error && <p style={{ color: '#c0392b' }}>{copilotResult.error}</p>}
               {copilotResult.answer && (
                 <div style={{ whiteSpace: 'pre-wrap', marginBottom: 12 }}>{copilotResult.answer}</div>
@@ -493,6 +554,13 @@ function App() {
               {(copilotResult.chunks || []).map((c) => (
                 <div key={c.id} style={{ borderLeft: '3px solid #0d9488', paddingLeft: 10, marginBottom: 12, fontSize: 13 }}>
                   <strong>[{c.id}] {c.title}</strong>
+                  {(c.lexicalScore != null || c.cosineScore != null) && (
+                    <div style={{ fontSize: 11, color: '#64748b' }}>
+                      Relevancia: {c.relevance != null ? c.relevance : '—'}
+                      {c.lexicalScore != null ? ` · léxica ${c.lexicalScore}` : ''}
+                      {c.cosineScore != null ? ` · coseno ${c.cosineScore}` : ''}
+                    </div>
+                  )}
                   <div style={{ fontSize: 11, color: '#64748b' }}>{c.source_citation}</div>
                   <p style={{ margin: '6px 0 0' }}>{c.text}</p>
                 </div>

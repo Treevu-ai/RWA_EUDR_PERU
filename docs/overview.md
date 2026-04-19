@@ -27,6 +27,12 @@ Construir una solución integral que facilite el cumplimiento de los requisitos 
    - Exportación de datos en formatos exigidos por la UE.
    - Soporte para auditorías internas y externas.
 
+5. Capa de **copiloto / apoyo cognitivo** (prototipo; opcional)
+   - Recuperación de fragmentos **con citas** desde un corpus versionado (léxica; **híbrida** con embeddings si se genera el índice y hay clave de API).
+   - Modo **asistido** con LLM solo si se configura en servidor; las respuestas deben anclarse a fragmentos `[id]` — no sustituye asesoría legal ni declara cumplimiento EUDR.
+   - Checklist de preparación frente al lote en demo, enlaces de lectura a EUR-Lex y registro ligero de uso para trazabilidad del proceso interno.
+   - **No** es un agente autónomo que actúe en nombre del operador económico; el juicio y la responsabilidad siguen siendo humanos.
+
 ## Tecnologías recomendadas
 
 - Backend: Node.js, Python o .NET para APIs y lógica de negocio.
@@ -44,4 +50,5 @@ Construir una solución integral que facilite el cumplimiento de los requisitos 
 ## Documentación relacionada
 
 - `docs/propuesta_integral.md` - Propuesta integral blockchain y plan piloto detallado.
-- `prototype/README.md` - Prototipo visual de la interfaz.
+- `prototype/README.md` - Prototipo y arranque local.
+- `docs/eudr-compliance-copilot.md` - Copiloto EUDR: límites, API y modo asistido opcional.
