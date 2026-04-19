@@ -15,6 +15,8 @@
 
 *Documentación abierta y prototipo para orquestar trazabilidad en cadenas agroexportadoras peruanas — con foco inicial en café y cacao y en exigencias del mercado europeo (incl. marco EUDR cuando aplique).*
 
+[![Para empresas](https://img.shields.io/badge/Landing-para%20clientes%20B2B-0d9488?style=flat-square)](https://treevu-ai.github.io/RWA_EUDR_PERU/clientes/)
+
 <br />
 
 </div>
@@ -36,7 +38,7 @@ Este proyecto **documenta requisitos**, **propone arquitectura** y ofrece un **p
 | **`assets/`** | Recursos para documentación en GitHub (p. ej. banner del README) |
 | [**`docs/`**](docs/) | Requisitos UE, propuesta integral, roadmap, pitch, diagramas |
 | [**`docs/convocatorias/`**](docs/convocatorias/) | Checklist, plantillas, pitch 90s, ficha 1 página, exportación a PDF |
-| [**`landing/`**](landing/) | Sitio estático informativo (desplegado vía GitHub Pages) |
+| [**`landing/`**](landing/) | Sitio estático; [**`/clientes/`**](landing/clientes/) landing B2B para exportadores y cooperativas |
 | [**`prototype/`**](prototype/) | Demo React + Express: trazas OTLP, compliance preliminar, DDS MVP |
 
 ---
