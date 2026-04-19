@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Trazabilidad verificable y evidencia para exportaciones agropecuarias peruanas frente a exigencias UE (EUDR). Documentación abierta y prototipo."
+      content="Trazabilidad verificable y evidencia para exportaciones agropecuarias peruanas frente a la UE (EUDR). Prototipo reproducible, trazas técnicas y copiloto de preparación documental — documentación abierta."
     />
     <title>RWA EUDR Perú — Trazabilidad y cumplimiento para mercados europeos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,6 +33,7 @@
           <a href="#retos">Reto</a>
           <a href="#solucion">Solución</a>
           <a href="#piloto">Piloto</a>
+          <a href="#demo">Demo</a>
           <a href="#documentacion">Docs</a>
           <a href="clientes/index.html">Empresas</a>
           <a class="nav-cta" href="https://github.com/Treevu-ai/RWA_EUDR_PERU" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -69,7 +70,9 @@
               Una línea de trabajo técnico y documental para que café, cacao y el resto de la canasta
               agroexportadora peruana pueda reunir <strong>origen</strong>, <strong>custodia</strong> y
               <strong>debida diligencia</strong> frente al mercado europeo — incluido el marco EUDR cuando
-              aplique — sin improvisar cada envío.
+              aplique — sin improvisar cada envío. El repositorio incluye un <strong>prototipo ejecutable</strong>
+              para demos reproducibles y un <strong>copiloto de preparación documental</strong> con citas (no
+              sustituye asesoría legal).
             </p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="https://github.com/Treevu-ai/RWA_EUDR_PERU" target="_blank" rel="noopener noreferrer">Explorar el repositorio</a>
@@ -158,11 +161,11 @@
             <span class="section-eyebrow">enfoque</span>
             <h2>Tres capas que funcionan en conjunto</h2>
             <p class="section-intro">
-              Diseño modular para que campo, cumplimiento y auditoría puedan madurar a ritmos distintos sin romper la cadena lógica de evidencia.
+              Diseño modular para que campo, cumplimiento, auditoría y — cuando se active — <strong>apoyo cognitivo citado</strong> puedan madurar a ritmos distintos sin romper la cadena lógica de evidencia.
             </p>
           </header>
 
-          <div class="grid-3">
+          <div class="grid-3 grid-features">
             <article class="card">
               <div class="card-icon" aria-hidden="true">
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
@@ -182,7 +185,7 @@
                 </svg>
               </div>
               <h3>Cumplimiento UE</h3>
-              <p>Criterios de debida diligencia y preparación de artefactos exportables antes de llamadas de auditoría improvisadas.</p>
+              <p>Criterios de debida diligencia y paquetes exportables antes de auditorías improvisadas; referencias EUR-Lex enlazadas para lectura oficial.</p>
               <div class="tags"><span class="tag">EUDR</span><span class="tag">DDS</span><span class="tag">reportes</span></div>
             </article>
             <article class="card">
@@ -195,6 +198,19 @@
               <p>Trazas y eventos para reconstruir qué ocurrió en el sistema — complemento al juicio legal del operador, no sustituto.</p>
               <div class="tags"><span class="tag">OTLP</span><span class="tag">trazas</span></div>
             </article>
+            <article class="card">
+              <div class="card-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 15a4 4 0 01-4 4H8l-5 3V9a4 4 0 014-4h10a4 4 0 014 4v6z" stroke="currentColor" stroke-width="1.65" stroke-linejoin="round"/>
+                  <path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3>Copiloto cognitivo (opcional)</h3>
+              <p>
+                Recuperación de fragmentos <strong>con citas</strong> desde corpus versionado; modo híbrido y redacción asistida opcionales con LLM en servidor. Pensado como asistente de preparación documental, sin agentes autónomos ni certificación legal.
+              </p>
+              <div class="tags"><span class="tag">RAG citado</span><span class="tag">EUR-Lex</span><span class="tag">humano responsable</span></div>
+            </article>
           </div>
         </div>
       </section>
@@ -205,7 +221,7 @@
             <span class="section-eyebrow">estado</span>
             <h3>Piloto sobre base demostrable</h3>
             <p class="small">
-              El directorio <code style="font-size: 0.9em">prototype/</code> contiene una app React + API Express con datos de laboratorio y receptor OTLP: sirve para ensayar flujos antes de invertir en integraciones productivas.
+              El directorio <code style="font-size: 0.9em">prototype/</code> contiene una app React + API Express con datos de laboratorio, receptor OTLP y copiloto de preparación documental: sirve para <strong>demos guiadas</strong> antes de invertir en integraciones productivas.
             </p>
             <div class="metrics" aria-label="Indicadores del piloto">
               <div class="metric">
@@ -235,6 +251,39 @@
         </div>
       </section>
 
+      <section class="section" id="demo">
+        <div class="wrap">
+          <header class="section-head">
+            <span class="section-eyebrow">credibilidad técnica</span>
+            <h2>Demo que se puede repetir — y revisar en código</h2>
+            <p class="section-intro">
+              Pensada para equipos que evalúan <strong>piloto</strong> con rigor: el mismo flujo referencial en
+              máquina limpia, con instrucciones en el repositorio. Incluye API Express, frontend React, captura
+              OTLP opcional y copiloto orientado a <strong>organización de evidencias</strong> y fragmentos
+              citados — sin declarar cumplimiento legal frente al Reglamento (UE) 2023/1115.
+            </p>
+          </header>
+          <div class="grid-3">
+            <article class="card">
+              <h3>Reproducible</h3>
+              <p><code>prototype/README.md</code> describe arranque en dos terminales, credenciales demo y límites del entorno local.</p>
+            </article>
+            <article class="card">
+              <h3>Observable</h3>
+              <p>Trazas en cliente y endpoints documentados; base para explicar incidentes y auditorías de proceso, no sustituto del juicio del operador.</p>
+            </article>
+            <article class="card">
+              <h3>Transparente</h3>
+              <p>Código y documentación abiertos en GitHub; condiciones de un piloto productivo se acuerdan según alcance e integraciones.</p>
+            </article>
+          </div>
+          <p class="section-intro demo-cta" style="margin-top: 1.25rem; margin-bottom: 0">
+            <a class="btn btn-primary" href="https://github.com/Treevu-ai/RWA_EUDR_PERU/tree/main/prototype" target="_blank" rel="noopener noreferrer">Ver carpeta prototype</a>
+            <a class="btn btn-ghost" href="clientes/index.html">Hablar de piloto con el equipo comercial →</a>
+          </p>
+        </div>
+      </section>
+
       <section class="section" id="documentacion">
         <div class="wrap">
           <header class="section-head">
@@ -250,6 +299,8 @@
             <div class="doc-row"><code>docs/requirements.md</code><span>Requisitos regulatorios</span></div>
             <div class="doc-row"><code>docs/propuesta_integral.md</code><span>Blockchain &amp; piloto</span></div>
             <div class="doc-row"><code>docs/roadmap.md</code><span>Roadmap</span></div>
+            <div class="doc-row"><code>docs/eudr-compliance-copilot.md</code><span>Copiloto EUDR (límites, API)</span></div>
+            <div class="doc-row"><code>docs/demo-runbook.md</code><span>Runbook demo local</span></div>
             <div class="doc-row"><code>docs/convocatorias/</code><span>Plantillas para fondos UE</span></div>
           </div>
 
