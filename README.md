@@ -26,9 +26,16 @@ Este proyecto busca documentar y desarrollar una solución que facilite el cumpl
 ## Estructura del Proyecto
 
 - `docs/` - Documentación de requisitos, diseño y roadmap.
+- `docs/convocatorias/` - Checklist y plantillas para preparar postulaciones (cooperación UE / innovación).
 - `landing/` - Landing informativa estática (HTML/CSS) sobre la iniciativa y cooperación UE.
 - `src/` - Código de la solución (aplicación, APIs, integraciones).
 - `data/` - Ejemplos de datos, esquemas y casos de prueba.
+
+## Publicación de la landing (GitHub Pages)
+
+El workflow [.github/workflows/deploy-landing.yml](.github/workflows/deploy-landing.yml) despliega la carpeta `landing/` en la rama `gh-pages`. Tras el primer despliegue exitoso, en GitHub: **Settings → Pages → Build and deployment → Branch `gh-pages` / folder `/ (root)`**.
+
+La URL típica del sitio será `https://treevu-ai.github.io/RWA_EUDR_PERU/` (ajusta si cambias nombre del repositorio).
 
 ## Primeros pasos
 
@@ -39,10 +46,12 @@ Este proyecto busca documentar y desarrollar una solución que facilite el cumpl
 
 ## Documentación clave
 
+- `docs/convocatorias/README.md` - Índice de materiales para convocatorias.
 - `docs/overview.md` - Visión general de la solución y componentes.
 - `docs/requirements.md` - Requisitos regulatorios y de trazabilidad.
 - `docs/propuesta_integral.md` - Propuesta integral blockchain y plan piloto detallado.
 - `docs/roadmap.md` - Fases de desarrollo y prioridades.
 - `docs/tracing.md` - Documentación de tracing e instrumentación.
 - `prototype/README.md` - Prototipo React con backend local y panel de trazas.
+- `prototype/NEXT_STEPS.md` - Próximos pasos técnicos sugeridos para el piloto.
 - `prototype/server.js` - Backend Express con datos de muestra y receptor OTLP.
