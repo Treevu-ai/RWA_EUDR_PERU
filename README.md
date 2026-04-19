@@ -35,7 +35,7 @@ Este proyecto **documenta requisitos**, **propone arquitectura** y ofrece un **p
 |------|-----------|
 | **`assets/`** | Recursos para documentación en GitHub (p. ej. banner del README) |
 | [**`docs/`**](docs/) | Requisitos UE, propuesta integral, roadmap, pitch, diagramas |
-| [**`docs/convocatorias/`**](docs/convocatorias/) | Checklist y plantillas para postulaciones (cooperación UE / innovación) |
+| [**`docs/convocatorias/`**](docs/convocatorias/) | Checklist, plantillas, pitch 90s, ficha 1 página, exportación a PDF |
 | [**`landing/`**](landing/) | Sitio estático informativo (desplegado vía GitHub Pages) |
 | [**`prototype/`**](prototype/) | Demo React + Express: trazas OTLP, compliance preliminar, DDS MVP |
 

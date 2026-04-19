@@ -4,6 +4,7 @@ Orden sugerido para cerrar el salto de “demo local” a “piloto creíble”.
 
 ## Corto plazo (base sólida)
 
+0. **Entorno**: copiar `prototype/.env.example` → `.env` y documentar puertos antes de exponer públicamente la API.
 1. **Persistencia**: salir de JSON de demo solo cuando el piloto lo requiera; definir modelo de datos (lotes, geometrías, custodia) y migración.
 2. **Datos de demostración**: revisar si el flujo necesita datos de muestra versionados en repo o generados por script (`prototype/data/` está en `.gitignore` para muchos JSON).
 3. **Autenticación**: credenciales demo están bien para laboratorio; documentar rotación y entornos (`dev`/`pilot`) antes de exposición pública.
@@ -17,7 +18,7 @@ Orden sugerido para cerrar el salto de “demo local” a “piloto creíble”.
 ## Observabilidad y operación
 
 7. **OTLP**: mantener trazas en piloto solo si aportan incident response (evitar coste innecesario).
-8. **Seguridad**: HTTPS, headers básicos, límites de tasa en API pública si se expone más allá de localhost.
+8. **Seguridad**: HTTPS delante del servidor, límites de tasa en API pública si se expone más allá de localhost. *(Cabeceras mínimas ya aplicadas en `server.js`; endurecer en reverse proxy.)*
 
 ## Referencia
 

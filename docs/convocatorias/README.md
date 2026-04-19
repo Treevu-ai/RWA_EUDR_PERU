@@ -6,6 +6,9 @@ Material de apoyo para preparar postulaciones no reembolsables usando la documen
 |-----------|-----|
 | [checklist-postulacion-ue.md](./checklist-postulacion-ue.md) | Lista de verificación antes de enviar |
 | [plantilla-nota-conceptual.md](./plantilla-nota-conceptual.md) | Borrador de narrativa compacta |
+| [ficha-proyecto-1-pagina.md](./ficha-proyecto-1-pagina.md) | Resumen de una cara para fichas de financiador |
+| [elevator-pitch-90s.md](./elevator-pitch-90s.md) | Guion oral breve (ES + EN corto) |
+| [exportar-documentos.md](./exportar-documentos.md) | Cómo pasar Markdown a PDF para anexos |
 
 ## Mapa rápido (enlaces internos del repo)
 

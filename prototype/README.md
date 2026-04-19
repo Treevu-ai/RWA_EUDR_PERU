@@ -2,6 +2,11 @@
 
 Aplicación de demostración para trazabilidad agroexportadora y verificación preliminar de compliance EUDR.
 
+## Configuración
+
+- Copia [`.env.example`](./.env.example) a `.env` si quieres fijar **`PORT`** (por defecto `3000`).
+- El backend aplica **cabeceras HTTP mínimas** (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`). En producción sitúa **HTTPS** delante (proxy inverso o plataforma) y refuerza políticas allí.
+
 ## Stack actual
 - `server.js`: backend Express con auth, productores, lotes, compliance, DDS MVP, blockchain local y trazas OTLP.
 - `src/`: frontend React montado con Vite.
