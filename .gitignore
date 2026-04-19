@@ -1,0 +1,33 @@
+# Environment variables (NO COMMIT)
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build
+dist/
+*.build
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (local persistence)
+prototype/data/*.json
+!prototype/data/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Catálogo externo empaquetado (subrepo ajeno; excluir del remoto principal)
+agentic-ai-apis/

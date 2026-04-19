@@ -1,0 +1,364 @@
+/* RWA EUDR — landing informativa (estático) */
+:root {
+  --bg: #f6f4ef;
+  --surface: #fffefb;
+  --ink: #1c1b18;
+  --muted: #4a4740;
+  --line: #d9d4c8;
+  --accent: #1e5c4a;
+  --accent-soft: #e8f2ee;
+  --warn: #8a4b16;
+  --radius: 14px;
+  --shadow: 0 18px 50px rgba(28, 27, 24, 0.08);
+  --max: 1120px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Source Sans 3", system-ui, -apple-system, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(30, 92, 74, 0.12), transparent),
+    radial-gradient(900px 500px at 95% 0%, rgba(138, 75, 22, 0.06), transparent),
+    var(--bg);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 0.75rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.wrap {
+  width: min(var(--max), calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  background: rgba(246, 244, 239, 0.85);
+  border-bottom: 1px solid rgba(217, 212, 200, 0.65);
+}
+
+.site-header .inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.brand strong {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.brand span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  justify-content: flex-end;
+}
+
+.nav a {
+  font-size: 0.95rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
+.hero {
+  padding: clamp(3rem, 6vw, 5rem) 0 3rem;
+}
+
+.hero-grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 254, 251, 0.75);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.hero h1 {
+  font-size: clamp(2.15rem, 4vw, 3.05rem);
+  margin: 1rem 0 1rem;
+}
+
+.lede {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 54ch;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.35rem 1.35rem 1.15rem;
+}
+
+.panel h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 700;
+}
+
+.panel ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+}
+
+.panel li {
+  margin-bottom: 0.55rem;
+}
+
+.note {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px dashed rgba(138, 75, 22, 0.35);
+  background: rgba(138, 75, 22, 0.06);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.note strong {
+  color: var(--warn);
+}
+
+.section {
+  padding: 2.75rem 0;
+  border-top: 1px solid rgba(217, 212, 200, 0.75);
+}
+
+.section h2 {
+  font-size: clamp(1.65rem, 3vw, 2.15rem);
+  margin: 0 0 1rem;
+}
+
+.grid-3 {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.35rem 1.25rem 1.25rem;
+  height: 100%;
+}
+
+.card h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.2rem;
+}
+
+.card p {
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  font-size: 0.82rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(232, 242, 238, 0.55);
+  color: var(--muted);
+}
+
+.two-col {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 900px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.callout {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(232, 242, 238, 0.65), rgba(255, 254, 251, 0.9));
+  padding: 1.35rem 1.35rem 1.25rem;
+}
+
+.callout h3 {
+  margin-top: 0;
+}
+
+.metrics {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 1rem;
+}
+
+@media (max-width: 700px) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metric {
+  padding: 0.85rem 0.95rem;
+  border-radius: 12px;
+  border: 1px solid rgba(217, 212, 200, 0.85);
+  background: rgba(255, 254, 251, 0.75);
+}
+
+.metric strong {
+  display: block;
+  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+}
+
+.metric span {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.docs-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+}
+
+.docs-list code {
+  font-size: 0.92em;
+  background: rgba(232, 242, 238, 0.55);
+  padding: 0.1rem 0.35rem;
+  border-radius: 6px;
+  border: 1px solid rgba(217, 212, 200, 0.65);
+}
+
+.site-footer {
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid rgba(217, 212, 200, 0.75);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.small {
+  font-size: 0.9rem;
+}
+
+.lang-en {
+  border-left: 4px solid rgba(30, 92, 74, 0.35);
+  padding-left: 1rem;
+}
+
+.lang-en h2 {
+  font-size: 1.35rem;
+}

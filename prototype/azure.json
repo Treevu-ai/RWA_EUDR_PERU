@@ -1,0 +1,18 @@
+{
+  "version": "0.2.1",
+  "framework": "nodejs",
+  "configurations": {
+    "development": {
+      "appCommandLine": "node server.js",
+      "pmCommandLine": "pm2 start server.js",
+      "nodePort": 3000,
+      "launchCommand": "node server.js"
+    },
+    "production": {
+      "appCommandLine": "node server.js",
+      "pmCommandLine": "pm2 start server.js",
+      "nodePort": 3000,
+      "launchCommand": "node server.js"
+    }
+  }
+}
