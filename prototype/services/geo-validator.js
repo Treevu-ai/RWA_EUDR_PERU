@@ -99,8 +99,9 @@ export function validateEudrPolygon(geojson, options = {}) {
 
     // Warn about low-precision coordinates (EUDR expects at least 5 decimal places ~ ±1 m)
     const [flon, flat] = first;
-    const lonDecimals = (String(Math.abs(flon)).split('.')[1] || '').length;
-    const latDecimals = (String(Math.abs(flat)).split('.')[1] || '').length;
+    // Use toFixed to avoid scientific notation before counting decimal places
+    const lonDecimals = (flon.toFixed(20).replace(/\.?0+$/, '').split('.')[1] || '').length;
+    const latDecimals = (flat.toFixed(20).replace(/\.?0+$/, '').split('.')[1] || '').length;
     if (lonDecimals < 5 || latDecimals < 5) {
       warnings.push(
         `${label}: coordinates have low precision (lon: ${lonDecimals} decimals, lat: ${latDecimals} decimals). ` +
@@ -113,7 +114,7 @@ export function validateEudrPolygon(geojson, options = {}) {
 }
 
 /**
- * Close an open polygon ring in-place by appending the first coordinate at the end.
+ * Close an open polygon ring by appending the first coordinate at the end.
  * Returns a *new* array; the original is not mutated.
  *
  * @param {number[][]} ring - Array of [lon, lat] pairs

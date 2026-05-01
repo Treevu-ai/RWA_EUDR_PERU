@@ -411,7 +411,7 @@
         badge.style.display = 'none';
       }
 
-      const now = new Date().toLocaleTimeString('es-PE');
+      const now = new Date().toLocaleString('es-PE', { dateStyle: 'short', timeStyle: 'medium' });
       statusEl.textContent = `Actualizado: ${now}`;
 
       if (alerts.length === 0) {
@@ -462,9 +462,10 @@
       }
     }
 
-    // Initial fetch + periodic polling
+    // Initial fetch + periodic polling.
+    // Store the interval ID so it can be cleared if needed (e.g. on logout).
     fetchAlerts();
-    setInterval(fetchAlerts, POLL_INTERVAL_MS);
+    window._alertsPollingId = setInterval(fetchAlerts, POLL_INTERVAL_MS);
   </script>
 
 </body>
