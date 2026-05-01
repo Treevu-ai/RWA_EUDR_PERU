@@ -11,6 +11,7 @@ import {
   executeService,
   hashData,
   generateBlockHash,
+  generateFullHash,
   calculateWeightedComplianceScore,
   determineComplianceStatus,
   generateEvidenceHash,
@@ -38,6 +39,7 @@ app.use((_req, res, next) => {
   next();
 });
 const dataDir = path.join(__dirname, 'data');
+const seedsDir = path.join(__dirname, 'seeds');
 
 const files = {
   traces: path.join(dataDir, 'traces.json'),
@@ -47,7 +49,8 @@ const files = {
   alerts: path.join(dataDir, 'alerts.json'),
   producers: path.join(dataDir, 'producers.json'),
   lots: path.join(dataDir, 'lots.json'),
-  users: path.join(dataDir, 'users.json')
+  users: path.join(dataDir, 'users.json'),
+  sessions: path.join(dataDir, 'sessions.json')
 };
 
 function ensureDataDir() {
@@ -66,37 +69,74 @@ function saveJSON(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 
-let producers = loadJSON(files.producers, [
-  { id: 'P-001', name: 'Cooperativa Agraria APROCAM', region: 'San Martín', hectares: 450, status: 'Conectado', digitalMaturity: 'Intermedia', members: 180, lat: -6.5217, lon: -76.3823, certifications: ['Fairtrade', 'Orgánico', 'Rainforest'], createdAt: new Date().toISOString() },
-  { id: 'P-002', name: 'Juan Huaman (Café)', region: 'Cajamarca', hectares: 2.5, status: 'Registrado', digitalMaturity: 'Inicial', members: 1, lat: -7.1567, lon: -78.5133, certifications: ['UTZ'], createdAt: new Date().toISOString() },
-  { id: 'P-003', name: 'María Quispe Exports', region: 'Piura', hectares: 12, status: 'Verificado', digitalMaturity: 'Avanzada', members: 1, lat: -5.1947, lon: -80.6323, certifications: ['Kosher', 'Orgánico', 'B Corp'], createdAt: new Date().toISOString() },
-  { id: 'P-004', name: 'Orgánicos del Vraem', region: 'Junín', hectares: 85, status: 'Conectado', digitalMaturity: 'Básica', members: 45, lat: -11.1234, lon: -74.5678, certifications: ['Fairtrade'], createdAt: new Date().toISOString() },
-  { id: 'P-005', name: 'Central Café del Norte', region: 'Cajamarca', hectares: 320, status: 'Conectado', digitalMaturity: 'Avanzada', members: 120, lat: -6.8714, lon: -78.1234, certifications: ['Fairtrade', '4C', 'UTZ'], createdAt: new Date().toISOString() },
-  { id: 'P-006', name: 'Cooperativa Tocache Cacao', region: 'San Martín', hectares: 280, status: 'Conectado', digitalMaturity: 'Intermedia', members: 95, lat: -8.1893, lon: -76.5123, certifications: ['Orgánico', 'Fairtrade'], createdAt: new Date().toISOString() },
-  { id: 'P-007', name: 'Agricultores de Quillabamba', region: 'Cusco', hectares: 45, status: 'Registrado', digitalMaturity: 'Inicial', members: 22, lat: -12.8654, lon: -72.6987, certifications: ['UTZ'], createdAt: new Date().toISOString() },
-  { id: 'P-008', name: 'Exportadora Peruana SA', region: 'Lambayeque', hectares: 150, status: 'Verificado', digitalMaturity: 'Avanzada', members: 60, lat: -6.4817, lon: -79.8542, certifications: ['Orgánico', 'BRC', 'ISO22000'], createdAt: new Date().toISOString() },
-  { id: 'P-009', name: 'Café Altomayo', region: 'Amazonas', hectares: 180, status: 'Conectado', digitalMaturity: 'Intermedia', members: 75, lat: -5.5612, lon: -77.8123, certifications: ['Fairtrade', 'Rainforest', 'Orgánico'], createdAt: new Date().toISOString() },
-  { id: 'P-010', name: 'Cooperativa Pangoa', region: 'Junín', hectares: 95, status: 'Conectado', digitalMaturity: 'Básica', members: 38, lat: -10.9234, lon: -74.1234, certifications: ['Fairtrade', 'UTZ'], createdAt: new Date().toISOString() }
-]);
+/** Load data file; if missing, seed from seeds/ directory. */
+function loadWithSeed(dataPath, seedName) {
+  ensureDataDir();
+  if (!fs.existsSync(dataPath)) {
+    const seedPath = path.join(seedsDir, `${seedName}.json`);
+    if (fs.existsSync(seedPath)) {
+      try {
+        const seed = JSON.parse(fs.readFileSync(seedPath, 'utf8'));
+        fs.writeFileSync(dataPath, JSON.stringify(seed, null, 2));
+        return seed;
+      } catch (e) {
+        console.error(`Error loading seed ${seedName}:`, e.message);
+      }
+    }
+  }
+  return loadJSON(dataPath, []);
+}
 
-let lots = loadJSON(files.lots, [
-  { id: 'CAC-2026-001', producer: 'APROCAM', product: 'Cacao', parcel: 'PAR-045', eudr: 'Verificado', status: 'Exportado', weightKg: 4500, destination: 'Países Bajos', pricePerKg: 9.20, certification: 'Fairtrade Orgánico', lat: -6.4852, lon: -76.3671, createdAt: new Date().toISOString() },
-  { id: 'CAF-2026-012', producer: 'Juan Huaman', product: 'Café', parcel: 'PAR-071', eudr: 'Pendiente', status: 'Acopiado', weightKg: 820, destination: 'Alemania', pricePerKg: 8.50, certification: 'UTZ', lat: -7.1567, lon: -78.5133, createdAt: new Date().toISOString() },
-  { id: 'CAC-2026-008', producer: 'APROCAM', product: 'Cacao', parcel: 'PAR-022', eudr: 'Verificado', status: 'En destino', weightKg: 2800, destination: 'Bélgica', pricePerKg: 8.80, certification: 'Orgánico UE', lat: -6.5012, lon: -76.3901, createdAt: new Date().toISOString() },
-  { id: 'QNA-2026-003', producer: 'María Quispe', product: 'Quinua', parcel: 'PAR-089', eudr: 'Verificado', status: 'Embalado', weightKg: 1200, destination: 'España', pricePerKg: 4.20, certification: 'Kosher', lat: -5.1947, lon: -80.6323, createdAt: new Date().toISOString() },
-  { id: 'CAF-2026-015', producer: 'Central Café del Norte', product: 'Café', parcel: 'PAR-102', eudr: 'Verificado', status: 'En tránsito', weightKg: 6500, destination: 'Italia', pricePerKg: 8.75, certification: 'Fairtrade 4C', lat: -6.8714, lon: -78.1234, createdAt: new Date().toISOString() },
-  { id: 'CAC-2026-012', producer: 'Cooperativa Tocache Cacao', product: 'Cacao', parcel: 'PAR-203', eudr: 'Verificado', status: 'Registrado', weightKg: 3200, destination: 'Países Bajos', pricePerKg: 9.40, certification: 'Fairtrade Orgánico', lat: -8.1893, lon: -76.5123, createdAt: new Date().toISOString() },
-  { id: 'CAF-2026-018', producer: 'Café Altomayo', product: 'Café', parcel: 'PAR-305', eudr: 'Pendiente', status: 'Cosecha', weightKg: 1800, destination: 'Francia', pricePerKg: 9.10, certification: 'Rainforest Orgánico', lat: -5.5612, lon: -77.8123, createdAt: new Date().toISOString() },
-  { id: 'CAC-2026-015', producer: 'Cooperativa Pangoa', product: 'Cacao', parcel: 'PAR-401', eudr: 'Verificado', status: 'Acopiado', weightKg: 2100, destination: 'Bélgica', pricePerKg: 8.95, certification: 'Fairtrade UTZ', lat: -10.9234, lon: -74.1234, createdAt: new Date().toISOString() },
-  { id: 'CAF-2026-020', producer: 'Agricultores de Quillabamba', product: 'Café', parcel: 'PAR-501', eudr: 'Pendiente', status: 'Certificación', weightKg: 950, destination: 'Suecia', pricePerKg: 7.80, certification: 'UTZ', lat: -12.8654, lon: -72.6987, createdAt: new Date().toISOString() },
-  { id: 'CAC-2026-018', producer: 'Exportadora Peruana SA', product: 'Cacao', parcel: 'PAR-601', eudr: 'Verificado', status: 'Embalado', weightKg: 5800, destination: 'Alemania', pricePerKg: 9.60, certification: 'Orgánico BRC ISO', lat: -6.4817, lon: -79.8542, createdAt: new Date().toISOString() }
-]);
+function createFreshGenesis() {
+  const ts = new Date().toISOString();
+  const genesis = {
+    index: 0,
+    timestamp: ts,
+    data: { type: 'genesis', message: 'RWA EUDR Blockchain - Trazabilidad Agroexportadora' },
+    previousHash: '0'
+  };
+  genesis.hash = generateBlockHash(genesis);
+  const chain = [genesis];
+  saveJSON(files.blockchain, chain);
+  return chain;
+}
 
-let blockchain = loadJSON(files.blockchain, [{
-  index: 0, timestamp: new Date().toISOString(),
-  data: { type: 'genesis', message: 'RWA EUDR Blockchain - Trazabilidad Agroexportadora' },
-  previousHash: '0', hash: hashData({ index: 0, timestamp: new Date().toISOString() })
-}]);
+/** Load blockchain and validate integrity. Resets to fresh genesis if chain is corrupted. */
+function validateAndInitBlockchain() {
+  const chain = loadJSON(files.blockchain, []);
+  if (chain.length === 0) return createFreshGenesis();
+  for (let i = 1; i < chain.length; i++) {
+    const block = chain[i];
+    const prev = chain[i - 1];
+    const expected = generateBlockHash({
+      index: block.index, timestamp: block.timestamp,
+      data: block.data, previousHash: block.previousHash
+    });
+    if (block.previousHash !== prev.hash || block.hash !== expected) {
+      console.warn(`⚠️  Blockchain: inconsistencia en bloque ${i}. Reiniciando cadena.`);
+      return createFreshGenesis();
+    }
+  }
+  return chain;
+}
+
+/** Simple field validators; return an error string or null. */
+function validateString(val, name, { maxLen = 200 } = {}) {
+  if (typeof val !== 'string' || val.trim().length === 0) return `${name} es requerido`;
+  if (val.length > maxLen) return `${name} excede ${maxLen} caracteres`;
+  return null;
+}
+
+function validatePositiveNumber(val, name) {
+  const n = Number(val);
+  if (!Number.isFinite(n) || n <= 0) return `${name} debe ser un número positivo`;
+  return null;
+}
+
+let producers = loadWithSeed(files.producers, 'producers');
+let lots = loadWithSeed(files.lots, 'lots');
+
+let blockchain = validateAndInitBlockchain();
 
 let traceHistory = loadJSON(files.traces, []);
 let alerts = loadJSON(files.alerts, []);
@@ -107,7 +147,24 @@ let users = loadJSON(files.users, [
 
 let complianceReports = loadJSON(files.compliance, []);
 let ddsReports = loadJSON(files.dds, []);
-let sessions = [];
+
+const SESSION_TTL_HOURS_RAW = parseInt(process.env.SESSION_TTL_HOURS, 10);
+const SESSION_TTL_MS = (Number.isFinite(SESSION_TTL_HOURS_RAW) && SESSION_TTL_HOURS_RAW > 0
+  ? SESSION_TTL_HOURS_RAW : 8) * 60 * 60 * 1000;
+let sessions = loadJSON(files.sessions, []).filter(
+  (s) => !s.expiresAt || Date.now() < new Date(s.expiresAt).getTime()
+);
+
+function saveSessions() {
+  saveJSON(files.sessions, sessions);
+}
+
+// Periodically remove expired sessions from memory and file
+setInterval(() => {
+  const before = sessions.length;
+  sessions = sessions.filter((s) => !s.expiresAt || Date.now() < new Date(s.expiresAt).getTime());
+  if (sessions.length !== before) saveSessions();
+}, 10 * 60 * 1000);
 
 const marketStats = {
   cacao: { export2025: 1510000000, growth: '22%', topMarkets: ['EEUU', 'Países Bajos', 'Bélgica', 'Italia'], volumeMT: 169987 },
@@ -115,9 +172,54 @@ const marketStats = {
   eudShare: '34%'
 };
 
-app.use(cors());
+const allowedOrigins = (process.env.ALLOWED_ORIGIN || 'http://localhost:3000,http://localhost:5173')
+  .split(',').map((o) => o.trim()).filter(Boolean);
+
+app.use(cors({
+  origin: (origin, cb) => {
+    // Same-origin requests (SPA served by Express) have no Origin header — always allow.
+    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    cb(new Error('Not allowed by CORS'));
+  }
+}));
 app.use(express.json({ limit: '4mb' }));
 app.use((req, res, next) => { systemStats.apiCalls++; next(); });
+
+// ============== RATE LIMITING ==============
+const rateLimitWindows = new Map();
+
+function createRateLimiter({ windowMs = 60 * 1000, max = 200, message = 'Demasiadas solicitudes. Intente más tarde.' } = {}) {
+  return (req, res, next) => {
+    const key = req.ip || req.socket?.remoteAddress;
+    // If IP is indeterminate, skip rate limiting to avoid incorrectly blocking
+    // multiple clients that share the same fallback key.
+    if (!key) { next(); return; }
+    const now = Date.now();
+    let entry = rateLimitWindows.get(key);
+    if (!entry || now > entry.resetAt) entry = { count: 0, resetAt: now + windowMs };
+    entry.count++;
+    rateLimitWindows.set(key, entry);
+    res.setHeader('X-RateLimit-Limit', max);
+    res.setHeader('X-RateLimit-Remaining', Math.max(0, max - entry.count));
+    res.setHeader('X-RateLimit-Reset', Math.ceil(entry.resetAt / 1000));
+    if (entry.count > max) return res.status(429).json({ error: message });
+    next();
+  };
+}
+
+const apiLimiter = createRateLimiter({ windowMs: 60 * 1000, max: 200 });
+const authLimiter = createRateLimiter({ windowMs: 15 * 60 * 1000, max: 20 });
+const copilotLimiter = createRateLimiter({ windowMs: 60 * 1000, max: 20 });
+
+app.use('/api/', apiLimiter);
+
+// Periodically prune stale rate-limit entries to prevent memory growth
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, entry] of rateLimitWindows) {
+    if (now > entry.resetAt) rateLimitWindows.delete(key);
+  }
+}, 5 * 60 * 1000);
 
 function generateId(prefix) {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
@@ -177,25 +279,39 @@ function buildGeoEvidence(lot) {
 
 function authMiddleware(req, res, next) {
   const token = req.headers.authorization?.replace('Bearer ', '');
-  const session = sessions.find(s => s.token === token);
+  const session = sessions.find((s) => s.token === token);
   if (!session) return res.status(401).json({ error: 'No autorizado' });
+  if (session.expiresAt && Date.now() >= new Date(session.expiresAt).getTime()) {
+    sessions = sessions.filter((s) => s.token !== token);
+    saveSessions();
+    return res.status(401).json({ error: 'Sesión expirada' });
+  }
   req.user = session;
   next();
 }
 
 // ============== AUTH ==============
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', authLimiter, (req, res) => {
   const { username, password } = req.body;
-  const user = users.find(u => u.username === username && u.password === hashData(password));
+  const errs = [
+    validateString(username, 'username', { maxLen: 100 }),
+    validateString(password, 'password', { maxLen: 100 })
+  ].filter(Boolean);
+  if (errs.length) return res.status(400).json({ error: errs[0] });
+
+  const user = users.find((u) => u.username === username && u.password === hashData(password));
   if (!user) return res.status(401).json({ error: 'Credenciales inválidas' });
-  
-  const token = hashData(username + Date.now());
-  sessions.push({ token, userId: user.id, username: user.username, role: user.role, createdAt: new Date().toISOString() });
+
+  const token = crypto.randomBytes(32).toString('hex');
+  const expiresAt = new Date(Date.now() + SESSION_TTL_MS).toISOString();
+  sessions.push({ token, userId: user.id, username: user.username, role: user.role, createdAt: new Date().toISOString(), expiresAt });
+  saveSessions();
   res.json({ token, user: { id: user.id, username: user.username, role: user.role, name: user.name } });
 });
 
 app.post('/api/auth/logout', authMiddleware, (req, res) => {
-  sessions = sessions.filter(s => s.token !== req.headers.authorization?.replace('Bearer ', ''));
+  sessions = sessions.filter((s) => s.token !== req.headers.authorization?.replace('Bearer ', ''));
+  saveSessions();
   res.json({ success: true });
 });
 
@@ -283,6 +399,13 @@ app.get('/api/producers', authMiddleware, (req, res) => {
 app.post('/api/producers', authMiddleware, (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ error: 'Sin permisos' });
   const { name, region, hectares, digitalMaturity, members, lat, lon, certifications } = req.body;
+  // Required: name, region. Optional with defaults: hectares (numeric if given), digitalMaturity, members, lat, lon, certifications.
+  const errs = [
+    validateString(name, 'name'),
+    validateString(region, 'region'),
+    hectares != null ? validatePositiveNumber(hectares, 'hectares') : null
+  ].filter(Boolean);
+  if (errs.length) return res.status(400).json({ errors: errs });
   const producer = {
     id: generateId('P'),
     name, region, hectares, digitalMaturity: digitalMaturity || 'Inicial',
@@ -322,6 +445,15 @@ app.get('/api/lots', authMiddleware, (req, res) => {
 
 app.post('/api/lots', authMiddleware, (req, res) => {
   const { producer, product, parcel, eudr, status, weightKg, destination, pricePerKg, certification, lat, lon } = req.body;
+  // Required: producer, product. Optional with defaults: parcel, eudr, status, weightKg (numeric if given),
+  // destination (string if given), pricePerKg, certification, lat, lon.
+  const errs = [
+    validateString(producer, 'producer'),
+    validateString(product, 'product'),
+    weightKg != null ? validatePositiveNumber(weightKg, 'weightKg') : null,
+    destination != null ? validateString(destination, 'destination') : null
+  ].filter(Boolean);
+  if (errs.length) return res.status(400).json({ errors: errs });
   const lot = {
     id: generateId(product?.substring(0, 3) || 'LOT'),
     producer, product, parcel, eudr: eudr || 'Pendiente',
@@ -702,7 +834,7 @@ app.get('/api/copilot/eurlex-refs', authMiddleware, (req, res) => {
   }
 });
 
-app.post('/api/copilot/query', authMiddleware, async (req, res) => {
+app.post('/api/copilot/query', authMiddleware, copilotLimiter, async (req, res) => {
   try {
     const { question, useLlm } = req.body || {};
     if (!question || typeof question !== 'string') {
@@ -758,5 +890,20 @@ findAvailablePort(port).then((availablePort) => {
     console.log(`🔐 Credenciales:`);
     console.log(`   admin/admin123 (admin)`);
     console.log(`   operador/operador123 (operador)\n`);
+    console.log(`🔧 Características activas:`);
+    console.log(`   CORS origins        : ${allowedOrigins.join(', ')}`);
+    console.log(`   Sesión TTL          : ${process.env.SESSION_TTL_HOURS || 8}h`);
+    console.log(`   Rate limiting       : activo (API: 200/min · Auth: 20/15min · Copilot: 20/min)`);
+    if (process.env.OPENAI_API_KEY) {
+      console.log(`   OpenAI              : activo (modelo: ${process.env.OPENAI_MODEL || 'gpt-4o-mini'})`);
+    } else {
+      console.log(`   OpenAI              : desactivado — copiloto solo léxico (falta OPENAI_API_KEY)`);
+    }
+    if (process.env.APIFY_TOKEN) {
+      console.log(`   Apify               : activo`);
+    } else {
+      console.log(`   Apify               : desactivado — usando datos simulados (falta APIFY_TOKEN)`);
+    }
+    console.log('');
   });
 }).catch(err => { console.error('Error:', err.message); process.exit(1); });
