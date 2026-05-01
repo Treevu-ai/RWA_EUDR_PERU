@@ -7,8 +7,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const dataDir = path.join(__dirname, '..', 'data');
 
-const APIFY_TOKEN = process.env.APIFY_TOKEN || '';
 const APIFY_BASE = 'https://api.apify.com/v2';
+
+/** Read token at call time so that the env var can be injected after module load. */
+function getApifyToken() {
+  return process.env.APIFY_TOKEN || '';
+}
 
 export const COMPLIANCE_WEIGHTS = {
   euRegulations: 0.40,
@@ -106,6 +110,7 @@ export class CacheManager {
 export const cache = new CacheManager();
 
 async function apifyActor(actorId, runInput) {
+  const APIFY_TOKEN = getApifyToken();
   if (!APIFY_TOKEN) {
     return { error: 'APIFY_TOKEN no configurado', fallback: true, data: generateMockData(actorId, runInput) };
   }
@@ -135,7 +140,7 @@ async function apifyActor(actorId, runInput) {
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > maxWait) {
-        return { error: 'Timeout esperando actor', runId };
+        return { error: 'Timeout esperando actor', fallback: true, data: generateMockData(actorId, runInput), runId };
       }
       await new Promise(r => setTimeout(r, 2000));
       const statusRes = await fetch(`${APIFY_BASE}/acts/${actorId}/runs/${runId}`, {
@@ -486,10 +491,11 @@ export const apifyServices = {
 
 export async function getServiceStatus() {
   const status = {};
+  const configured = !!getApifyToken();
   for (const [key, service] of Object.entries(apifyServices)) {
     status[key] = {
       name: service.name,
-      configured: !!APIFY_TOKEN,
+      configured,
       description: service.description,
       actorId: service.actorId || 'internal',
       cacheTTL: service.cacheTTL ? `${service.cacheTTL / 1000}s` : 'N/A'

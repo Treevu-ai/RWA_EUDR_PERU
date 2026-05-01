@@ -146,6 +146,35 @@
       margin-top: 1rem;
     }
     button:hover { background: #1d4ed8; }
+
+    /* Alerts panel */
+    #alerts-panel { margin-bottom: 1.5rem; }
+    #alerts-list { list-style: none; margin-top: 0.75rem; }
+    #alerts-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      background: #f9fafb;
+      border-left: 4px solid #d1d5db;
+    }
+    #alerts-list li.high   { border-left-color: #ef4444; background: #fef2f2; }
+    #alerts-list li.medium { border-left-color: #f59e0b; background: #fffbeb; }
+    #alerts-list li.low    { border-left-color: #10b981; background: #ecfdf5; }
+    #alerts-list li .alert-meta { font-size: 0.78rem; color: #6b7280; margin-top: 0.2rem; }
+    #alerts-status { font-size: 0.8rem; color: #6b7280; margin-top: 0.25rem; }
+    .alert-badge {
+      background: #ef4444;
+      color: white;
+      border-radius: 999px;
+      padding: 0.1rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -304,6 +333,20 @@
     </table>
   </div>
 
+  <!-- ===== ALERTS PANEL ===== -->
+  <div id="alerts-panel" class="panel">
+    <div class="panel-header">
+      <h2>
+        Alertas del Sistema
+        <span id="alerts-unread-badge" class="alert-badge" style="display:none">0</span>
+      </h2>
+      <span id="alerts-status">Cargando…</span>
+    </div>
+    <ul id="alerts-list">
+      <li>Cargando alertas…</li>
+    </ul>
+  </div>
+
   <div class="form-section">
     <h2>Registro de Nuevo Lote</h2>
     <div class="form-grid">
@@ -333,6 +376,96 @@
     </div>
     <button onclick="alert('Lote registrado en blockchain!')">Generar Pasaporte Digital</button>
   </div>
+  <script>
+    // ─── Alert Polling ────────────────────────────────────────────────────────
+    // Polls /api/alerts every 30 seconds and updates the UI without a page refresh.
+    // A session token is read from localStorage (set on login via /api/auth/login).
+    // If no token is present the panel shows a friendly message instead.
+
+    const POLL_INTERVAL_MS = 30000;
+
+    function getAuthToken() {
+      try { return localStorage.getItem('eudr_token') || ''; } catch { return ''; }
+    }
+
+    function severityClass(severity) {
+      if (!severity) return '';
+      const s = String(severity).toLowerCase();
+      if (s === 'high' || s === 'critical') return 'high';
+      if (s === 'medium' || s === 'warning') return 'medium';
+      return 'low';
+    }
+
+    function renderAlerts(data) {
+      const list = document.getElementById('alerts-list');
+      const badge = document.getElementById('alerts-unread-badge');
+      const statusEl = document.getElementById('alerts-status');
+
+      const alerts = data.alerts || [];
+      const unread = typeof data.unread === 'number' ? data.unread : 0;
+
+      if (unread > 0) {
+        badge.textContent = unread;
+        badge.style.display = '';
+      } else {
+        badge.style.display = 'none';
+      }
+
+      const now = new Date().toLocaleTimeString('es-PE');
+      statusEl.textContent = `Actualizado: ${now}`;
+
+      if (alerts.length === 0) {
+        list.innerHTML = '<li>Sin alertas activas.</li>';
+        return;
+      }
+
+      list.innerHTML = alerts.map(a => {
+        const cls = severityClass(a.severity || a.type);
+        const time = a.createdAt
+          ? new Date(a.createdAt).toLocaleString('es-PE', { dateStyle: 'short', timeStyle: 'short' })
+          : '';
+        return `<li class="${cls}">
+          <div>
+            <strong>${a.message || a.title || '(sin mensaje)'}</strong>
+            <div class="alert-meta">${[a.type, a.region, time].filter(Boolean).join(' · ')}</div>
+          </div>
+        </li>`;
+      }).join('');
+    }
+
+    async function fetchAlerts() {
+      const token = getAuthToken();
+      const statusEl = document.getElementById('alerts-status');
+
+      if (!token) {
+        statusEl.textContent = 'Sin sesión — ingrese para ver alertas en tiempo real.';
+        document.getElementById('alerts-list').innerHTML =
+          '<li>Inicie sesión para ver las alertas del sistema.</li>';
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/alerts', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.status === 401) {
+          statusEl.textContent = 'Sesión expirada.';
+          document.getElementById('alerts-list').innerHTML =
+            '<li>Sesión expirada. Recargue la página e inicie sesión nuevamente.</li>';
+          return;
+        }
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        renderAlerts(data);
+      } catch (err) {
+        if (statusEl) statusEl.textContent = `Error al obtener alertas: ${err.message}`;
+      }
+    }
+
+    // Initial fetch + periodic polling
+    fetchAlerts();
+    setInterval(fetchAlerts, POLL_INTERVAL_MS);
+  </script>
 
 </body>
 </html>
