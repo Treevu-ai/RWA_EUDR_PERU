@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página no encontrada — RWA EUDR Perú</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600&family=Figtree:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/RWA_EUDR_PERU/styles.css" />
+    <style>
+      .error-page {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 4rem 1rem;
+      }
+      .error-code {
+        font-family: "Fraunces", Georgia, serif;
+        font-size: clamp(5rem, 15vw, 9rem);
+        font-weight: 600;
+        line-height: 1;
+        background: linear-gradient(135deg, #064e3b, #0d9488);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin: 0 0 0.5rem;
+      }
+      .error-title {
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        margin: 0 0 1rem;
+        color: #0f1419;
+      }
+      .error-lead {
+        color: #4b5563;
+        max-width: 46ch;
+        margin: 0 auto 2rem;
+        font-size: 1.08rem;
+        line-height: 1.6;
+      }
+      .error-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <header class="site-header">
+      <div class="wrap inner">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div class="brand-text">
+            <strong>RWA EUDR · Perú</strong>
+            <span>Trazabilidad agro · evidencia UE</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Principal">
+          <a href="/RWA_EUDR_PERU/">Inicio</a>
+          <a href="/RWA_EUDR_PERU/clientes/">Empresas</a>
+          <a class="nav-cta" href="https://github.com/Treevu-ai/RWA_EUDR_PERU" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="wrap error-page">
+        <p class="error-code" aria-hidden="true">404</p>
+        <h1 class="error-title">Página no encontrada</h1>
+        <p class="error-lead">
+          No hemos encontrado la página que buscas. Puede que la URL haya cambiado o no exista.
+          Aquí tienes los accesos más útiles:
+        </p>
+        <div class="error-actions">
+          <a class="btn btn-primary" href="/RWA_EUDR_PERU/">Volver al inicio</a>
+          <a class="btn btn-ghost" href="/RWA_EUDR_PERU/clientes/">Página para empresas</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <div class="footer-brand">
+          <div class="brand-mark" style="width: 36px; height: 36px" aria-hidden="true"></div>
+          <div>
+            <strong>RWA EUDR Perú</strong>
+            <p class="small" style="margin: 0.35rem 0 0">
+              Trazabilidad y evidencia para exportaciones agroalimentarias.
+            </p>
+          </div>
+        </div>
+        <div class="small">
+          <p style="margin-top: 0">
+            <a href="/RWA_EUDR_PERU/">Inicio</a> ·
+            <a href="/RWA_EUDR_PERU/clientes/">Empresas</a> ·
+            <a href="https://github.com/Treevu-ai/RWA_EUDR_PERU">GitHub</a>
+          </p>
+          <p>&copy; <span id="y"></span> — titular del proyecto.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
