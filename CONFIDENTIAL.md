@@ -32,7 +32,8 @@ Al acceder a este repositorio, el colaborador declara:
 ## Contacto
 
 **SINAPSIS INNOVADORA S.A.C.**  
-contacto@sinapsisinnovadora.pe
+sinapsisinnovadoraperu@gmail.com  
++51 902 126 765
 
 ---
 
