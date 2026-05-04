@@ -27,5 +27,5 @@ jobs:
         working-directory: landing
         run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
         env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_ORG_ID: team_hvdUkmghXOiSlTAs1fTOD4u4
           VERCEL_PROJECT_ID: prj_J3BWCGq6ihxAPS2CDqBTDtaOgNFo
