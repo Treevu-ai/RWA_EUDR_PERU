@@ -98,7 +98,18 @@ function loadJSON(filePath, defaultValue = []) {
 }
 
 function saveJSON(filePath, data) {
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  // Se escribe primero en un archivo temporal y luego se renombra.
+  // Así, si el proceso se interrumpe a mitad, el archivo original queda intacto.
+  const tmp = filePath + '.tmp';
+  try {
+    fs.writeFileSync(tmp, JSON.stringify(data, null, 2));
+    fs.renameSync(tmp, filePath);
+  } catch (err) {
+    // Limpieza del temporal si algo falló
+    try { fs.unlinkSync(tmp); } catch { /* ya no existe, ok */ }
+    console.error(`[saveJSON] Error escribiendo ${path.basename(filePath)}:`, err.message);
+    throw err;
+  }
 }
 
 /** Load data file; if missing, seed from seeds/ directory. */
@@ -723,7 +734,13 @@ app.get('/api/admin/stats', authMiddleware, (req, res) => {
 
 app.post('/api/admin/config', authMiddleware, (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ error: 'Sin permisos' });
-  systemConfig = { ...systemConfig, ...req.body };
+  // Solo se aceptan los campos conocidos para evitar que se inyecten propiedades arbitrarias.
+  const { threshold, email, timezone } = req.body;
+  const patch = {};
+  if (threshold !== undefined) patch.threshold = Number(threshold);
+  if (email !== undefined) patch.email = Boolean(email);
+  if (timezone !== undefined && typeof timezone === 'string') patch.timezone = timezone;
+  systemConfig = { ...systemConfig, ...patch };
   res.json({ success: true, config: systemConfig });
 });
 
@@ -773,11 +790,23 @@ app.get('/api/export/compliance/:id', authMiddleware, (req, res) => {
 });
 
 function generatePDFHTML(report, lot) {
+  // Función de escape: convierte caracteres especiales HTML en su versión segura.
+  // Por ejemplo, "<script>" se convierte en "&lt;script&gt;" y se muestra como texto, no como código.
+  function esc(val) {
+    if (val == null) return 'N/A';
+    return String(val)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   return `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Reporte Compliance - ${report.lotId}</title>
+  <title>Reporte Compliance - ${esc(report.lotId)}</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; }
     h1 { color: #2d3436; border-bottom: 2px solid #27ae60; padding-bottom: 10px; }
@@ -798,9 +827,9 @@ function generatePDFHTML(report, lot) {
   <h1>Reporte de Compliance EUDR</h1>
   <div class="header">
     <div>
-      <p><strong>Lote:</strong> ${report.lotId}</p>
-      <p><strong>Producto:</strong> ${lot?.product || 'N/A'}</p>
-      <p><strong>Productor:</strong> ${lot?.producer || 'N/A'}</p>
+      <p><strong>Lote:</strong> ${esc(report.lotId)}</p>
+      <p><strong>Producto:</strong> ${esc(lot?.product)}</p>
+      <p><strong>Productor:</strong> ${esc(lot?.producer)}</p>
     </div>
     <div>
       <p><strong>Fecha:</strong> ${new Date(report.timestamp).toLocaleDateString('es-ES')}</p>
@@ -810,26 +839,26 @@ function generatePDFHTML(report, lot) {
   
   <div class="section" style="text-align: center; padding: 30px; background: #f8f9fa; border-radius: 8px;">
     <h2>Score de Compliance</h2>
-    <div class="score ${report.status.toLowerCase().replace('_', '-')}">${report.weightedScore}%</div>
-    <p><strong>Estado:</strong> ${report.status}</p>
+    <div class="score ${esc(report.status.toLowerCase().replace('_', '-'))}">${esc(report.weightedScore)}%</div>
+    <p><strong>Estado:</strong> ${esc(report.status)}</p>
   </div>
   
   <div class="section">
     <h2>Datos del Lote</h2>
     <table>
-      <tr><th>Parcela</th><td>${lot?.parcel || 'N/A'}</td></tr>
-      <tr><th>Peso</th><td>${lot?.weightKg || 'N/A'} kg</td></tr>
-      <tr><th>Destino</th><td>${lot?.destination || 'N/A'}</td></tr>
-      <tr><th>Certificación</th><td>${lot?.certification || 'N/A'}</td></tr>
-      <tr><th>Estado EUDR</th><td>${lot?.eudr || 'N/A'}</td></tr>
+      <tr><th>Parcela</th><td>${esc(lot?.parcel)}</td></tr>
+      <tr><th>Peso</th><td>${lot?.weightKg != null ? esc(lot.weightKg) + ' kg' : 'N/A'}</td></tr>
+      <tr><th>Destino</th><td>${esc(lot?.destination)}</td></tr>
+      <tr><th>Certificación</th><td>${esc(lot?.certification)}</td></tr>
+      <tr><th>Estado EUDR</th><td>${esc(lot?.eudr)}</td></tr>
     </table>
   </div>
   
   <div class="section">
     <h2>Verificación de Blockchain</h2>
     <table>
-      <tr><th>Hash del Bloque</th><td><code>${report.blockHash || 'N/A'}</code></td></tr>
-      <tr><th>Hash del Reporte</th><td><code>${report.hash || 'N/A'}</code></td></tr>
+      <tr><th>Hash del Bloque</th><td><code>${esc(report.blockHash)}</code></td></tr>
+      <tr><th>Hash del Reporte</th><td><code>${esc(report.hash)}</code></td></tr>
     </table>
   </div>
   
