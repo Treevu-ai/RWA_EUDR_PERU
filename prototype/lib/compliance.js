@@ -40,10 +40,12 @@ export async function buildComplianceReport(
     complianceScore: weightedScore
   });
 
+  const timestamp = new Date().toISOString();
+
   const report = {
     id: generateId('CR'),
     lotId, parcelId,
-    timestamp: new Date().toISOString(),
+    timestamp,
     checks: {
       euRegulations: checks[0].status === 'fulfilled' ? checks[0].value : { error: 'Falló' },
       weather:       checks[1].status === 'fulfilled' ? checks[1].value : { error: 'Falló' },
@@ -54,7 +56,8 @@ export async function buildComplianceReport(
     blockHash: block.hash,
     // Se usa generateFullHash (SHA-256 completo, 64 chars) para la firma del reporte
     // de cumplimiento, ya que sirve como evidencia de integridad ante la normativa EUDR.
-    hash: generateFullHash({ lotId, timestamp: new Date().toISOString(), score: weightedScore })
+    // El mismo timestamp capturado arriba garantiza que el hash es consistente con el reporte.
+    hash: generateFullHash({ lotId, timestamp, score: weightedScore })
   };
 
   const newAlerts = _buildAlertsFromChecks(checks, lotId);

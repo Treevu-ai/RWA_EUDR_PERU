@@ -35,8 +35,9 @@ export function buildDds({ lot, latestReport, operator }) {
       ? 'READY_FOR_REVIEW'
       : 'NEEDS_ACTION'
   };
-  // Se usa generateFullHash (SHA-256 completo, 64 chars) para el hash del DDS,
-  // ya que es el documento que se presenta ante las autoridades EUDR.
-  dds.hash = generateFullHash(dds);
+  // Se calcula el hash ANTES de asignarlo al objeto para que la firma no se incluya
+  // en su propia entrada y sea reproducible al excluir el campo hash explícitamente.
+  // El hash es SHA-256 completo (64 chars) del documento sin el campo hash.
+  dds.hash = generateFullHash({ ...dds });
   return dds;
 }

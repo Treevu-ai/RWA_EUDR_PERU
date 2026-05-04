@@ -88,7 +88,8 @@ app.use('/',                    traceRoutes);       // /api/traces, /otlp/v1/tra
 
 // ── Static (Vite build) ──────────────────────────────────────────────────────
 app.use(express.static(path.join(__dirname, 'dist')));
-app.get('*', (_req, res) => res.sendFile(path.join(__dirname, 'dist', 'index.html')));
+// SPA fallback — aplica el mismo rate limiter para proteger también el file system access.
+app.get('*', apiLimiter, (_req, res) => res.sendFile(path.join(__dirname, 'dist', 'index.html')));
 
 // ── Arranque con búsqueda de puerto libre ────────────────────────────────────
 function findAvailablePort(startPort, maxPort = startPort + 20) {
