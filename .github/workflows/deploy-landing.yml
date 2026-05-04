@@ -1,4 +1,4 @@
-name: Deploy landing to GitHub Pages
+name: Deploy landing to Vercel
 
 on:
   push:
@@ -9,11 +9,8 @@ on:
       - ".github/workflows/deploy-landing.yml"
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 concurrency:
-  group: pages-deploy
+  group: vercel-deploy
   cancel-in-progress: true
 
 jobs:
@@ -23,9 +20,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy landing folder to gh-pages branch
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: landing
-          clean: true
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Deploy to Vercel (production)
+        working-directory: landing
+        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

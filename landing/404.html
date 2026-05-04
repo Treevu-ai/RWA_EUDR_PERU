@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página no encontrada — RWA EUDR Perú</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600&family=Figtree:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .error-page {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 4rem 1.5rem;
+      }
+      .error-code {
+        font-family: var(--font-display, serif);
+        font-size: clamp(5rem, 20vw, 10rem);
+        line-height: 1;
+        color: var(--color-accent, #2d6a4f);
+        opacity: 0.15;
+      }
+      .error-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+      <div class="wrap inner">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <a class="brand-name" href="/">RWA EUDR Perú</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <section class="error-page">
+        <div class="error-code" aria-hidden="true">404</div>
+        <h1 class="error-title">Página no encontrada</h1>
+        <p>La URL que buscas no existe o ha cambiado de dirección.</p>
+        <a class="btn btn-primary" href="/">Volver al inicio</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap inner">
+        <p>© 2025 Treevu · Documentación abierta bajo MIT</p>
+      </div>
+    </footer>
+  </body>
+</html>
