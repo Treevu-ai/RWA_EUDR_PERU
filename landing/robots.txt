@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# Este sitio no debe ser indexado por motores de búsqueda.
+# Acceso restringido — SINAPSIS INNOVADORA S.A.C.
