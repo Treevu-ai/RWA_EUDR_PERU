@@ -31,6 +31,38 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
+// ============== CONTRASEÑAS SEGURAS ==============
+// scrypt es una función de derivación de clave que incorpora una "sal" aleatoria por usuario.
+// Sin sal, dos usuarios con la misma contraseña tendrían el mismo hash — fácilmente descifrable.
+// Con sal, cada hash es único aunque las contraseñas sean idénticas.
+const SCRYPT_KEYLEN = 32;
+const SCRYPT_OPTS = { N: 16384, r: 8, p: 1 };
+
+function hashPassword(password) {
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.scryptSync(password, salt, SCRYPT_KEYLEN, SCRYPT_OPTS).toString('hex');
+  return `${salt}:${hash}`;
+}
+
+/** Verifica una contraseña contra el hash almacenado.
+ *  Soporta migración automática desde el formato antiguo (SHA-256 sin sal). */
+function verifyPassword(password, stored) {
+  if (!stored) return false;
+  if (!stored.includes(':')) {
+    // Formato antiguo (SHA-256 corto, sin sal) — solo se usa durante la migración.
+    return stored === hashData(password);
+  }
+  const [salt, hash] = stored.split(':');
+  if (!salt || !hash || hash.length !== SCRYPT_KEYLEN * 2) return false;
+  try {
+    const derived = crypto.scryptSync(password, salt, SCRYPT_KEYLEN, SCRYPT_OPTS).toString('hex');
+    // timingSafeEqual evita ataques de temporización (timing attacks)
+    return crypto.timingSafeEqual(Buffer.from(derived, 'hex'), Buffer.from(hash, 'hex'));
+  } catch {
+    return false;
+  }
+}
+
 /** Cabeceras HTTP mínimas; en producción completar con TLS y proxy (nginx, etc.). */
 app.use((_req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -141,8 +173,8 @@ let blockchain = validateAndInitBlockchain();
 let traceHistory = loadJSON(files.traces, []);
 let alerts = loadJSON(files.alerts, []);
 let users = loadJSON(files.users, [
-  { id: 'U-001', username: 'admin', password: hashData('admin123'), role: 'admin', name: 'Administrador' },
-  { id: 'U-002', username: 'operador', password: hashData('operador123'), role: 'operator', name: 'Operador' }
+  { id: 'U-001', username: 'admin', password: hashPassword('admin123'), role: 'admin', name: 'Administrador' },
+  { id: 'U-002', username: 'operador', password: hashPassword('operador123'), role: 'operator', name: 'Operador' }
 ]);
 
 let complianceReports = loadJSON(files.compliance, []);
@@ -227,12 +259,16 @@ function generateId(prefix) {
 
 function addBlock(data) {
   const prev = blockchain[blockchain.length - 1];
+  // Se captura el timestamp una sola vez para que el contenido del bloque
+  // y su firma (hash) usen exactamente el mismo valor — sin esta corrección
+  // existía una diferencia de milisegundos que hacía la firma inválida.
+  const timestamp = new Date().toISOString();
   const block = {
     index: prev.index + 1,
-    timestamp: new Date().toISOString(),
+    timestamp,
     data,
     previousHash: prev.hash,
-    hash: generateBlockHash({ index: prev.index + 1, timestamp: new Date().toISOString(), data, previousHash: prev.hash })
+    hash: generateBlockHash({ index: prev.index + 1, timestamp, data, previousHash: prev.hash })
   };
   blockchain.push(block);
   saveJSON(files.blockchain, blockchain);
@@ -299,8 +335,19 @@ app.post('/api/auth/login', authLimiter, (req, res) => {
   ].filter(Boolean);
   if (errs.length) return res.status(400).json({ error: errs[0] });
 
-  const user = users.find((u) => u.username === username && u.password === hashData(password));
+  const user = users.find((u) => u.username === username);
   if (!user) return res.status(401).json({ error: 'Credenciales inválidas' });
+
+  const isLegacyHash = !user.password?.includes(':');
+  if (!verifyPassword(password, user.password)) {
+    return res.status(401).json({ error: 'Credenciales inválidas' });
+  }
+  // Migración automática: si el hash era del formato antiguo (sin sal),
+  // lo reemplazamos por el nuevo formato seguro tras el primer login exitoso.
+  if (isLegacyHash) {
+    user.password = hashPassword(password);
+    saveJSON(files.users, users);
+  }
 
   const token = crypto.randomBytes(32).toString('hex');
   const expiresAt = new Date(Date.now() + SESSION_TTL_MS).toISOString();
@@ -422,7 +469,20 @@ app.put('/api/producers/:id', authMiddleware, (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ error: 'Sin permisos' });
   const idx = producers.findIndex(p => p.id === req.params.id);
   if (idx === -1) return res.status(404).json({ error: 'No encontrado' });
-  producers[idx] = { ...producers[idx], ...req.body, updatedAt: new Date().toISOString() };
+  // Solo se permite modificar campos explícitos — campos internos como id y createdAt
+  // no pueden ser alterados desde afuera para evitar falsificación de registros.
+  const { name, region, hectares, digitalMaturity, members, lat, lon, certifications, status } = req.body;
+  const allowed = {};
+  if (name !== undefined) allowed.name = name;
+  if (region !== undefined) allowed.region = region;
+  if (hectares !== undefined) allowed.hectares = hectares;
+  if (digitalMaturity !== undefined) allowed.digitalMaturity = digitalMaturity;
+  if (members !== undefined) allowed.members = members;
+  if (lat !== undefined) allowed.lat = lat;
+  if (lon !== undefined) allowed.lon = lon;
+  if (certifications !== undefined) allowed.certifications = certifications;
+  if (status !== undefined) allowed.status = status;
+  producers[idx] = { ...producers[idx], ...allowed, updatedAt: new Date().toISOString() };
   saveJSON(files.producers, producers);
   addBlock({ type: 'producer_updated', producer: producers[idx] });
   res.json({ producer: producers[idx] });
@@ -469,7 +529,21 @@ app.post('/api/lots', authMiddleware, (req, res) => {
 app.put('/api/lots/:id', authMiddleware, (req, res) => {
   const idx = lots.findIndex(l => l.id === req.params.id);
   if (idx === -1) return res.status(404).json({ error: 'No encontrado' });
-  lots[idx] = { ...lots[idx], ...req.body, updatedAt: new Date().toISOString() };
+  // Solo se permite modificar campos explícitos — igual que en productores.
+  const { producer, product, parcel, eudr, status, weightKg, destination, pricePerKg, certification, lat, lon } = req.body;
+  const allowed = {};
+  if (producer !== undefined) allowed.producer = producer;
+  if (product !== undefined) allowed.product = product;
+  if (parcel !== undefined) allowed.parcel = parcel;
+  if (eudr !== undefined) allowed.eudr = eudr;
+  if (status !== undefined) allowed.status = status;
+  if (weightKg !== undefined) allowed.weightKg = weightKg;
+  if (destination !== undefined) allowed.destination = destination;
+  if (pricePerKg !== undefined) allowed.pricePerKg = pricePerKg;
+  if (certification !== undefined) allowed.certification = certification;
+  if (lat !== undefined) allowed.lat = lat;
+  if (lon !== undefined) allowed.lon = lon;
+  lots[idx] = { ...lots[idx], ...allowed, updatedAt: new Date().toISOString() };
   saveJSON(files.lots, lots);
   addBlock({ type: 'lot_updated', lot: lots[idx] });
   res.json({ lot: lots[idx] });
@@ -768,7 +842,7 @@ function generatePDFHTML(report, lot) {
 }
 
 // ============== TRACES ==============
-app.get('/api/traces', (req, res) => {
+app.get('/api/traces', authMiddleware, (req, res) => {
   res.json({ traces: traceHistory.slice(-20).reverse(), metrics: { total: traceHistory.length } });
 });
 

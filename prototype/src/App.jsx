@@ -104,7 +104,7 @@ function App() {
       const h = authHeaders(token);
       const [dataRes, tracesRes, servicesRes, alertsRes, blockchainRes, complianceRes, summaryRes, ddsRes] = await Promise.all([
         fetch('/api/data', { headers: h }),
-        fetch('/api/traces'),
+        fetch('/api/traces', { headers: h }),
         fetch('/api/services/status', { headers: h }),
         fetch('/api/alerts', { headers: h }),
         fetch('/api/blockchain', { headers: h }),
@@ -113,7 +113,7 @@ function App() {
         fetch('/api/eudr/due-diligence', { headers: h })
       ]);
 
-      if ([dataRes, servicesRes, alertsRes, blockchainRes, complianceRes, summaryRes, ddsRes].some((r) => r.status === 401)) {
+      if ([dataRes, tracesRes, servicesRes, alertsRes, blockchainRes, complianceRes, summaryRes, ddsRes].some((r) => r.status === 401)) {
         clearSession();
         setAuthError('Sesión no válida o expirada.');
         setIsLoading(false);
