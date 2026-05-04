@@ -9,11 +9,13 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "embed-corpus": "node scripts/build-embeddings.mjs"
+    "embed-corpus": "node scripts/build-embeddings.mjs",
+    "test": "node --test"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "express-rate-limit": "^8.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

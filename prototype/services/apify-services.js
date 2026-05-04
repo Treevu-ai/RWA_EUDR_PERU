@@ -30,10 +30,16 @@ export function hashData(data, algorithm = 'sha256') {
   return crypto.createHash(algorithm).update(JSON.stringify(data)).digest('hex').substring(0, 16);
 }
 
+/** Full-length (64-char) SHA-256. Used for block hashes to avoid trivial collisions. */
+export function generateFullHash(data) {
+  const str = typeof data === 'string' ? data : JSON.stringify(data);
+  return crypto.createHash('sha256').update(str).digest('hex');
+}
+
 export function generateBlockHash(blockData) {
   const { index, timestamp, data, previousHash } = blockData;
   const blockString = `${index}${timestamp}${JSON.stringify(data)}${previousHash}`;
-  return hashData(blockString);
+  return generateFullHash(blockString);
 }
 
 export class CacheManager {
@@ -81,7 +87,15 @@ export class CacheManager {
     this.memoryCache.set(key, entry);
 
     const filePath = path.join(this.cacheDir, `${key}.json`);
-    fs.writeFileSync(filePath, JSON.stringify(entry, null, 2));
+    // Escritura atómica: igual que saveJSON — primero al temporal, luego rename.
+    const tmp = filePath + '.tmp';
+    try {
+      fs.writeFileSync(tmp, JSON.stringify(entry, null, 2));
+      fs.renameSync(tmp, filePath);
+    } catch (err) {
+      try { fs.unlinkSync(tmp); } catch { /* ya no existe */ }
+      console.error(`[CacheManager] Error escribiendo caché ${key}:`, err.message);
+    }
   }
 
   invalidate(key) {

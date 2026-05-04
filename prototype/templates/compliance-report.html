@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte Compliance - {{LOT_ID}}</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; }
+    h1 { color: #2d3436; border-bottom: 2px solid #27ae60; padding-bottom: 10px; }
+    .header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+    .section { margin-bottom: 20px; }
+    .section h2 { color: #636e72; font-size: 14px; text-transform: uppercase; }
+    table { width: 100%; border-collapse: collapse; }
+    td, th { padding: 10px; border: 1px solid #ddd; text-align: left; }
+    th { background: #f8f9fa; }
+    .score { font-size: 48px; font-weight: bold; text-align: center; }
+    .score.compliant { color: #27ae60; }
+    .score.partial { color: #f39c12; }
+    .score.non-compliant { color: #e74c3c; }
+    .footer { margin-top: 40px; text-align: center; color: #999; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Reporte de Compliance EUDR</h1>
+  <div class="header">
+    <div>
+      <p><strong>Lote:</strong> {{LOT_ID}}</p>
+      <p><strong>Producto:</strong> {{PRODUCT}}</p>
+      <p><strong>Productor:</strong> {{PRODUCER}}</p>
+    </div>
+    <div>
+      <p><strong>Fecha:</strong> {{DATE}}</p>
+      <p><strong>Hora:</strong> {{TIME}}</p>
+    </div>
+  </div>
+
+  <div class="section" style="text-align: center; padding: 30px; background: #f8f9fa; border-radius: 8px;">
+    <h2>Score de Compliance</h2>
+    <div class="score {{STATUS_CLASS}}">{{SCORE}}%</div>
+    <p><strong>Estado:</strong> {{STATUS}}</p>
+  </div>
+
+  <div class="section">
+    <h2>Datos del Lote</h2>
+    <table>
+      <tr><th>Parcela</th><td>{{PARCEL}}</td></tr>
+      <tr><th>Peso</th><td>{{WEIGHT}}</td></tr>
+      <tr><th>Destino</th><td>{{DESTINATION}}</td></tr>
+      <tr><th>Certificación</th><td>{{CERTIFICATION}}</td></tr>
+      <tr><th>Estado EUDR</th><td>{{EUDR_STATUS}}</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Verificación de Blockchain</h2>
+    <table>
+      <tr><th>Hash del Bloque</th><td><code>{{BLOCK_HASH}}</code></td></tr>
+      <tr><th>Hash del Reporte</th><td><code>{{REPORT_HASH}}</code></td></tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <p>RWA EUDR - Trazabilidad Agroexportadora</p>
+    <p>Generado automáticamente el {{GENERATED_AT}}</p>
+  </div>
+</body>
+</html>
