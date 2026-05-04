@@ -10,7 +10,7 @@
 
 <br />
 
-[![Landing](https://img.shields.io/badge/Landing-sitio%20comercial-0a5c4a?style=for-the-badge&logo=vercel&logoColor=white)](https://treevu-ai.github.io/RWA_EUDR_PERU/)
+[![Landing](https://img.shields.io/badge/Landing-sitio%20comercial%20(Vercel)-0a5c4a?style=for-the-badge&logo=vercel&logoColor=white)](#despliegue-de-la-landing)
 [![License](https://img.shields.io/badge/Licencia-Propietaria-red?style=for-the-badge)](LICENSE)
 
 ### Plataforma de trazabilidad, cumplimiento y evidencia agroexportadora
