@@ -87,7 +87,15 @@ export class CacheManager {
     this.memoryCache.set(key, entry);
 
     const filePath = path.join(this.cacheDir, `${key}.json`);
-    fs.writeFileSync(filePath, JSON.stringify(entry, null, 2));
+    // Escritura atómica: igual que saveJSON — primero al temporal, luego rename.
+    const tmp = filePath + '.tmp';
+    try {
+      fs.writeFileSync(tmp, JSON.stringify(entry, null, 2));
+      fs.renameSync(tmp, filePath);
+    } catch (err) {
+      try { fs.unlinkSync(tmp); } catch { /* ya no existe */ }
+      console.error(`[CacheManager] Error escribiendo caché ${key}:`, err.message);
+    }
   }
 
   invalidate(key) {

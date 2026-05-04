@@ -191,6 +191,7 @@ let users = loadJSON(files.users, [
 let complianceReports = loadJSON(files.compliance, []);
 let ddsReports = loadJSON(files.dds, []);
 
+// Separar el parse del cálculo facilita la validación del valor crudo antes de multiplicar.
 const SESSION_TTL_HOURS_RAW = parseInt(process.env.SESSION_TTL_HOURS, 10);
 const SESSION_TTL_MS = (Number.isFinite(SESSION_TTL_HOURS_RAW) && SESSION_TTL_HOURS_RAW > 0
   ? SESSION_TTL_HOURS_RAW : 8) * 60 * 60 * 1000;
@@ -610,7 +611,9 @@ app.post('/api/compliance/check', authMiddleware, async (req, res) => {
       },
       weightedScore, status, weatherEvidence,
       blockHash: block.hash,
-      hash: hashData({ lotId, timestamp: new Date().toISOString(), score: weightedScore })
+      // Se usa generateFullHash (SHA-256 completo, 64 chars) para la firma del reporte
+      // de cumplimiento, ya que sirve como evidencia de integridad ante la normativa EUDR.
+      hash: generateFullHash({ lotId, timestamp: new Date().toISOString(), score: weightedScore })
     };
 
     complianceReports.push(report);
@@ -682,7 +685,9 @@ app.post('/api/eudr/due-diligence/:lotId', authMiddleware, (req, res) => {
     },
     status: geoEvidence.hasCoordinates && (latestReport?.weightedScore ?? 0) >= 80 ? 'READY_FOR_REVIEW' : 'NEEDS_ACTION'
   };
-  dds.hash = hashData(dds);
+  // Se usa generateFullHash (SHA-256 completo, 64 chars) para el hash del DDS,
+  // ya que es el documento de debida diligencia que se presenta ante las autoridades EUDR.
+  dds.hash = generateFullHash(dds);
   ddsReports.push(dds);
   if (ddsReports.length > 200) ddsReports = ddsReports.slice(-200);
   saveJSON(files.dds, ddsReports);
@@ -847,7 +852,7 @@ function generatePDFHTML(report, lot) {
     <h2>Datos del Lote</h2>
     <table>
       <tr><th>Parcela</th><td>${esc(lot?.parcel)}</td></tr>
-      <tr><th>Peso</th><td>${lot?.weightKg != null ? esc(lot.weightKg) + ' kg' : 'N/A'}</td></tr>
+      <tr><th>Peso</th><td>${esc(lot?.weightKg != null ? `${lot.weightKg} kg` : null)}</td></tr>
       <tr><th>Destino</th><td>${esc(lot?.destination)}</td></tr>
       <tr><th>Certificación</th><td>${esc(lot?.certification)}</td></tr>
       <tr><th>Estado EUDR</th><td>${esc(lot?.eudr)}</td></tr>
@@ -990,9 +995,7 @@ findAvailablePort(port).then((availablePort) => {
     console.log(`   /api/alerts       - Alertas`);
     console.log(`   /api/blockchain   - Cadena de bloques`);
     console.log(`   /api/export/*     - Exportar reportes\n`);
-    console.log(`🔐 Credenciales:`);
-    console.log(`   admin/admin123 (admin)`);
-    console.log(`   operador/operador123 (operador)\n`);
+    console.log(`🔐 Credenciales demo: ver README (no se imprimen en log para evitar exposición en entornos de producción).`);
     console.log(`🔧 Características activas:`);
     console.log(`   CORS origins        : ${allowedOrigins.join(', ')}`);
     console.log(`   Sesión TTL          : ${process.env.SESSION_TTL_HOURS || 8}h`);
