@@ -19,47 +19,98 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        gap: 1.5rem;
-        padding: 4rem 1.5rem;
+        padding: 4rem 1rem;
       }
       .error-code {
-        font-family: var(--font-display, serif);
-        font-size: clamp(5rem, 20vw, 10rem);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: clamp(5rem, 15vw, 9rem);
+        font-weight: 600;
         line-height: 1;
-        color: var(--color-accent, #2d6a4f);
-        opacity: 0.15;
+        background: linear-gradient(135deg, #064e3b, #0d9488);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin: 0 0 0.5rem;
       }
       .error-title {
-        font-size: 1.5rem;
-        font-weight: 700;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        margin: 0 0 1rem;
+        color: #0f1419;
+      }
+      .error-lead {
+        color: #4b5563;
+        max-width: 46ch;
+        margin: 0 auto 2rem;
+        font-size: 1.08rem;
+        line-height: 1.6;
+      }
+      .error-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
       }
     </style>
   </head>
   <body>
-    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
 
     <header class="site-header">
       <div class="wrap inner">
         <div class="brand">
           <div class="brand-mark" aria-hidden="true"></div>
-          <a class="brand-name" href="/">RWA EUDR Perú</a>
+          <div class="brand-text">
+            <strong>RWA EUDR · Perú</strong>
+            <span>Trazabilidad agro · evidencia UE</span>
+          </div>
         </div>
+        <nav class="nav" aria-label="Principal">
+          <a href="/">Inicio</a>
+          <a href="/clientes/">Empresas</a>
+          <a class="nav-cta" href="https://github.com/Treevu-ai/RWA_EUDR_PERU" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </nav>
       </div>
     </header>
 
-    <main id="contenido">
-      <section class="error-page">
-        <div class="error-code" aria-hidden="true">404</div>
+    <main id="main">
+      <div class="wrap error-page">
+        <p class="error-code" aria-hidden="true">404</p>
         <h1 class="error-title">Página no encontrada</h1>
-        <p>La URL que buscas no existe o ha cambiado de dirección.</p>
-        <a class="btn btn-primary" href="/">Volver al inicio</a>
-      </section>
+        <p class="error-lead">
+          No hemos encontrado la página que buscas. Puede que la URL haya cambiado o no exista.
+          Aquí tienes los accesos más útiles:
+        </p>
+        <div class="error-actions">
+          <a class="btn btn-primary" href="/">Volver al inicio</a>
+          <a class="btn btn-ghost" href="/clientes/">Página para empresas</a>
+        </div>
+      </div>
     </main>
 
     <footer class="site-footer">
-      <div class="wrap inner">
-        <p>© 2025 Treevu · Documentación abierta bajo MIT</p>
+      <div class="wrap footer-grid">
+        <div class="footer-brand">
+          <div class="brand-mark" style="width: 36px; height: 36px" aria-hidden="true"></div>
+          <div>
+            <strong>RWA EUDR Perú</strong>
+            <p class="small" style="margin: 0.35rem 0 0">
+              Trazabilidad y evidencia para exportaciones agroalimentarias.
+            </p>
+          </div>
+        </div>
+        <div class="small">
+          <p style="margin-top: 0">
+            <a href="/">Inicio</a> ·
+            <a href="/clientes/">Empresas</a> ·
+            <a href="https://github.com/Treevu-ai/RWA_EUDR_PERU">GitHub</a>
+          </p>
+          <p>&copy; <span id="y"></span> — titular del proyecto.</p>
+        </div>
       </div>
     </footer>
+
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
