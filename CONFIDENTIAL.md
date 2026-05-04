@@ -32,7 +32,7 @@ Al acceder a este repositorio, el colaborador declara:
 ## Contacto
 
 **SINAPSIS INNOVADORA S.A.C.**  
-contacto@sinapsisinovadora.pe
+contacto@sinapsisinnovadora.pe
 
 ---
 
