@@ -86,6 +86,7 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 50;
+  -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   background: rgba(250, 248, 245, 0.88);
   border-bottom: 1px solid var(--line);
@@ -275,7 +276,7 @@ a:hover {
   font-size: 1.2rem;
   line-height: 1.55;
   color: rgba(250, 248, 245, 0.88);
-  max-width: 52ch;
+  max-width: 46ch;
   margin-bottom: 1.5rem;
 }
 
@@ -345,6 +346,7 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius);
   padding: 1.5rem 1.5rem 1.35rem;
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
@@ -472,6 +474,7 @@ a:hover {
   font-size: 1.12rem;
   color: var(--muted);
   line-height: 1.6;
+  max-width: 62ch;
 }
 
 .grid-3 {
@@ -528,6 +531,7 @@ a:hover {
   color: var(--muted);
   margin-bottom: 0;
   font-size: 0.98rem;
+  max-width: 52ch;
 }
 
 .tags {
