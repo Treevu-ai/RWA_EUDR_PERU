@@ -44,7 +44,7 @@ Credenciales demo: `**operador` / `operador123`** (o `admin` / `admin123` si nec
 | 3     | Compliance              | Verificación preliminar como **referencia**, no certificación oficial.                                     |
 | 4     | DDS MVP (si hay tiempo) | Paquete de evidencia DDS en demo; mismo matiz de límites.                                                  |
 | 5     | **Copiloto EUDR**       | Checklist vs lote → consulta al corpus → fragmentos citados → bloque EUR-Lex. Opcional LLM solo con clave. |
-| 6     | Cierre                  | Transparencia del código abierto; siguiente paso = **piloto acotado** con métricas acordadas.              |
+| 6     | Cierre                  | Transparencia del prototipo y sus límites; siguiente paso = **piloto acotado** con métricas acordadas.     |
 
 
 Detalle extendido del paso Copiloto: `[docs/eudr-compliance-copilot.md](eudr-compliance-copilot.md)`.
