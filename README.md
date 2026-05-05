@@ -17,7 +17,7 @@
 
 **SINAPSIS INNOVADORA S.A.C.** — expertos en cadenas de valor global y fortalecimiento de cadenas productivas agroexportadoras.
 
-Solución de software para que cooperativas y exportadores peruanos de café, cacao y productos similares construyan **paquetes de evidencia verificables** — origen, cadena de custodia y debida diligencia — con plena trazabilidad ante el mercado europeo (incl. marco EUDR cuando aplique).
+Solución de software para que cooperativas y exportadores peruanos de café, cacao y productos similares construyan **paquetes de evidencia verificables** — origen, cadena de custodia y debida diligencia (EUDR) — desde un único hilo de trazabilidad.
 
 **Contacto comercial:** [sinapsisinnovadoraperu@gmail.com](mailto:sinapsisinnovadoraperu@gmail.com) · +51 902 126 765
 
@@ -29,9 +29,9 @@ Solución de software para que cooperativas y exportadores peruanos de café, ca
 
 ## ¿Qué problema resolvemos?
 
-Las exportaciones agro hacia la UE pierden contratos, sufren stock detenido y erosionan la confianza del comprador cuando la evidencia de origen, custodia y debida diligencia llega tarde, incompleta o sin consistencia. El costo lo absorben productores con baja conectividad y exportadores que improvisan cada envío.
+Las exportaciones agro hacia la UE pierden contratos, sufren stock detenido y erosionan la confianza del comprador cuando la evidencia de origen, custodia y debida diligencia llega tarde, incompleta o inconsistente.
 
-**SINAPSIS INNOVADORA S.A.C.** resuelve esto con una plataforma propietaria que orquesta datos de campo, reglas de cumplimiento y paquetes de evidencia exportables desde un único hilo de trazabilidad.
+**SINAPSIS INNOVADORA S.A.C.** resuelve esto con una plataforma propietaria que orquesta datos de campo, reglas de cumplimiento y paquetes de evidencia exportables.
 
 ---
 
@@ -41,8 +41,8 @@ Las exportaciones agro hacia la UE pierden contratos, sufren stock detenido y er
 |------|------------------------|
 | **Captura & custodia** | Registro de fincas, lotes, movimientos y responsables; funciona con señal móvil irregular. Sin retrabajo en campo. |
 | **Compliance UE** | Criterios de debida diligencia (DDS), paquetes exportables alineados con el mercado europeo (incl. referencias EUR-Lex). Menos sorpresas en frontera. |
-| **Auditabilidad** | Historial cronológico de cada acción; cualquier auditoría recibe una historia coherente y completa, sin reconstrucciones a último minuto. |
-| **Copiloto documental** | Recuperación de fragmentos con citas desde corpus versionado; apoya la preparación documental — no sustituye asesoría legal. |
+| **Auditabilidad** | Historial cronológico de cada acción; auditoría con una historia coherente y completa, sin reconstrucciones de último minuto. |
+| **Copiloto documental** | Recuperación de fragmentos con citas desde un corpus versionado; apoya la preparación documental — no sustituye asesoría legal. |
 
 ---
 
@@ -117,8 +117,8 @@ El workflow [`.github/workflows/deploy-landing.yml`](.github/workflows/deploy-la
 
 ## Aviso legal
 
-El prototipo y el copiloto **no constituyen asesoría jurídica** ni certificación EUDR. La **obligación de cumplimiento** sigue siendo del **operador económico** y de sus asesores cualificados en la UE y en Perú.
+El prototipo y el copiloto **no constituyen asesoría jurídica** ni certificación EUDR. La **obligación de cumplimiento** sigue siendo del **operador económico** y de sus asesores calificados.
 
 ---
 
-© 2024–2025 **SINAPSIS INNOVADORA S.A.C.** — Todos los derechos reservados. Software propietario — prohibida su copia, distribución o uso no autorizado. Ver [`LICENSE`](LICENSE) y [`CONFIDENTIAL.md`](CONFIDENTIAL.md).
+© 2024–2026 **SINAPSIS INNOVADORA S.A.C.** — Todos los derechos reservados. Software propietario — prohibida su copia, distribución o uso no autorizado. Ver [`LICENSE`](LICENSE) y [`CONFIDENTIAL.md`](CONFIDENTIAL.md).
