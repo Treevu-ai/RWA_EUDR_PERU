@@ -1,69 +1,101 @@
-# Prototipo RWA EUDR
+# ForestTrace Prototype - Sprint 1
 
-Aplicación de demostración para trazabilidad agroexportadora y verificación preliminar de compliance EUDR.
+Base ejecutable del plan de integracion: API Node + PostgreSQL/PostGIS con multi-tenant basico, entidades core y auditoria.
 
-## Configuración
+## Requisitos
 
-- Copia [`.env.example`](./.env.example) a `.env` si quieres fijar **`PORT`** (por defecto `3000`).
-- El backend aplica **cabeceras HTTP mínimas** (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`). En producción sitúa **HTTPS** delante (proxy inverso o plataforma) y refuerza políticas allí.
+- Node.js 20+
+- PostgreSQL 15+ con extension PostGIS
 
-## Stack actual
-- `server.js`: backend Express con auth, productores, lotes, compliance, DDS MVP, blockchain local y trazas OTLP.
-- `src/`: frontend React montado con Vite.
-- `src/tracing.js`: OpenTelemetry web apuntando a `/otlp/v1/traces`.
-- `data/*.json`: persistencia local para demo.
+## Configuracion
 
-## Ejecución recomendada
-1. En `prototype/`, instalar dependencias:
-   - `npm install`
-2. Terminal 1: iniciar backend:
-   - `npm start`
-3. Terminal 2: iniciar frontend:
-   - `npm run dev`
-4. Abrir:
-   - `http://localhost:5173`
+1. Copiar `.env.example` a `.env`
+2. Ajustar `DATABASE_URL`
+3. Instalar dependencias:
 
-## Build estático
-1. `npm install`
-2. `npm run build`
-3. `npm start`
-4. Abrir `http://localhost:3000`
+```bash
+npm install
+```
 
-## Credenciales demo
-- `admin / admin123`
-- `operador / operador123`
+## Inicializacion de base de datos
 
-## Guión breve de demo (20–40 min)
+```bash
+npm run db:migrate
+npm run db:seed
+```
 
-1. **Login** con `operador` / `operador123`.  
-2. **Dashboard / lotes**: elegir un lote con coordenadas válidas para la narrativa.  
-3. **Compliance** (y si aplica **DDS**): mostrar flujo referencial y evidencia geo en demo.  
-4. **Copiloto EUDR**: pestaña dedicada — checklist vs lote, consulta al corpus con citas, enlaces EUR-Lex; opcional modo asistido si hay `OPENAI_API_KEY`.  
-5. **Cierre verbal**: preparación documental y datos ordenados; **no** certificación EUDR ni asesoría legal — responsabilidad del operador económico.
+## Ejecutar API
 
-Para una segunda opinión técnica, el evaluador puede clonar el repo y repetir el arranque en dos terminales.
+```bash
+npm start
+```
 
-Runbook ampliado (checklist previa, troubleshooting): [`docs/demo-runbook.md`](../docs/demo-runbook.md).
+Servidor: `http://localhost:3000`
 
-## Copiloto EUDR (preparación documental)
+## Endpoints disponibles (Sprint 1)
 
-Corpus versionado en `data/eudr-knowledge.json` y checklist en `data/eudr-checklist.json`. Opcional: `OPENAI_API_KEY` para recuperación **híbrida** (embeddings de consulta + léxica) si existe `data/eudr-knowledge.embeddings.json`, y para modo asistido con LLM (`useLlm: true`). Generar el índice: `npm run embed-corpus` (requiere clave). Ver [`docs/eudr-compliance-copilot.md`](../docs/eudr-compliance-copilot.md).
+- `GET /api/health`
+- `GET /api/producers`
+- `POST /api/producers`
+- `GET /api/farms`
+- `POST /api/farms`
+- `GET /api/lots`
+- `POST /api/lots`
+- `PUT /api/lots/:id/link-farm`
+- `POST /api/ingestion/excel`
+- `POST /api/ingestion/geojson`
+- `POST /api/compliance/check`
+- `GET /api/compliance/reports`
+- `GET /api/compliance/summary`
+- `POST /api/reports/compliance/:complianceRecordId`
+- `GET /api/reports/:reportId/download`
+- `POST /api/reports/:reportId/share`
+- `GET /api/reports/shared/:token`
+- `POST /api/finance/lots/:lotId/simulate`
+- `GET /api/export/lots.csv`
+- `GET /api/docs`
+- `GET /api/metrics`
 
-- `GET /api/copilot/capabilities` — versiones, disclaimer, `llmAvailable`, `hybridRetrievalReady`, referencias EUR-Lex.
-- `GET /api/copilot/checklist` — checklist completo.
-- `GET /api/copilot/eurlex-refs` — lista orientativa de actos CELEX / enlaces plantilla (lectura humana).
-- `POST /api/copilot/gap-analysis` — `{ "lotId": "..." }`.
-- `POST /api/copilot/query` — `{ "question": "...", "useLlm": false }`.
+### Headers requeridos
 
-En la UI: pestaña **Copiloto EUDR** (bloque de enlaces EUR-Lex, checklist vs lote, consulta al corpus).
+- `x-org-id`: UUID de organizacion
+- `x-actor-id` (opcional): UUID de usuario actor para auditoria
 
-## Endpoints principales
-- Auth: `POST /api/auth/login`, `GET /api/auth/me`, `POST /api/auth/logout`
-- Dashboard: `GET /api/data`, `GET /api/traces`, `GET /api/blockchain`
-- Compliance: `POST /api/compliance/check`, `GET /api/compliance/reports`, `GET /api/compliance/summary`
-- DDS: `POST /api/eudr/due-diligence/:lotId`, `GET /api/eudr/due-diligence`, `GET /api/eudr/due-diligence/:id`
-- Servicios: `GET /api/services/status`, `GET /api/services/:serviceName`
-- Admin cache: `POST /api/cache/clear`, `GET /api/cache/status`
+## Entregables Sprint 1 cubiertos
 
-## Objetivo
-Ofrecer una base funcional para validar flujos de trazabilidad, compliance preliminar y DDS antes de evolucionar hacia un piloto EUDR más formal.
+- Esquema DB core con PostGIS (`src/db/schema.sql`)
+- Repos DB para `producers` y `batches`
+- `audit_events` para acciones create
+- Plantilla de ingesta CSV en `templates/excel/`
+
+## Entregables Sprint 2 cubiertos (ingesta y geoespacial base)
+
+- Ingesta de CSV por endpoint (`/api/ingestion/excel`) con validacion de plantilla
+- Ingesta GeoJSON Polygon (`/api/ingestion/geojson`) con validacion de geometria WGS84
+- Gestion de `farms` y vinculacion lote-parcela (`/api/lots/:id/link-farm`)
+- Auditoria de eventos de importacion y vinculacion
+
+## Entregables Sprint 3 cubiertos (scoring defendible v1)
+
+- Evaluacion de riesgo v1: NDVI 50%, ubicacion 30%, calidad de datos 20%
+- Persistencia de `assessment_runs` y `compliance_records`
+- Endpoints de reportes y resumen por organizacion
+- Respuesta con desglose de contribuciones por factor
+
+## Entregables Sprint 4 cubiertos (PDF + share link)
+
+- Generacion PDF de compliance con `pdfkit`
+- Descarga directa de reporte por ID
+- Share link temporal con token y expiracion
+
+## Entregables Sprint 5 cubiertos (comercial + API minima)
+
+- Simulacion financiera por lote (`value_estimated`, `financing_eligible`)
+- Export consolidado CSV para operaciones/comercial
+- Endpoint de documentacion API minima enterprise
+
+## Entregables Sprint 6 cubiertos (hardening + observabilidad + tests)
+
+- Control de permisos por rol (`viewer`, `operator`, `admin`) en endpoints criticos de escritura
+- Request ID por peticion y endpoint de metricas (`/api/metrics`)
+- Suite minima de contratos API en `test/api-contract.test.js`
