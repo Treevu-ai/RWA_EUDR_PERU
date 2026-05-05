@@ -19,5 +19,5 @@ run()
     process.exitCode = 1;
   })
   .finally(async () => {
-    await pool.end();
+    if (pool) await pool.end();
   });

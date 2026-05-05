@@ -19,12 +19,8 @@ export const config = {
     .map((origin) => origin.trim())
     .filter(Boolean),
   db: {
-    url: process.env.DATABASE_URL ?? "",
+    url: process.env.DATABASE_URL ?? null,
     ssl: asBool(process.env.DB_SSL, false),
     max: asInt(process.env.DB_POOL_MAX, 10)
   }
 };
-
-if (!config.db.url) {
-  throw new Error("DATABASE_URL is required. Copy .env.example to .env and configure it.");
-}

@@ -1,15 +1,27 @@
 import { Pool } from "pg";
 import { config } from "../config.js";
 
-export const pool = new Pool({
-  connectionString: config.db.url,
-  ssl: config.db.ssl ? { rejectUnauthorized: false } : false,
-  max: config.db.max
-});
+export const pool = config.db.url
+  ? new Pool({
+      connectionString: config.db.url,
+      ssl: config.db.ssl ? { rejectUnauthorized: false } : false,
+      max: config.db.max
+    })
+  : null;
 
-export const query = (text, params) => pool.query(text, params);
+const dbUnavailableError = () => {
+  const error = new Error("DATABASE_URL is not configured for this deployment");
+  error.statusCode = 503;
+  return error;
+};
+
+export const query = (text, params) => {
+  if (!pool) throw dbUnavailableError();
+  return pool.query(text, params);
+};
 
 export const withTransaction = async (handler) => {
+  if (!pool) throw dbUnavailableError();
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
