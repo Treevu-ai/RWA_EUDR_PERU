@@ -27,6 +27,14 @@ Solución de software para que cooperativas y exportadores peruanos de café, ca
 
 ---
 
+## Accesos rápidos
+
+- **Landing (sitio comercial):** [`landing/`](landing/) · despliegue: [ver sección](#despliegue-de-la-landing)
+- **Plataforma (demo):** [`prototype/`](prototype/) · guía técnica: [`prototype/README.md`](prototype/README.md)
+- **Docs internas:** [`docs/`](docs/) · overview: [`docs/overview.md`](docs/overview.md)
+
+---
+
 ## ¿Qué problema resolvemos?
 
 Las exportaciones agro hacia la UE pierden contratos, sufren stock detenido y erosionan la confianza del comprador cuando la evidencia de origen, custodia y debida diligencia llega tarde, incompleta o inconsistente.
@@ -80,18 +88,39 @@ Las exportaciones agro hacia la UE pierden contratos, sufren stock detenido y er
 
 ---
 
-## Entorno de desarrollo (solo uso interno)
+## Cómo ejecutar (demo) — `prototype/`
 
-> *Esta sección es exclusivamente para el equipo de desarrollo. No compartir con clientes.*
+> *Solo para uso interno. No compartir con clientes.*
+
+### Requisitos
+
+- Node.js **20+**
+- PostgreSQL **15+** con extensión **PostGIS**
+
+### Configuración
 
 ```bash
-# Desde prototype/
+cd prototype
+cp .env.example .env
+# Editar DATABASE_URL en .env
 npm install
+```
+
+### Inicializar base de datos
+
+```bash
+npm run db:migrate
+npm run db:seed
+```
+
+### Ejecutar
+
+```bash
 npm start          # API en :3000
 npm run dev        # Frontend Vite → http://localhost:5173
 ```
 
-Credenciales demo: ver [`prototype/README.md`](prototype/README.md).
+Más detalle (endpoints/headers): ver [`prototype/README.md`](prototype/README.md).
 
 ---
 
