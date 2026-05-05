@@ -12,6 +12,7 @@ import { financeRouter } from "./routes/finance.js";
 import { exportRouter } from "./routes/export.js";
 import { apiDocsRouter } from "./routes/api-docs.js";
 import { metricsRouter } from "./routes/metrics.js";
+import { showcaseRouter } from "./routes/showcase.js";
 import { requestMetricsMiddleware, trackError } from "./lib/observability.js";
 
 export const createApp = () => {
@@ -43,6 +44,7 @@ export const createApp = () => {
   app.use("/api/export", exportRouter);
   app.use("/api/docs", apiDocsRouter);
   app.use("/api/metrics", metricsRouter);
+  app.use("/", showcaseRouter);
 
   app.use((error, _req, res, _next) => {
     trackError();
