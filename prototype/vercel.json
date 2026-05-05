@@ -1,5 +1,7 @@
 {
   "version": 2,
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
   "builds": [
     {
       "src": "api/index.js",
@@ -12,11 +14,4 @@
       "dest": "api/index.js"
     }
   ]
-}
-{
-  "buildCommand": "npm run build",
-  "devCommand": "npm run start",
-  "framework": "node",
-  "installCommand": "npm install",
-  "outputDirectory": "dist"
 }
