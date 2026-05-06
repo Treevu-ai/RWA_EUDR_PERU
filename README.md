@@ -147,7 +147,8 @@ El workflow en la raíz del repo [`.github/workflows/deploy-landing.yml`](../.gi
 
 Si falta el token o el proyecto no coincide con tu cuenta, el workflow falla y el sitio puede seguir mostrando HTML antiguo.
 
-- URL de producción: <https://landing-five-teal-76.vercel.app/>
+- URL de producción (CI / último deploy): <https://landing-five-teal-76-eta.vercel.app/>  
+  El subdominio `landing-five-teal-76.vercel.app` puede seguir apuntando a un despliegue **anterior** de otra instancia de proyecto; unifica en [Vercel → proyecto → Settings → Domains](https://vercel.com/docs/projects/domains) si quieres un solo host.
 - Herencia `/clientes`: **redirect HTTP 308** a `/` en [`landing/vercel.json`](landing/vercel.json) (sin contenido duplicado).
 
 > **Nota de privacidad**: la landing incluye `robots.txt` con `Disallow: /` para evitar indexación pública. Verificar que el repositorio esté configurado como **Privado** en GitHub Settings.
