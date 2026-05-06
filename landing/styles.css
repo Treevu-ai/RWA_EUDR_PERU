@@ -983,3 +983,267 @@ a:hover {
   max-width: 46ch;
   line-height: 1.55;
 }
+
+/* Hero · contexto normativo */
+.hero-eudr {
+  margin: 0 0 1.25rem;
+  max-width: 52ch;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--gold);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.hero-eudr abbr {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+.hero-eudr strong {
+  color: #fff;
+}
+
+.hero-eudr em {
+  color: rgba(253, 230, 168, 0.95);
+}
+
+/* Diferenciación */
+.card-diff--focus {
+  border: 1px solid rgba(10, 92, 74, 0.35);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(240, 235, 227, 0.65));
+  box-shadow: var(--shadow-sm);
+}
+
+.diff-cards .card-diff h3 {
+  font-size: 1.15rem;
+}
+
+/* Piloto · compromiso cliente */
+.piloto-you-give {
+  margin-top: 2rem;
+  padding: 1.35rem 1.5rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px dashed rgba(10, 92, 74, 0.35);
+}
+
+.piloto-you-give h3 {
+  font-family: "Figtree", system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.85rem;
+  color: var(--forest);
+}
+
+.piloto-you-give-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.piloto-you-give-list li {
+  margin-bottom: 0.45rem;
+}
+
+.piloto-you-give-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Story lane · ejemplo cadena */
+.story-lane {
+  margin: 2rem 0 0;
+  padding: 1.25rem 1.35rem;
+  border-radius: var(--radius);
+  background: rgba(10, 92, 74, 0.06);
+  border: 1px solid rgba(10, 92, 74, 0.12);
+}
+
+.story-lane-cap {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+  margin: 0 0 1rem;
+}
+
+.story-lane-track {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.35rem;
+  font-size: 0.94rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.story-node {
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.story-node--end {
+  background: linear-gradient(135deg, rgba(10, 92, 74, 0.12), rgba(26, 107, 140, 0.1));
+  border-color: rgba(10, 92, 74, 0.25);
+}
+
+.story-arrow {
+  color: var(--muted2);
+  font-weight: 600;
+}
+
+@media (max-width: 520px) {
+  .story-arrow {
+    display: none;
+  }
+
+  .story-lane-track {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .story-node {
+    text-align: center;
+  }
+}
+
+/* Demo · mock navegador */
+.demo-browser-wrap {
+  margin-top: 2rem;
+}
+
+.demo-browser {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  background: var(--surface);
+  max-width: 720px;
+}
+
+.demo-browser-chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.85rem;
+  background: linear-gradient(180deg, #eceae6, #e2ddd6);
+  border-bottom: 1px solid var(--line);
+}
+
+.demo-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c4bfb6;
+}
+
+.demo-dot:nth-child(2) {
+  background: #d4cfc6;
+}
+
+.demo-dot:nth-child(3) {
+  background: #bbb6ad;
+}
+
+.demo-browser-url {
+  flex: 1;
+  text-align: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+
+.demo-browser-body {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  min-height: 140px;
+  gap: 0;
+}
+
+.demo-fake-sidebar {
+  background: linear-gradient(180deg, rgba(10, 92, 74, 0.08), rgba(10, 92, 74, 0.03));
+  border-right: 1px solid var(--line);
+}
+
+.demo-fake-main {
+  padding: 1rem 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.demo-fake-bar {
+  height: 10px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(10, 92, 74, 0.2), rgba(26, 107, 140, 0.15));
+  max-width: 72%;
+}
+
+.demo-fake-bar--long {
+  max-width: 100%;
+}
+
+.demo-fake-bar--short {
+  max-width: 42%;
+  opacity: 0.75;
+}
+
+.demo-fake-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+}
+
+.demo-fake-cell {
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(10, 92, 74, 0.06);
+  border: 1px dashed rgba(10, 92, 74, 0.15);
+}
+
+.demo-browser-note {
+  margin: 0.65rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted2);
+  max-width: 52ch;
+}
+
+/* Contacto · checklist */
+.contact-checklist {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+  max-width: 38rem;
+}
+
+.contact-checklist li {
+  position: relative;
+  padding-left: 1.65rem;
+  font-size: 0.98rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.contact-checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 4px;
+  border: 2px solid var(--forest-mid);
+  background: rgba(10, 92, 74, 0.12);
+}
