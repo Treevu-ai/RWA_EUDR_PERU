@@ -68,5 +68,5 @@ Detalle extendido del paso Copiloto: `[docs/eudr-compliance-copilot.md](eudr-com
 ## Landing pública
 
 - Vista general: [sitio GitHub Pages](https://treevu-ai.github.io/RWA_EUDR_PERU/) — sección **Demo** enlaza al repositorio.
-- B2B: [landing clientes](https://treevu-ai.github.io/RWA_EUDR_PERU/clientes/).
+- B2B (landing comercial): [producción Vercel](https://landing-five-teal-76.vercel.app/) (`/clientes` redirige a `/`).
 

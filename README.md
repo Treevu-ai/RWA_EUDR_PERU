@@ -95,7 +95,7 @@ La landing comercial incorpora un embudo de tracción con dos pasos:
 |------|-----------|
 | [`docs/`](docs/) | Requisitos UE, propuesta integral, roadmap, pitch, diagramas — uso interno. |
 | [`docs/convocatorias/`](docs/convocatorias/) | Checklist, plantillas, pitch 90s, ficha 1 página. |
-| [`landing/`](landing/) | Sitio comercial (un solo inicio: perfiles, diagnóstico, FAQ y contacto; `/clientes/` redirige al inicio). |
+| [`landing/`](landing/) | Sitio comercial único (`/`); `/clientes` redirige en edge (308) a `/` — sin página duplicada. |
 | [`prototype/`](prototype/) | Plataforma React + Express: compliance, DDS, copiloto EUDR. |
 | [`assets/`](assets/) | Recursos gráficos internos. |
 
@@ -142,7 +142,7 @@ Más detalle (endpoints/headers): ver [`prototype/README.md`](prototype/README.m
 El workflow en la raíz del repo [`.github/workflows/deploy-landing.yml`](../.github/workflows/deploy-landing.yml) despliega `landing/` en Vercel (producción).
 
 - URL de producción: <https://landing-five-teal-76.vercel.app/>
-- Ruta heredada `/clientes/`: redirección a la misma landing (`#contacto`).
+- Herencia `/clientes`: **redirect HTTP 308** a `/` en [`landing/vercel.json`](landing/vercel.json) (sin contenido duplicado).
 
 > **Nota de privacidad**: la landing incluye `robots.txt` con `Disallow: /` para evitar indexación pública. Verificar que el repositorio esté configurado como **Privado** en GitHub Settings.
 

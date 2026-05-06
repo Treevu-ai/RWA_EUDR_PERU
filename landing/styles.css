@@ -258,6 +258,17 @@ a:hover {
   box-shadow: 0 0 12px rgba(232, 196, 104, 0.9);
 }
 
+.hero-proof {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: rgba(250, 248, 245, 0.96);
+  margin: 0 0 1rem;
+  max-width: 44ch;
+  line-height: 1.3;
+}
+
 .hero-mast h1 {
   font-size: clamp(2.35rem, 5vw, 3.35rem);
   margin: 0 0 1rem;
@@ -366,30 +377,44 @@ a:hover {
   margin: 0 0 1rem;
 }
 
-.actor-list {
+.hero-stats {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.actor-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.65rem;
-  padding: 0.55rem 0;
+.hero-stats li {
+  padding: 0.65rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(250, 248, 245, 0.92);
-  font-size: 0.98rem;
 }
 
-.actor-list li:last-child {
+.hero-stats li:last-child {
   border-bottom: none;
 }
 
-.actor-list svg {
-  flex-shrink: 0;
-  margin-top: 3px;
-  opacity: 0.9;
+.hero-stats strong {
+  display: block;
+  font-family: "Figtree", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 245, 0.72);
+  margin-bottom: 0.35rem;
+}
+
+.hero-stats span {
+  display: block;
+  font-size: 0.96rem;
+  line-height: 1.45;
+  color: rgba(250, 248, 245, 0.93);
+}
+
+.piloto-card .diag-sla {
+  display: block;
+  margin-top: 0.65rem;
+  font-weight: 700;
+  color: var(--forest-mid);
 }
 
 /* Story strip */
