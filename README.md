@@ -142,8 +142,8 @@ Más detalle (endpoints/headers): ver [`prototype/README.md`](prototype/README.m
 El workflow en la raíz del repo [`.github/workflows/deploy-landing.yml`](../.github/workflows/deploy-landing.yml) despliega `landing/` en Vercel (producción). Secrets en GitHub (**Settings → Secrets and variables → Actions**):
 
 - **`VERCEL_TOKEN`** — obligatorio; [crear token](https://vercel.com/account/tokens).
-- **`VERCEL_TEAM`** — opcional; **slug del equipo** (aparece en la URL: `vercel.com/<slug>/...`). Añádelo si la cuenta tiene varios equipos o el *link* falla sin scope.
-- **`VERCEL_PROJECT_NAME`** — opcional; nombre del proyecto en el dashboard (por defecto el workflow usa `landing-five-teal-76`, alineado al subdominio de producción).
+- **`VERCEL_TEAM`** — obligatorio en CI; **slug del equipo** (`vercel.com/<slug>/...`). Sin él el CLI responde `missing_scope` en modo no interactivo.
+- **`VERCEL_PROJECT_NAME`** — opcional; nombre del proyecto en el dashboard (por defecto `landing-five-teal-76`). Si el nombre no coincide con tu proyecto, cámbialo aquí.
 
 Si falta el token o el proyecto no coincide con tu cuenta, el workflow falla y el sitio puede seguir mostrando HTML antiguo.
 

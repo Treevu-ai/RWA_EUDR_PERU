@@ -27,9 +27,8 @@ jobs:
         working-directory: landing
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          # Slug del equipo (URL: vercel.com/<slug>/…). Opcional si solo tienes cuenta personal sin equipo.
+          # Slug o ID del equipo; obligatorio en CI (--scope). Ej.: acuba0103-7161s-projects
           VERCEL_TEAM: ${{ secrets.VERCEL_TEAM }}
-          # Nombre del proyecto en el dashboard; por defecto coincide con el subdominio .vercel.app
           VERCEL_PROJECT_NAME: ${{ secrets.VERCEL_PROJECT_NAME }}
         run: |
           set -e
@@ -37,11 +36,11 @@ jobs:
             echo "::error::Secret VERCEL_TOKEN no está definido (GitHub → Settings → Secrets and variables → Actions)."
             exit 1
           fi
+          if [ -z "$VERCEL_TEAM" ]; then
+            echo "::error::Secret VERCEL_TEAM no está definido. En Vercel → tu equipo: el slug aparece en la URL (vercel.com/<slug>/...) o en el mensaje de error del CLI (missing_scope → choices)."
+            exit 1
+          fi
           PROJECT_NAME="${VERCEL_PROJECT_NAME:-landing-five-teal-76}"
           rm -rf .vercel
-          if [ -n "$VERCEL_TEAM" ]; then
-            vercel link --yes --non-interactive --team "$VERCEL_TEAM" --project "$PROJECT_NAME"
-          else
-            vercel link --yes --non-interactive --project "$PROJECT_NAME"
-          fi
+          vercel link --yes --non-interactive --scope "$VERCEL_TEAM" --project "$PROJECT_NAME"
           vercel deploy --prod --yes
