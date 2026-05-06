@@ -27,11 +27,21 @@ jobs:
         working-directory: landing
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: team_hvdUkmghXOiSlTAs1fTOD4u4
-          VERCEL_PROJECT_ID: prj_J3BWCGq6ihxAPS2CDqBTDtaOgNFo
+          # Slug del equipo (URL: vercel.com/<slug>/…). Opcional si solo tienes cuenta personal sin equipo.
+          VERCEL_TEAM: ${{ secrets.VERCEL_TEAM }}
+          # Nombre del proyecto en el dashboard; por defecto coincide con el subdominio .vercel.app
+          VERCEL_PROJECT_NAME: ${{ secrets.VERCEL_PROJECT_NAME }}
         run: |
+          set -e
           if [ -z "$VERCEL_TOKEN" ]; then
-            echo "::error::Secret VERCEL_TOKEN no está definido en GitHub (Settings → Secrets and variables → Actions). Sin él el CLI no puede desplegar y producción se queda en un HTML antiguo."
+            echo "::error::Secret VERCEL_TOKEN no está definido (GitHub → Settings → Secrets and variables → Actions)."
             exit 1
+          fi
+          PROJECT_NAME="${VERCEL_PROJECT_NAME:-landing-five-teal-76}"
+          rm -rf .vercel
+          if [ -n "$VERCEL_TEAM" ]; then
+            vercel link --yes --non-interactive --team "$VERCEL_TEAM" --project "$PROJECT_NAME"
+          else
+            vercel link --yes --non-interactive --project "$PROJECT_NAME"
           fi
           vercel deploy --prod --yes

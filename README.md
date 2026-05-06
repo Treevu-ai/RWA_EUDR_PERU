@@ -139,7 +139,13 @@ Más detalle (endpoints/headers): ver [`prototype/README.md`](prototype/README.m
 
 ## Despliegue de la landing
 
-El workflow en la raíz del repo [`.github/workflows/deploy-landing.yml`](../.github/workflows/deploy-landing.yml) despliega `landing/` en Vercel (producción). Requiere el secreto de repositorio **`VERCEL_TOKEN`** (token de cuenta en [Vercel → Settings → Tokens](https://vercel.com/account/tokens)); si falta, el workflow falla y el sitio público puede seguir mostrando una versión antigua del HTML.
+El workflow en la raíz del repo [`.github/workflows/deploy-landing.yml`](../.github/workflows/deploy-landing.yml) despliega `landing/` en Vercel (producción). Secrets en GitHub (**Settings → Secrets and variables → Actions**):
+
+- **`VERCEL_TOKEN`** — obligatorio; [crear token](https://vercel.com/account/tokens).
+- **`VERCEL_TEAM`** — opcional; **slug del equipo** (aparece en la URL: `vercel.com/<slug>/...`). Añádelo si la cuenta tiene varios equipos o el *link* falla sin scope.
+- **`VERCEL_PROJECT_NAME`** — opcional; nombre del proyecto en el dashboard (por defecto el workflow usa `landing-five-teal-76`, alineado al subdominio de producción).
+
+Si falta el token o el proyecto no coincide con tu cuenta, el workflow falla y el sitio puede seguir mostrando HTML antiguo.
 
 - URL de producción: <https://landing-five-teal-76.vercel.app/>
 - Herencia `/clientes`: **redirect HTTP 308** a `/` en [`landing/vercel.json`](landing/vercel.json) (sin contenido duplicado).
