@@ -13,17 +13,19 @@
 [![Landing](https://img.shields.io/badge/Landing-sitio%20comercial%20(Vercel)-0a5c4a?style=for-the-badge&logo=vercel&logoColor=white)](#despliegue-de-la-landing)
 [![License](https://img.shields.io/badge/Licencia-Propietaria-red?style=for-the-badge)](LICENSE)
 
-### Plataforma de trazabilidad, cumplimiento y evidencia agroexportadora
+### Forest Trace AI · Plataforma de trazabilidad, cumplimiento y evidencia agroexportadora
 
 **SINAPSIS INNOVADORA S.A.C.** — expertos en cadenas de valor global y fortalecimiento de cadenas productivas agroexportadoras.
 
-Solución de software para que cooperativas y exportadores peruanos de café, cacao y productos similares construyan **paquetes de evidencia verificables** — origen, cadena de custodia y debida diligencia (EUDR) — desde un único hilo de trazabilidad.
+**Forest Trace AI** es el producto de software de **SINAPSIS INNOVADORA S.A.C.** para que cooperativas y exportadores peruanos de café, cacao y productos similares construyan **paquetes de evidencia verificables** — origen, cadena de custodia y debida diligencia (EUDR) — desde un único hilo de trazabilidad frente al mercado europeo.
 
 **Contacto comercial:** [sinapsisinnovadoraperu@gmail.com](mailto:sinapsisinnovadoraperu@gmail.com) · +51 902 126 765
 
 <br />
 
 </div>
+
+> **Monorepo:** El índice principal del repositorio es el [`README.md`](../README.md) en la raíz — describe `landing/`, `prototype/` y esta carpeta.
 
 ---
 
@@ -63,11 +65,22 @@ Las exportaciones agro hacia la UE pierden contratos, sufren stock detenido y er
 
 ---
 
+## Diagnóstico inicial y agente asistido
+
+La landing comercial incorpora un embudo de tracción con dos pasos:
+
+1. **Diagnóstico con especialista (24h)**: evaluación inicial de brechas de evidencia y propuesta de alcance.
+2. **Pre-auditoría asistida por agente (opcional)**: chequeo de completitud y consistencia para priorizar correcciones antes de auditoría formal.
+
+> **Disclaimer**: la pre-auditoría asistida no constituye certificación ni dictamen legal. La validación final corresponde al operador económico y su asesoría especializada.
+
+---
+
 ## Estado del proyecto
 
 | Área | Estado |
 |------|--------|
-| **Landing** (`landing/`) | Sitio comercial desplegado; identidad SINAPSIS INNOVADORA S.A.C., mensajería orientada a exportadores y cooperativas. |
+| **Landing** (`landing/`) | Sitio comercial desplegado con branding **Forest Trace AI**, UX optimizada, CTA de diagnóstico y disclaimer legal para agente asistido. |
 | **Plataforma** (`prototype/`) | Funcional en entorno de demostración: autenticación, lotes, compliance/DDS, historial de auditoría, copiloto. |
 | **Copiloto EUDR** | Corpus + checklist versionados; recuperación léxica e híbrida; modo asistido con LLM opcional. Ver [`docs/eudr-compliance-copilot.md`](docs/eudr-compliance-copilot.md). |
 | **Producción / piloto real** | Integraciones enterprise y hardening se activan bajo acuerdo de piloto firmado. |
@@ -82,7 +95,7 @@ Las exportaciones agro hacia la UE pierden contratos, sufren stock detenido y er
 |------|-----------|
 | [`docs/`](docs/) | Requisitos UE, propuesta integral, roadmap, pitch, diagramas — uso interno. |
 | [`docs/convocatorias/`](docs/convocatorias/) | Checklist, plantillas, pitch 90s, ficha 1 página. |
-| [`landing/`](landing/) | Sitio comercial; [`/clientes/`](landing/clientes/) para exportadores y cooperativas. |
+| [`landing/`](landing/) | Sitio comercial (un solo inicio: perfiles, diagnóstico, FAQ y contacto; `/clientes/` redirige al inicio). |
 | [`prototype/`](prototype/) | Plataforma React + Express: compliance, DDS, copiloto EUDR. |
 | [`assets/`](assets/) | Recursos gráficos internos. |
 
@@ -126,7 +139,10 @@ Más detalle (endpoints/headers): ver [`prototype/README.md`](prototype/README.m
 
 ## Despliegue de la landing
 
-El workflow [`.github/workflows/deploy-landing.yml`](.github/workflows/deploy-landing.yml) despliega `landing/` en Vercel (producción).
+El workflow en la raíz del repo [`.github/workflows/deploy-landing.yml`](../.github/workflows/deploy-landing.yml) despliega `landing/` en Vercel (producción).
+
+- URL de producción: <https://landing-five-teal-76.vercel.app/>
+- Ruta heredada `/clientes/`: redirección a la misma landing (`#contacto`).
 
 > **Nota de privacidad**: la landing incluye `robots.txt` con `Disallow: /` para evitar indexación pública. Verificar que el repositorio esté configurado como **Privado** en GitHub Settings.
 

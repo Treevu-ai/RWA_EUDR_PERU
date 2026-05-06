@@ -262,11 +262,16 @@ a:hover {
   font-size: clamp(2.35rem, 5vw, 3.35rem);
   margin: 0 0 1rem;
   color: #faf8f5;
-  max-width: 18ch;
+  max-width: min(52ch, 92vw);
+  line-height: 1.12;
+}
+
+.hero-mast h1 .hero-line {
+  display: block;
 }
 
 .hero-mast .headline-accent {
-  background: linear-gradient(90deg, #fff 0%, #e8d89c 50%, #fff 100%);
+  background: linear-gradient(90deg, #fff 0%, #e8d89c 45%, #f5ead1 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -759,4 +764,197 @@ a:hover {
   flex-wrap: wrap;
   gap: 0.75rem;
   align-items: center;
+}
+
+.btn-outline {
+  background: transparent !important;
+  color: var(--forest-mid) !important;
+  border: 2px solid rgba(10, 92, 74, 0.45);
+  box-shadow: none;
+}
+
+.btn-outline:hover {
+  background: rgba(10, 92, 74, 0.08) !important;
+  filter: none;
+}
+
+/* Trust strip (contenido integrado desde página B2B) */
+.landing-trust {
+  padding: 1.15rem 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.landing-trust-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.65rem;
+  justify-content: center;
+}
+
+.trust-pill {
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+/* FAQ */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  max-width: 720px;
+}
+
+.faq-list details {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.faq-list summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 1rem 1.15rem;
+  list-style: none;
+}
+
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list details[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-list details p {
+  margin: 0;
+  padding: 0.85rem 1.15rem 1.1rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.diag-footnote {
+  margin: 1.5rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted2);
+  max-width: 72ch;
+}
+
+.diag-cards .piloto-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.diag-cards .piloto-card > p:last-child {
+  margin-top: auto;
+}
+
+.section[id],
+.landing-trust {
+  scroll-margin-top: 5.25rem;
+}
+
+.section .lang-en {
+  margin-top: 2.5rem;
+}
+
+/* Camino comercial → piloto (4 pasos) */
+.piloto-journey {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.15rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1000px) {
+  .piloto-journey {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .piloto-journey {
+    grid-template-columns: 1fr;
+  }
+}
+
+.piloto-step {
+  margin: 0;
+  padding: 1.35rem 1.2rem 1.25rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.piloto-step:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.piloto-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  background: linear-gradient(145deg, var(--forest-mid), var(--sea));
+  color: #fff;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 6px 18px rgba(10, 92, 74, 0.25);
+}
+
+.piloto-step h3 {
+  font-size: 1.12rem;
+  margin: 0 0 0.45rem;
+  letter-spacing: -0.02em;
+}
+
+.piloto-step p {
+  margin: 0;
+  font-size: 0.96rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.piloto-journey-cta {
+  margin-top: 2.25rem;
+  padding: 1.5rem 1.65rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(10, 92, 74, 0.22);
+  background: linear-gradient(125deg, rgba(10, 92, 74, 0.09), rgba(26, 107, 140, 0.07));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.piloto-journey-cta-text h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  margin: 0 0 0.4rem;
+  color: var(--ink);
+}
+
+.piloto-journey-cta-text p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  max-width: 46ch;
+  line-height: 1.55;
 }
