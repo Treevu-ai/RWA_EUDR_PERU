@@ -40,7 +40,7 @@ typography:
     fontFamily: GT Walsheim Medium
     fontSize: 62px
     fontWeight: 500
-    lineHeight: 1.00
+    lineHeight: 1.0
     letterSpacing: -3.1px
     fontFeature: ss02
   display-md:
@@ -513,7 +513,7 @@ The defining decorative surface of Framer's marketing — oversized atmospheric 
 | Desktop | 1199px | Default desktop layout |
 | Tablet | 810px | Card grids collapse 4-up → 2-up; nav becomes hamburger |
 | Mobile-Lg | 809px | Pricing comparison table becomes per-tier accordion |
-| Mobile-XS | 98px | Smallest documented breakpoint — single-column everything |
+| Mobile-XS | 320px | Smallest documented breakpoint — single-column everything |
 
 ### Touch Targets
 
