@@ -143,7 +143,7 @@ El workflow en la raíz del repo [`.github/workflows/deploy-landing.yml`](../.gi
 
 - **`VERCEL_TOKEN`** — obligatorio; [crear token](https://vercel.com/account/tokens).
 - **`VERCEL_TEAM`** — obligatorio en CI; **slug del equipo** (`vercel.com/<slug>/...`). Sin él el CLI responde `missing_scope` en modo no interactivo.
-- **`VERCEL_PROJECT_NAME`** — opcional; nombre del proyecto en el dashboard (por defecto `landing-five-teal-76`). Si el nombre no coincide con tu proyecto, cámbialo aquí.
+- **`VERCEL_LANDING_PROJECT_NAME`** — opcional; nombre del proyecto en el dashboard (por defecto `landing-five-teal-76`). Si el nombre no coincide con tu proyecto, cámbialo aquí.
 
 Si falta el token o el proyecto no coincide con tu cuenta, el workflow falla y el sitio puede seguir mostrando HTML antiguo.
 
@@ -155,11 +155,11 @@ Si falta el token o el proyecto no coincide con tu cuenta, el workflow falla y e
 
 ## Despliegue del prototype
 
-El workflow [`.github/workflows/deploy-prototype.yml`](.github/workflows/deploy-prototype.yml) despliega `prototype/` en Vercel (producción). Usa los mismos secrets de Actions:
+El workflow [`.github/workflows/deploy-prototype.yml`](.github/workflows/deploy-prototype.yml) despliega `prototype/` en Vercel (producción). Usa estos secrets de Actions:
 
 - **`VERCEL_TOKEN`** — token del equipo en Vercel.
 - **`VERCEL_TEAM`** — slug del equipo (`vercel.com/<slug>/...`).
-- **`VERCEL_PROJECT_NAME`** — opcional; si el dominio productivo sigue apuntando a un proyecto legado (por ejemplo, el que servía `prototype-rosy-two.vercel.app`), configúralo con ese nombre para relinkear el deploy al proyecto correcto.
+- **`VERCEL_PROTOTYPE_PROJECT_NAME`** — opcional; si el dominio productivo sigue apuntando a un proyecto legado (por ejemplo, el que servía `prototype-rosy-two.vercel.app`), configúralo con ese nombre para relinkear el deploy al proyecto correcto.
 
 El endpoint `GET /api/health` responde `200` tanto en modo normal como degradado, indicando si la base está `reachable`, `unreachable` o `unconfigured`. Esto evita falsos negativos en despliegues serverless donde el backend público debe seguir respondiendo aunque `DATABASE_URL` aún no esté configurado.
 

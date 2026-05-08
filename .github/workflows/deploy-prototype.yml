@@ -31,7 +31,7 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_TEAM: ${{ secrets.VERCEL_TEAM }}
-          VERCEL_PROJECT_NAME: ${{ secrets.VERCEL_PROJECT_NAME }}
+          VERCEL_PROTOTYPE_PROJECT_NAME: ${{ secrets.VERCEL_PROTOTYPE_PROJECT_NAME }}
         run: |
           set -e
           if [ -z "$VERCEL_TOKEN" ]; then
@@ -42,7 +42,7 @@ jobs:
             echo "::error::Secret VERCEL_TEAM no está definido. En Vercel → tu equipo: el slug aparece en la URL (vercel.com/<slug>/...)."
             exit 1
           fi
-          PROJECT_NAME="${VERCEL_PROJECT_NAME:-rwa-eudr-prototype}"
+          PROJECT_NAME="${VERCEL_PROTOTYPE_PROJECT_NAME:-rwa-eudr-prototype}"
           rm -rf .vercel
           vercel link --yes --non-interactive --scope "$VERCEL_TEAM" --project "$PROJECT_NAME"
           vercel deploy --prod --yes
