@@ -24,7 +24,7 @@ colors:
 
 typography:
   display-xxl:
-    fontFamily: GT Walsheim Framer Medium
+    fontFamily: GT Walsheim Medium
     fontSize: 110px
     fontWeight: 500
     lineHeight: 0.85
@@ -213,6 +213,12 @@ components:
     padding: 32px
   gradient-spotlight-card-orange:
     backgroundColor: "{colors.gradient-orange}"
+    textColor: "{colors.ink}"
+    typography: "{typography.subhead}"
+    rounded: "{rounded.xl}"
+    padding: 32px
+  gradient-spotlight-card-coral:
+    backgroundColor: "{colors.gradient-coral}"
     textColor: "{colors.ink}"
     typography: "{typography.subhead}"
     rounded: "{rounded.xl}"
@@ -453,7 +459,8 @@ The defining decorative surface of Framer's marketing — oversized atmospheric 
 **`gradient-spotlight-card-orange`** — sunset-orange wash.
 - Background `{colors.gradient-orange}`, otherwise identical.
 
-(Coral pink follows the same shape with `{colors.gradient-coral}`.)
+**`gradient-spotlight-card-coral`** — coral-pink glow.
+- Background `{colors.gradient-coral}`, otherwise identical.
 
 ### Comparison & FAQ
 
