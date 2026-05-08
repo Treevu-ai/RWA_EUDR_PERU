@@ -28,13 +28,6 @@ const page = `<!doctype html>
       <p>Demo funcional para mostrar flujo EUDR: ingesta, scoring v1, reporte PDF, simulacion financiera y API enterprise.</p>
 
       <div class="card">
-        <strong>Landing comercial</strong>
-        <div class="row">
-          <a class="btn" href="https://treevu-ai.github.io/RWA_EUDR_PERU/" target="_blank" rel="noreferrer">Abrir landing</a>
-        </div>
-      </div>
-
-      <div class="card">
         <strong>Prototype API (demo tecnica)</strong>
         <ul>
           <li>API docs: <code>/api/docs</code></li>
@@ -59,4 +52,3 @@ const page = `<!doctype html>
 showcaseRouter.get("/", (_req, res) => {
   res.status(200).type("html").send(page);
 });
-

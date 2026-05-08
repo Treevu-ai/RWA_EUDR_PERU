@@ -528,14 +528,6 @@ function App() {
             <button type="button" onClick={() => handleCopilotQuery(false)} disabled={copilotBusy}>
               Recuperar fragmentos
             </button>
-            <button
-              type="button"
-              onClick={() => handleCopilotQuery(true)}
-              disabled={copilotBusy || !copilotCaps?.llmAvailable}
-              title={!copilotCaps?.llmAvailable ? 'Configurar OPENAI_API_KEY en el servidor' : ''}
-            >
-              Modo asistido (LLM)
-            </button>
           </div>
 
           {copilotResult && (
