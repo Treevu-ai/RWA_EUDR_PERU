@@ -632,7 +632,7 @@
             return;
           }
           const deadlineUtc = Date.UTC(deadline.getUTCFullYear(), deadline.getUTCMonth(), deadline.getUTCDate());
-          const diffDays = Math.round((deadlineUtc - todayUtc) / MS_PER_DAY);
+          const diffDays = (deadlineUtc - todayUtc) / MS_PER_DAY;
 
           if (diffDays > 0) {
             node.textContent = `Faltan ${diffDays} días`;
@@ -818,11 +818,11 @@
         const supplyChain = formData.get("supplyChain")?.toString().trim() || "";
 
         const normalizedCompany = company.replace(/\s+/g, " ").trim();
-        const truncatedCompany =
-          normalizedCompany.length > MAX_SUBJECT_COMPANY_LENGTH
-            ? normalizedCompany.slice(0, MAX_SUBJECT_COMPANY_LENGTH).replace(/\s+\S*$/, "").trim()
-            : normalizedCompany;
-        const safeCompany = truncatedCompany || normalizedCompany.slice(0, MAX_SUBJECT_COMPANY_LENGTH).trim();
+        let safeCompany = normalizedCompany;
+        if (safeCompany.length > MAX_SUBJECT_COMPANY_LENGTH) {
+          const subjectSlice = safeCompany.slice(0, MAX_SUBJECT_COMPANY_LENGTH).trim();
+          safeCompany = subjectSlice.replace(/\s+\S*$/, "").trim() || subjectSlice;
+        }
         const subject = safeCompany ? `Solicitud de presupuesto DDS EUDR - ${safeCompany}` : "Solicitud de presupuesto DDS EUDR";
         const body = [
           "Hola equipo Forest Trace AI,",
@@ -853,7 +853,6 @@
           updateDeadlineLabels();
         }
       });
-      window.addEventListener("focus", updateDeadlineLabels);
     </script>
   </body>
 </html>
