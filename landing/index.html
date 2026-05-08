@@ -683,6 +683,12 @@
         button.addEventListener("click", closeReadinessModal);
       });
 
+      readinessResult?.addEventListener("click", (event) => {
+        if (event.target.closest("[data-close-readiness]")) {
+          closeReadinessModal();
+        }
+      });
+
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && !readinessModal.hidden) {
           closeReadinessModal();
@@ -717,29 +723,29 @@
           summary = "Hay avances claros, pero aún existen brechas que pueden frenar tiempos de respuesta, auditorías o due diligence de compradores UE.";
         }
 
-        const recommendedServices = [];
+        const recommendedServices = new Set();
 
         if (Number(formData.get("supplierData")) <= 1 || Number(formData.get("geolocation")) <= 1 || Number(formData.get("traceability")) <= 1) {
-          recommendedServices.push("Recopilación de información y trazabilidad");
+          recommendedServices.add("Recopilación de información y trazabilidad");
         }
 
         if (Number(formData.get("legalDocs")) <= 1 || Number(formData.get("riskAssessment")) <= 1) {
-          recommendedServices.push("Evaluación de riesgos y legalidad");
+          recommendedServices.add("Evaluación de riesgos y legalidad");
         }
 
         if (Number(formData.get("mitigation")) <= 1) {
-          recommendedServices.push("Reducción de riesgos y plan de mitigación");
+          recommendedServices.add("Reducción de riesgos y plan de mitigación");
         }
 
         if (Number(formData.get("ddsReadiness")) <= 1) {
-          recommendedServices.push("Preparación de DDS y paquete documental");
+          recommendedServices.add("Preparación de DDS y paquete documental");
         }
 
         if (Number(formData.get("marketWindow")) === 2) {
-          recommendedServices.push("Diagnóstico prioritario para embarques o compradores UE");
+          recommendedServices.add("Diagnóstico prioritario para embarques o compradores UE");
         }
 
-        const uniqueServices = [...new Set(recommendedServices)];
+        const uniqueServices = [...recommendedServices];
         if (!uniqueServices.length) {
           uniqueServices.push("Sesión de afinamiento y roadmap de cumplimiento");
         }
@@ -791,9 +797,6 @@
         `;
 
         readinessResult.hidden = false;
-        readinessResult.querySelectorAll("[data-close-readiness]").forEach((link) => {
-          link.addEventListener("click", closeReadinessModal);
-        });
         readinessResult.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     </script>

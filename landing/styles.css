@@ -976,7 +976,7 @@ body.modal-open {
 
 .readiness-field select:focus,
 .readiness-modal__close:focus,
-.btn:focus {
+.readiness-modal .btn:focus {
   outline: 3px solid rgba(26, 107, 140, 0.22);
   outline-offset: 2px;
 }
