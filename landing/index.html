@@ -75,9 +75,11 @@
               Para exportadores y cooperativas peruanas: unificamos finca, lote, origen y documentos — desde pequeños productores hasta exportación. Paquetes DDS revisables, sin reconstruir la historia en cada embarque.
             </p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#piloto">Agendar diagnóstico o piloto</a>
+              <button class="btn btn-primary" type="button" data-open-readiness>Evaluar EUDR Readiness</button>
+              <a class="btn btn-outline" href="#piloto">Agendar diagnóstico o piloto</a>
               <a class="btn btn-ghost" href="#flujo">Ver cómo funciona</a>
             </div>
+            <p class="hero-helper">8 preguntas clave · resultado orientativo en menos de 2 minutos.</p>
             <p class="hero-note" role="note">
               <strong>Transparencia:</strong> no emitimos certificación legal; entregamos infraestructura de datos y proceso para que tu equipo sustente evidencia coherente y auditable. No sustituimos asesoría legal ni al operador económico.
             </p>
@@ -217,7 +219,7 @@
                 <strong class="diag-sla">Respuesta orientativa en hasta 24 horas hábiles</strong> tras recibir tu contexto por correo.
               </p>
               <p style="margin-top: 1rem; margin-bottom: 0">
-                <a class="btn btn-primary" href="#contacto">Solicitar diagnóstico</a>
+                <button class="btn btn-primary" type="button" data-open-readiness>Completar EUDR Readiness</button>
               </p>
             </article>
             <article class="piloto-card">
@@ -506,6 +508,9 @@
           <p class="contact-email">
             <a href="mailto:sinapsisinnovadoraperu@gmail.com?subject=Diagnostico%20Forest%20Trace%20AI%20EUDR">Escribir para iniciar piloto o diagnóstico</a>
           </p>
+          <p style="margin: 1rem 0 0">
+            <button class="btn btn-outline" type="button" data-open-readiness>Evaluar mi readiness antes de escribir</button>
+          </p>
           <p class="section-intro" style="margin-top: 0.75rem">sinapsisinnovadoraperu@gmail.com</p>
           <p class="contact-email" style="margin-top: 0.5rem; font-size: 1rem">
             <a href="tel:+51902126765">+51 902 126 765</a>
@@ -513,6 +518,119 @@
         </div>
       </section>
     </main>
+
+    <div class="readiness-modal" data-readiness-modal hidden>
+      <div class="readiness-modal__backdrop" data-close-readiness></div>
+      <section
+        class="readiness-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="readiness-title"
+        aria-describedby="readiness-intro"
+      >
+        <button class="readiness-modal__close" type="button" aria-label="Cerrar evaluación" data-close-readiness>
+          ×
+        </button>
+        <div class="readiness-modal__body">
+          <span class="section-eyebrow">assessment · 8 preguntas</span>
+          <h2 id="readiness-title">EUDR Readiness</h2>
+          <p id="readiness-intro" class="section-intro readiness-modal__intro">
+            Responde estas 8 preguntas para identificar tu nivel de preparación y el tipo de acompañamiento que más valor puede darte hoy.
+          </p>
+
+          <form class="readiness-form" data-readiness-form>
+            <div class="readiness-form__grid">
+              <label class="readiness-field">
+                <span>1. ¿Qué tan cerca está tu operación de vender o exportar a la UE?</span>
+                <select name="marketWindow" required>
+                  <option value="" selected disabled>Selecciona una opción</option>
+                  <option value="2">Ya exportamos o tenemos comprador activo en la UE</option>
+                  <option value="1">Estamos preparando entrada al mercado UE en los próximos 12 meses</option>
+                  <option value="0">Aún no definimos mercado o timing</option>
+                </select>
+              </label>
+
+              <label class="readiness-field">
+                <span>2. ¿Qué tan ordenada está la información de proveedores, fincas y lotes?</span>
+                <select name="supplierData" required>
+                  <option value="" selected disabled>Selecciona una opción</option>
+                  <option value="2">Centralizada y actualizada</option>
+                  <option value="1">Parcialmente ordenada en varios archivos/sistemas</option>
+                  <option value="0">Dispersa o difícil de reconstruir</option>
+                </select>
+              </label>
+
+              <label class="readiness-field">
+                <span>3. ¿Cuál es el nivel de geolocalización disponible para parcelas o fincas?</span>
+                <select name="geolocation" required>
+                  <option value="" selected disabled>Selecciona una opción</option>
+                  <option value="2">Completa para la mayoría de predios o parcelas</option>
+                  <option value="1">Parcial o pendiente de validación</option>
+                  <option value="0">Muy limitada o inexistente</option>
+                </select>
+              </label>
+
+              <label class="readiness-field">
+                <span>4. ¿Puedes reconstruir la trazabilidad de finca a lote y embarque?</span>
+                <select name="traceability" required>
+                  <option value="" selected disabled>Selecciona una opción</option>
+                  <option value="2">Sí, con historial consistente y responsables claros</option>
+                  <option value="1">Solo en algunos lotes o con trabajo manual</option>
+                  <option value="0">No de forma confiable hoy</option>
+                </select>
+              </label>
+
+              <label class="readiness-field">
+                <span>5. ¿Qué tan accesible está la documentación legal, contractual y de soporte?</span>
+                <select name="legalDocs" required>
+                  <option value="" selected disabled>Selecciona una opción</option>
+                  <option value="2">Está centralizada y lista para revisión</option>
+                  <option value="1">Existe, pero en carpetas/correos dispersos</option>
+                  <option value="0">Hay vacíos o no tenemos visibilidad suficiente</option>
+                </select>
+              </label>
+
+              <label class="readiness-field">
+                <span>6. ¿Ya evalúan riesgo por origen, proveedor o complejidad de cadena?</span>
+                <select name="riskAssessment" required>
+                  <option value="" selected disabled>Selecciona una opción</option>
+                  <option value="2">Sí, con criterios definidos y revisión periódica</option>
+                  <option value="1">De manera informal o solo cuando un cliente lo pide</option>
+                  <option value="0">No tenemos un proceso de evaluación de riesgo</option>
+                </select>
+              </label>
+
+              <label class="readiness-field">
+                <span>7. ¿Tienen acciones de mitigación cuando el riesgo no es despreciable?</span>
+                <select name="mitigation" required>
+                  <option value="" selected disabled>Selecciona una opción</option>
+                  <option value="2">Sí, con responsables y seguimiento</option>
+                  <option value="1">Hay acciones, pero no un método uniforme</option>
+                  <option value="0">No, se resuelve caso por caso</option>
+                </select>
+              </label>
+
+              <label class="readiness-field">
+                <span>8. ¿Qué tan preparada está tu DDS o paquete documental para revisión?</span>
+                <select name="ddsReadiness" required>
+                  <option value="" selected disabled>Selecciona una opción</option>
+                  <option value="2">Lista o casi lista para revisión interna/cliente</option>
+                  <option value="1">En preparación, con brechas identificadas</option>
+                  <option value="0">Aún no tenemos una DDS estructurada</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="readiness-form__actions">
+              <button class="btn btn-primary" type="submit">Ver resultado</button>
+              <button class="btn btn-outline" type="button" data-close-readiness>Cerrar</button>
+            </div>
+          </form>
+
+          <div class="readiness-result" data-readiness-result hidden aria-live="polite"></div>
+        </div>
+      </section>
+    </div>
 
     <footer class="site-footer">
       <div class="wrap footer-grid">
@@ -535,6 +653,190 @@
 
     <script>
       document.getElementById("y").textContent = new Date().getFullYear();
+
+      const readinessModal = document.querySelector("[data-readiness-modal]");
+      const readinessForm = document.querySelector("[data-readiness-form]");
+      const readinessResult = document.querySelector("[data-readiness-result]");
+      const readinessOpeners = document.querySelectorAll("[data-open-readiness]");
+      const readinessClosers = document.querySelectorAll("[data-close-readiness]");
+      const readinessFirstField = readinessForm?.querySelector("select");
+      let readinessLastFocus = null;
+
+      function openReadinessModal() {
+        readinessLastFocus = document.activeElement;
+        readinessModal.hidden = false;
+        document.body.classList.add("modal-open");
+        readinessFirstField?.focus();
+      }
+
+      function closeReadinessModal() {
+        readinessModal.hidden = true;
+        document.body.classList.remove("modal-open");
+        readinessLastFocus?.focus?.();
+      }
+
+      readinessOpeners.forEach((button) => {
+        button.addEventListener("click", openReadinessModal);
+      });
+
+      readinessClosers.forEach((button) => {
+        button.addEventListener("click", closeReadinessModal);
+      });
+
+      readinessResult?.addEventListener("click", (event) => {
+        if (event.target.closest("[data-close-readiness]")) {
+          closeReadinessModal();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !readinessModal.hidden) {
+          closeReadinessModal();
+        }
+      });
+
+      const readinessQuestions = [
+        { name: "marketWindow", label: "Mercado UE" },
+        { name: "supplierData", label: "Información de proveedores, fincas y lotes" },
+        { name: "geolocation", label: "Geolocalización" },
+        { name: "traceability", label: "Trazabilidad finca → lote → embarque" },
+        { name: "legalDocs", label: "Documentación legal y contractual" },
+        { name: "riskAssessment", label: "Evaluación de riesgo" },
+        { name: "mitigation", label: "Mitigación" },
+        { name: "ddsReadiness", label: "DDS / paquete documental" }
+      ];
+
+      function buildReadinessList(items) {
+        const list = document.createElement("ul");
+        items.forEach((item) => {
+          const entry = document.createElement("li");
+          entry.textContent = item;
+          list.appendChild(entry);
+        });
+        return list;
+      }
+
+      readinessForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(readinessForm);
+        const scoreValues = readinessQuestions.map((question) => Number(formData.get(question.name)));
+        if (scoreValues.some(Number.isNaN)) {
+          return;
+        }
+        const score = scoreValues.reduce((total, value) => total + value, 0);
+
+        let level = "Readiness inicial";
+        let summary = "Tu operación todavía requiere una base más estructurada antes de responder con confianza a un comprador o auditor.";
+
+        if (score >= 12) {
+          level = "Readiness avanzada";
+          summary = "Ya existe una base sólida. El siguiente paso es afinar riesgos, consistencia documental y preparación pre-embarque.";
+        } else if (score >= 6) {
+          level = "Readiness en desarrollo";
+          summary = "Hay avances claros, pero aún existen brechas que pueden frenar tiempos de respuesta, auditorías o due diligence de compradores UE.";
+        }
+
+        const recommendedServices = new Set();
+
+        if (Number(formData.get("supplierData")) <= 1 || Number(formData.get("geolocation")) <= 1 || Number(formData.get("traceability")) <= 1) {
+          recommendedServices.add("Recopilación de información y trazabilidad");
+        }
+
+        if (Number(formData.get("legalDocs")) <= 1 || Number(formData.get("riskAssessment")) <= 1) {
+          recommendedServices.add("Evaluación de riesgos y legalidad");
+        }
+
+        if (Number(formData.get("mitigation")) <= 1) {
+          recommendedServices.add("Reducción de riesgos y plan de mitigación");
+        }
+
+        if (Number(formData.get("ddsReadiness")) <= 1) {
+          recommendedServices.add("Preparación de DDS y paquete documental");
+        }
+
+        if (Number(formData.get("marketWindow")) === 2) {
+          recommendedServices.add("Diagnóstico prioritario para embarques o compradores UE");
+        }
+
+        const servicesList = [...recommendedServices];
+        if (!servicesList.length) {
+          servicesList.push("Sesión de afinamiento y roadmap de cumplimiento");
+        }
+        const answers = readinessQuestions.map((question) => {
+          const select = readinessForm.elements[question.name];
+          return `${question.label}: ${select.options[select.selectedIndex].textContent.trim()}`;
+        });
+
+        const mailSubject = "Evaluación EUDR Readiness - Forest Trace AI";
+        const mailBody = [
+          "Hola equipo Forest Trace AI,",
+          "",
+          `Acabo de completar la evaluación EUDR Readiness.`,
+          `Resultado: ${level} (${score}/16)`,
+          "",
+          "Respuestas:",
+          ...answers.map((answer) => `- ${answer}`),
+          "",
+          "Servicios sugeridos:",
+          ...servicesList.map((service) => `- ${service}`),
+          "",
+          "Quiero coordinar el siguiente paso."
+        ].join("\n");
+
+        const mailtoHref = `mailto:sinapsisinnovadoraperu@gmail.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+        readinessResult.textContent = "";
+
+        const resultHeader = document.createElement("div");
+        resultHeader.className = "readiness-result__header";
+
+        const resultTag = document.createElement("span");
+        resultTag.className = "tag";
+        resultTag.textContent = "Resultado orientativo";
+
+        const resultTitle = document.createElement("h3");
+        resultTitle.textContent = `${level} · ${score}/16`;
+
+        const resultSummary = document.createElement("p");
+        resultSummary.textContent = summary;
+
+        resultHeader.append(resultTag, resultTitle, resultSummary);
+
+        const resultGrid = document.createElement("div");
+        resultGrid.className = "readiness-result__grid";
+
+        const servicesBlock = document.createElement("div");
+        const servicesTitle = document.createElement("strong");
+        servicesTitle.textContent = "Servicios que más podrían ayudarte ahora";
+        servicesBlock.append(servicesTitle, buildReadinessList(servicesList));
+
+        const answersBlock = document.createElement("div");
+        const answersTitle = document.createElement("strong");
+        answersTitle.textContent = "Resumen de tus respuestas";
+        answersBlock.append(answersTitle, buildReadinessList(answers));
+
+        resultGrid.append(servicesBlock, answersBlock);
+
+        const resultActions = document.createElement("div");
+        resultActions.className = "readiness-result__actions";
+
+        const mailLink = document.createElement("a");
+        mailLink.className = "btn btn-primary";
+        mailLink.href = mailtoHref;
+        mailLink.textContent = "Enviar evaluación al equipo";
+
+        const contactLink = document.createElement("a");
+        contactLink.className = "btn btn-outline";
+        contactLink.href = "#contacto";
+        contactLink.dataset.closeReadiness = "";
+        contactLink.textContent = "Ir a contacto";
+
+        resultActions.append(mailLink, contactLink);
+        readinessResult.append(resultHeader, resultGrid, resultActions);
+
+        readinessResult.hidden = false;
+        readinessResult.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     </script>
   </body>
 </html>
