@@ -30,7 +30,7 @@ const page = `<!doctype html>
       <div class="card">
         <strong>Landing comercial</strong>
         <div class="row">
-          <a class="btn" href="https://landing-five-teal-76-eta.vercel.app" target="_blank" rel="noreferrer">Abrir landing</a>
+          <a class="btn" href="https://treevu-ai.github.io/RWA_EUDR_PERU/" target="_blank" rel="noreferrer">Abrir landing</a>
         </div>
       </div>
 
