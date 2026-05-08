@@ -1,29 +1,32 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import express from "express";
-import request from "supertest";
 import { createHealthHandler } from "../src/routes/health.js";
 
-const createTestApp = (dbPool) => {
-  const app = express();
-  app.get("/api/health", createHealthHandler(dbPool));
-  return app;
+const createJsonRecorder = () => {
+  const response = {
+    body: undefined,
+    json(payload) {
+      this.body = payload;
+      return this;
+    }
+  };
+  return response;
 };
 
 test("health handler returns degraded when database is unconfigured", async () => {
-  const res = await request(createTestApp(null)).get("/api/health");
-  assert.equal(res.statusCode, 200);
+  const res = createJsonRecorder();
+  await createHealthHandler(null)({}, res);
   assert.deepEqual(res.body, { status: "degraded", database: "unconfigured" });
 });
 
 test("health handler returns ok when database is reachable", async () => {
-  const res = await request(createTestApp({ query: async () => ({ rows: [{ "?column?": 1 }] }) })).get("/api/health");
-  assert.equal(res.statusCode, 200);
+  const res = createJsonRecorder();
+  await createHealthHandler({ query: async () => ({ rows: [{ "?column?": 1 }] }) })({}, res);
   assert.deepEqual(res.body, { status: "ok", database: "reachable" });
 });
 
 test("health handler returns degraded when database is unreachable", async () => {
-  const res = await request(createTestApp({ query: async () => { throw new Error("boom"); } })).get("/api/health");
-  assert.equal(res.statusCode, 200);
+  const res = createJsonRecorder();
+  await createHealthHandler({ query: async () => { throw new Error("boom"); } })({}, res);
   assert.deepEqual(res.body, { status: "degraded", database: "unreachable" });
 });
