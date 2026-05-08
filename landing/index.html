@@ -624,12 +624,13 @@
         deadlineNodes.forEach((node) => {
           const deadline = new Date(`${node.dataset.deadline}T00:00:00`);
           const diffMs = deadline.getTime() - today.getTime();
-          const diffDays = Math.ceil(diffMs / 86400000);
+          const diffInDays = diffMs / 86400000;
+          const diffDays = diffInDays >= 0 ? Math.ceil(diffInDays) : Math.floor(diffInDays);
 
           if (diffDays > 0) {
             node.textContent = `Faltan ${diffDays} días`;
           } else if (diffDays === 0) {
-            node.textContent = "Aplica hoy";
+            node.textContent = "Aplicable hoy";
           } else {
             node.textContent = `Aplica desde hace ${Math.abs(diffDays)} días`;
           }
