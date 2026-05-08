@@ -706,11 +706,25 @@
         { name: "ddsReadiness", label: "DDS / paquete documental" }
       ];
 
+      function buildReadinessList(items) {
+        const list = document.createElement("ul");
+        items.forEach((item) => {
+          const entry = document.createElement("li");
+          entry.textContent = item;
+          list.appendChild(entry);
+        });
+        return list;
+      }
+
       readinessForm?.addEventListener("submit", (event) => {
         event.preventDefault();
 
         const formData = new FormData(readinessForm);
-        const score = readinessQuestions.reduce((total, question) => total + Number(formData.get(question.name) || 0), 0);
+        const scoreValues = readinessQuestions.map((question) => Number(formData.get(question.name)));
+        if (scoreValues.some(Number.isNaN)) {
+          return;
+        }
+        const score = scoreValues.reduce((total, value) => total + value, 0);
 
         let level = "Readiness inicial";
         let summary = "Tu operación todavía requiere una base más estructurada antes de responder con confianza a un comprador o auditor.";
@@ -745,9 +759,9 @@
           recommendedServices.add("Diagnóstico prioritario para embarques o compradores UE");
         }
 
-        const uniqueServices = [...recommendedServices];
-        if (!uniqueServices.length) {
-          uniqueServices.push("Sesión de afinamiento y roadmap de cumplimiento");
+        const servicesList = [...recommendedServices];
+        if (!servicesList.length) {
+          servicesList.push("Sesión de afinamiento y roadmap de cumplimiento");
         }
         const answers = readinessQuestions.map((question) => {
           const select = readinessForm.elements[question.name];
@@ -765,36 +779,60 @@
           ...answers.map((answer) => `- ${answer}`),
           "",
           "Servicios sugeridos:",
-          ...uniqueServices.map((service) => `- ${service}`),
+          ...servicesList.map((service) => `- ${service}`),
           "",
           "Quiero coordinar el siguiente paso."
         ].join("\n");
 
         const mailtoHref = `mailto:sinapsisinnovadoraperu@gmail.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
-        const serviceItems = uniqueServices.map((service) => `<li>${service}</li>`).join("");
-        const answerItems = answers.map((answer) => `<li>${answer}</li>`).join("");
+        readinessResult.textContent = "";
 
-        readinessResult.innerHTML = `
-          <div class="readiness-result__header">
-            <span class="tag">Resultado orientativo</span>
-            <h3>${level} · ${score}/16</h3>
-            <p>${summary}</p>
-          </div>
-          <div class="readiness-result__grid">
-            <div>
-              <strong>Servicios que más podrían ayudarte ahora</strong>
-              <ul>${serviceItems}</ul>
-            </div>
-            <div>
-              <strong>Resumen de tus respuestas</strong>
-              <ul>${answerItems}</ul>
-            </div>
-          </div>
-          <div class="readiness-result__actions">
-            <a class="btn btn-primary" href="${mailtoHref}">Enviar evaluación al equipo</a>
-            <a class="btn btn-outline" href="#contacto" data-close-readiness>Ir a contacto</a>
-          </div>
-        `;
+        const resultHeader = document.createElement("div");
+        resultHeader.className = "readiness-result__header";
+
+        const resultTag = document.createElement("span");
+        resultTag.className = "tag";
+        resultTag.textContent = "Resultado orientativo";
+
+        const resultTitle = document.createElement("h3");
+        resultTitle.textContent = `${level} · ${score}/16`;
+
+        const resultSummary = document.createElement("p");
+        resultSummary.textContent = summary;
+
+        resultHeader.append(resultTag, resultTitle, resultSummary);
+
+        const resultGrid = document.createElement("div");
+        resultGrid.className = "readiness-result__grid";
+
+        const servicesBlock = document.createElement("div");
+        const servicesTitle = document.createElement("strong");
+        servicesTitle.textContent = "Servicios que más podrían ayudarte ahora";
+        servicesBlock.append(servicesTitle, buildReadinessList(servicesList));
+
+        const answersBlock = document.createElement("div");
+        const answersTitle = document.createElement("strong");
+        answersTitle.textContent = "Resumen de tus respuestas";
+        answersBlock.append(answersTitle, buildReadinessList(answers));
+
+        resultGrid.append(servicesBlock, answersBlock);
+
+        const resultActions = document.createElement("div");
+        resultActions.className = "readiness-result__actions";
+
+        const mailLink = document.createElement("a");
+        mailLink.className = "btn btn-primary";
+        mailLink.href = mailtoHref;
+        mailLink.textContent = "Enviar evaluación al equipo";
+
+        const contactLink = document.createElement("a");
+        contactLink.className = "btn btn-outline";
+        contactLink.href = "#contacto";
+        contactLink.dataset.closeReadiness = "";
+        contactLink.textContent = "Ir a contacto";
+
+        resultActions.append(mailLink, contactLink);
+        readinessResult.append(resultHeader, resultGrid, resultActions);
 
         readinessResult.hidden = false;
         readinessResult.scrollIntoView({ behavior: "smooth", block: "start" });
