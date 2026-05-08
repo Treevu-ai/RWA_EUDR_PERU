@@ -153,6 +153,18 @@ Si falta el token o el proyecto no coincide con tu cuenta, el workflow falla y e
 
 ---
 
+## Despliegue del prototype
+
+El workflow [`.github/workflows/deploy-prototype.yml`](.github/workflows/deploy-prototype.yml) despliega `prototype/` en Vercel (producción). Usa los mismos secrets de Actions:
+
+- **`VERCEL_TOKEN`** — token del equipo en Vercel.
+- **`VERCEL_TEAM`** — slug del equipo (`vercel.com/<slug>/...`).
+- **`VERCEL_PROJECT_NAME`** — opcional; si el dominio productivo sigue apuntando a un proyecto legado (por ejemplo, el que servía `prototype-rosy-two.vercel.app`), configúralo con ese nombre para relinkear el deploy al proyecto correcto.
+
+El endpoint `GET /api/health` responde `200` tanto en modo normal como degradado, indicando si la base está `reachable`, `unreachable` o `unconfigured`. Esto evita falsos negativos en despliegues serverless donde el backend público debe seguir respondiendo aunque `DATABASE_URL` aún no esté configurado.
+
+---
+
 ## Documentación técnica interna
 
 - [`docs/overview.md`](docs/overview.md) — Visión general de la solución.
