@@ -13,6 +13,9 @@ concurrency:
   group: vercel-deploy-prototype
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import request from "supertest";
 
-process.env.DATABASE_URL = process.env.DATABASE_URL || "postgres://postgres:postgres@127.0.0.1:1/foresttrace";
+delete process.env.DATABASE_URL;
 process.env.ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || "http://localhost:3000";
 
 const { createApp } = await import("../src/app.js");
@@ -22,11 +22,11 @@ test("GET /api/metrics returns request counters", async () => {
   assert.equal(typeof res.body.metrics.requestsTotal, "number");
 });
 
-test("GET /api/health returns degraded status when database is unavailable", async () => {
+test("GET /api/health returns degraded status when database is unconfigured", async () => {
   const res = await request(app).get("/api/health");
   assert.equal(res.statusCode, 200);
   assert.equal(res.body.status, "degraded");
-  assert.equal(res.body.database, "unreachable");
+  assert.equal(res.body.database, "unconfigured");
 });
 
 test("POST /api/producers requires operator role", async () => {
