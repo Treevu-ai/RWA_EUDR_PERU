@@ -625,8 +625,8 @@
         deadlineNodes.forEach((node) => {
           const deadline = new Date(`${node.dataset.deadline}T00:00:00`);
           const diffMs = deadline.getTime() - today.getTime();
-          const diffInDays = diffMs / MS_PER_DAY;
-          const diffDays = diffInDays >= 0 ? Math.ceil(diffInDays) : Math.floor(diffInDays);
+          const exactDaysDiff = diffMs / MS_PER_DAY;
+          const diffDays = exactDaysDiff >= 0 ? Math.ceil(exactDaysDiff) : Math.floor(exactDaysDiff);
 
           if (diffDays > 0) {
             node.textContent = `Faltan ${diffDays} días`;
@@ -811,7 +811,8 @@
         const sector = formData.get("sector")?.toString().trim() || "";
         const supplyChain = formData.get("supplyChain")?.toString().trim() || "";
 
-        const subject = `Solicitud de presupuesto DDS EUDR - ${company}`;
+        const safeCompany = company.replace(/\s+/g, " ").slice(0, 80);
+        const subject = safeCompany ? `Solicitud de presupuesto DDS EUDR - ${safeCompany}` : "Solicitud de presupuesto DDS EUDR";
         const body = [
           "Hola equipo Forest Trace AI,",
           "",
