@@ -1910,6 +1910,14 @@ body.modal-open {
   font-size: 0.94rem;
 }
 
+.contact-form-note[data-state="success"] {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(10, 92, 74, 0.08);
+  border: 1px solid rgba(10, 92, 74, 0.16);
+  color: var(--forest);
+}
+
 .contact-sidecard h3 {
   margin-top: 0;
   font-size: 1.2rem;

@@ -628,11 +628,11 @@
           const deadline = new Date(`${rawDeadline}T00:00:00Z`);
           if (Number.isNaN(deadline.getTime())) {
             console.warn("Invalid deadline configured", rawDeadline);
-            node.textContent = "Fecha no disponible";
+            node.textContent = "Fecha inválida";
             return;
           }
           const deadlineUtc = Date.UTC(deadline.getUTCFullYear(), deadline.getUTCMonth(), deadline.getUTCDate());
-          const diffDays = (deadlineUtc - todayUtc) / MS_PER_DAY;
+          const diffDays = Math.trunc((deadlineUtc - todayUtc) / MS_PER_DAY);
 
           if (diffDays > 0) {
             node.textContent = `Faltan ${diffDays} días`;
@@ -820,8 +820,9 @@
         const normalizedCompany = company.replace(/\s+/g, " ").trim();
         let safeCompany = normalizedCompany;
         if (safeCompany.length > MAX_SUBJECT_COMPANY_LENGTH) {
-          const subjectSlice = safeCompany.slice(0, MAX_SUBJECT_COMPANY_LENGTH).trim();
-          safeCompany = subjectSlice.replace(/\s+\S*$/, "").trim() || subjectSlice;
+          const subjectSlice = safeCompany.slice(0, MAX_SUBJECT_COMPANY_LENGTH - 1).trim();
+          const boundarySlice = subjectSlice.replace(/\s+\S*$/, "").trim();
+          safeCompany = `${boundarySlice || subjectSlice}…`;
         }
         const subject = safeCompany ? `Solicitud de presupuesto DDS EUDR - ${safeCompany}` : "Solicitud de presupuesto DDS EUDR";
         const body = [
@@ -844,6 +845,7 @@
         window.location.href = `mailto:sinapsisinnovadoraperu@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         if (contactStatus) {
           contactStatus.textContent = "Abrimos su cliente de correo con el resumen de la solicitud. Si no se abre, escríbanos a sinapsisinnovadoraperu@gmail.com.";
+          contactStatus.dataset.state = "success";
         }
       });
 
