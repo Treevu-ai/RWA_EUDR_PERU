@@ -93,7 +93,8 @@ La landing comercial incorpora un embudo de tracción con dos pasos:
 
 | Ruta | Contenido |
 |------|-----------|
-| [`docs/`](docs/) | Requisitos UE, propuesta integral, roadmap, pitch, diagramas — uso interno. |
+| [`DEFO REGU EUDR/`](DEFO%20REGU%20EUDR/) | Corpus normativo UE: OJ C/2025/4524 (2ª ed.), guías pedagógicas, informe técnico de riesgo despreciable, protocolo DDS. |
+| [`docs/`](docs/) | Requisitos UE, propuesta integral, roadmap, pitch, diagramas, normativa peruana ([`peru-normativa.md`](docs/peru-normativa.md)). |
 | [`docs/convocatorias/`](docs/convocatorias/) | Checklist, plantillas, pitch 90s, ficha 1 página. |
 | [`landing/`](landing/) | Sitio comercial único (`/`); `/clientes` redirige en edge (308) a `/` — sin página duplicada. |
 | [`prototype/`](prototype/) | Plataforma React + Express: compliance, DDS, copiloto EUDR. |
@@ -174,6 +175,7 @@ El endpoint `GET /api/health` responde `200` tanto en modo normal como degradado
 - [`prototype/NEXT_STEPS.md`](prototype/NEXT_STEPS.md) — Próximos pasos técnicos.
 - [`docs/demo-runbook.md`](docs/demo-runbook.md) — Runbook demo local (checklist + guión).
 - [`docs/eudr-compliance-copilot.md`](docs/eudr-compliance-copilot.md) — Copiloto EUDR (límites, corpus).
+- [`docs/peru-normativa.md`](docs/peru-normativa.md) — Normativa peruana: MIDAGRI, SERFOR, SENASA, SUNARP, SUNAT, MINAM, MINCETUR, PROMPERÚ.
 
 ---
 

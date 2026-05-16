@@ -40,9 +40,10 @@ export const complianceRepository = {
     const { rows } = await query(
       `SELECT
          COUNT(*)::int AS total,
-         COUNT(*) FILTER (WHERE status = 'LOW')::int AS low,
-         COUNT(*) FILTER (WHERE status = 'MEDIUM')::int AS medium,
-         COUNT(*) FILTER (WHERE status = 'HIGH')::int AS high,
+         COUNT(*) FILTER (WHERE score < 0.15)::int AS negligible,
+         COUNT(*) FILTER (WHERE score >= 0.15 AND score < 0.35)::int AS low,
+         COUNT(*) FILTER (WHERE score >= 0.35 AND score < 0.60)::int AS moderate,
+         COUNT(*) FILTER (WHERE score >= 0.60)::int AS high,
          COALESCE(AVG(score), 0)::numeric(6,3) AS avg_score
        FROM compliance_records
        WHERE org_id = $1`,

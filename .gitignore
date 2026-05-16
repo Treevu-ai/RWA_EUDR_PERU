@@ -25,6 +25,10 @@ prototype/data/*.json
 !prototype/data/eudr-knowledge.json
 !prototype/data/eudr-checklist.json
 !prototype/data/eurlex-references.json
+!prototype/data/peru-regulatory.json
+
+# Zone.Identifier (Windows ADS — no versionar)
+*.Zone.Identifier
 
 # Copiloto: auditoría local (no versionar)
 prototype/data/copilot-audit.jsonl

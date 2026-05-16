@@ -1,0 +1,94 @@
+{
+  "version": "2026-05-15",
+  "note": "Repositorio estructurado de normativa peruana relevante para el cumplimiento EUDR. Fuentes: MIDAGRI, SERFOR, SENASA, MINAM, SUNAT, SUNARP, MINCETUR, PROMPERU. Verificar siempre el texto oficial en El Peruano y portales institucionales.",
+  "entities": {
+    "MIDAGRI": {
+      "full_name": "Ministerio de Desarrollo Agrario y Riego",
+      "portal": "https://www.gob.pe/midagri",
+      "role_in_eudr": "Identidad del productor, geolocalizacion de parcelas, registro de productores agrarios, padron de cultivos (cafe, cacao)",
+      "key_norms": [
+        { "id": "ley-31075", "title": "Ley de Organizaciones Agrarias y su Reglamento - DS 011-2021-MIDAGRI", "relevance": "Marco para cooperativas cafetaleras y cacaoteras como sujetos de trazabilidad", "url_hint": "https://www.gob.pe/midagri" },
+        { "id": "ds-002-2016-minagri", "title": "DS 002-2016-MINAGRI - Politica Nacional Agraria", "relevance": "Ejes de inclusion de pequenos productores y desarrollo de cadenas de valor agroexportadoras", "url_hint": "https://www.gob.pe/midagri" },
+        { "id": "padron-productor", "title": "Padron de Productores Agrarios (PPA)", "relevance": "Registro oficial de productores con geolocalizacion. Solo ~100K de 2M registrados.", "url_hint": "https://www.gob.pe/midagri" },
+        { "id": "identidad-digital", "title": "Identidad Digital del Productor Agrario", "relevance": "Iniciativa MIDAGRI para identidad unica y trazable del productor", "url_hint": "https://www.gob.pe/midagri" },
+        { "id": "agrodigital", "title": "AgroDigital - Plataforma de integracion de datos agropecuarios", "relevance": "Sistema de interoperabilidad del agro peruano; potencial fuente primaria para Forest Trace", "url_hint": "https://www.gob.pe/midagri" }
+      ]
+    },
+    "SERFOR": {
+      "full_name": "Servicio Nacional Forestal y de Fauna Silvestre",
+      "portal": "https://www.gob.pe/serfor",
+      "role_in_eudr": "Clasificacion de uso de suelo forestal vs. agricola, planes de manejo forestal, verificacion de no deforestacion",
+      "key_norms": [
+        { "id": "ley-29763", "title": "Ley 29763 - Ley Forestal y de Fauna Silvestre", "relevance": "Define bosque, plantacion y uso agrario en Peru. Crucial para determinar si parcela de cafe/cacao esta en zona de bosque segun EUDR.", "url_hint": "https://www.gob.pe/serfor" },
+        { "id": "ds-018-2015-minagri", "title": "DS 018-2015-MINAGRI - Reglamento de Gestion Forestal", "relevance": "Autorizaciones de desbosque y cambio de uso. Evidencia de que la parcela NO fue deforestada post-2020.", "url_hint": "https://www.gob.pe/serfor" },
+        { "id": "ds-020-2015-minagri", "title": "DS 020-2015-MINAGRI - Reglamento de Plantaciones y Sistemas Agroforestales", "relevance": "Define sistemas agroforestales como uso distinto al bosque. Alineado con FAO y EUDR Art. 2(6). La norma MAS relevante para cafe/cacao.", "url_hint": "https://www.gob.pe/serfor" },
+        { "id": "geobosques", "title": "GeoBosques - Monitoreo oficial de deforestacion", "relevance": "Alertas oficiales de perdida de bosque. Fuente primaria para validacion satelital post-2020.", "url_hint": "https://geobosques.minam.gob.pe/" }
+      ]
+    },
+    "SENASA": {
+      "full_name": "Servicio Nacional de Sanidad Agraria",
+      "portal": "https://www.gob.pe/senasa",
+      "role_in_eudr": "Certificacion fitosanitaria de exportacion, registro de exportadores, trazabilidad sanitaria",
+      "key_norms": [
+        { "id": "ley-27322", "title": "Ley 27322 - Ley de Sanidad Agraria", "relevance": "Base legal de certificacion fitosanitaria que la UE reconoce como evidencia.", "url_hint": "https://www.gob.pe/senasa" },
+        { "id": "certificado-fitosanitario", "title": "Certificado Fitosanitario de Exportacion", "relevance": "Documento obligatorio para exportar cafe y cacao a la UE. Evidencia ambito (h) EUDR.", "url_hint": "https://www.gob.pe/senasa" },
+        { "id": "registro-exportador", "title": "Registro de Exportadores SENASA", "relevance": "Identificacion del exportador ante autoridad sanitaria nacional.", "url_hint": "https://www.gob.pe/senasa" }
+      ]
+    },
+    "MINAM": {
+      "full_name": "Ministerio del Ambiente",
+      "portal": "https://www.gob.pe/minam",
+      "role_in_eudr": "Evaluacion de impacto ambiental, monitoreo de deforestacion (GeoBosques), areas protegidas",
+      "key_norms": [
+        { "id": "ley-27446", "title": "Ley 27446 - Ley del SEIA", "relevance": "Certificacion ambiental para proyectos agroindustriales. Ambito (b) EUDR.", "url_hint": "https://www.gob.pe/minam" },
+        { "id": "ley-26834", "title": "Ley 26834 - Areas Naturales Protegidas", "relevance": "Verificar que la parcela NO esta en ANP donde la produccion esta prohibida.", "url_hint": "https://www.gob.pe/minam" }
+      ]
+    },
+    "SUNARP": {
+      "full_name": "Superintendencia Nacional de los Registros Publicos",
+      "portal": "https://www.gob.pe/sunarp",
+      "role_in_eudr": "Titulos de propiedad, cargas y gravamenes sobre predios agricolas",
+      "key_norms": [
+        { "id": "ley-26366", "title": "Ley 26366 - Sistema Nacional de Registros Publicos", "relevance": "Titulo registrado en SUNARP es evidencia mas robusta de tenencia legal (ambito a).", "url_hint": "https://www.gob.pe/sunarp" }
+      ]
+    },
+    "SUNAT": {
+      "full_name": "Superintendencia Nacional de Aduanas y Administracion Tributaria",
+      "portal": "https://www.gob.pe/sunat",
+      "role_in_eudr": "RUC del exportador, declaraciones aduaneras, cumplimiento tributario",
+      "key_norms": [
+        { "id": "dl-1053", "title": "DL 1053 - Ley General de Aduanas", "relevance": "Regimen de exportacion definitiva. DUA como evidencia documental.", "url_hint": "https://www.gob.pe/sunat" },
+        { "id": "ruc-activo", "title": "RUC activo y habido", "relevance": "Evidencia de cumplimiento tributario peruano (ambito f EUDR).", "url_hint": "https://e-consultaruc.sunat.gob.pe/" }
+      ]
+    },
+    "MINCETUR": {
+      "full_name": "Ministerio de Comercio Exterior y Turismo",
+      "portal": "https://www.gob.pe/mincetur",
+      "role_in_eudr": "Acuerdo Comercial Peru-UE, politica de comercio exterior",
+      "key_norms": [
+        { "id": "acuerdo-peru-ue", "title": "Acuerdo Comercial Multipartes Peru-UE (2013)", "relevance": "Marco de preferencias y cooperacion regulatoria.", "url_hint": "https://www.acuerdoscomerciales.gob.pe/" }
+      ]
+    },
+    "PROMPERU": {
+      "full_name": "Comision de Promocion del Peru para la Exportacion y el Turismo",
+      "portal": "https://www.gob.pe/promperu",
+      "role_in_eudr": "Guias de cumplimiento EUDR, manuales de debida diligencia, capacitacion sectorial",
+      "key_norms": [
+        { "id": "guia-eudr-promperu", "title": "Guia PROMPERU de Cumplimiento EUDR para Agroexportaciones", "relevance": "Fuente autorizada para alinear Forest Trace con directrices nacionales.", "url_hint": "https://www.gob.pe/promperu" }
+      ]
+    },
+    "GOBIERNOS_REGIONALES": {
+      "full_name": "Gobiernos Regionales (San Martin, Cajamarca, Amazonas, Piura)",
+      "portal": "https://www.gob.pe/regiones",
+      "role_in_eudr": "Catastro rural, autorizaciones regionales, mesas tecnicas",
+      "key_norms": [
+        { "id": "catastro-san-martin", "title": "Catastro Rural - Direccion Regional de Agricultura San Martin", "relevance": "Principal zona productora de cafe y cacao para exportacion UE.", "url_hint": "https://www.regionsanmartin.gob.pe/" }
+      ]
+    }
+  },
+  "satellite_sources": [
+    { "name": "GeoBosques", "url": "https://geobosques.minam.gob.pe/", "coverage": "Nacional Peru", "type": "oficial" },
+    { "name": "Global Forest Watch", "url": "https://www.globalforestwatch.org/", "coverage": "Global", "type": "internacional" },
+    { "name": "Satelligence", "url": "https://satelligence.com/", "coverage": "Global alta resolucion", "type": "comercial" }
+  ]
+}

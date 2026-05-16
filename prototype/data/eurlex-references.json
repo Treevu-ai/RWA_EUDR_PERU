@@ -1,26 +1,49 @@
 {
-  "version": "2026-04-19",
-  "note": "Referencias oficiales para lectura humana y futura ingesta RAG. URLs tipo plantilla; verificar siempre el enlace vigente en EUR-Lex.",
-  "acts": [
+  "version": "2026-05-15",
+  "note": "Referencias oficiales para lectura humana y futura ingesta RAG. URLs tipo plantilla; verificar siempre el enlace vigente en EUR-Lex y El Peruano.",
+  "acts_eu": [
     {
       "celex": "32023R1115",
-      "short_title": "Reglamento (UE) 2023/1115 (EUDR)",
+      "short_title": "Reglamento (UE) 2023/1115 (EUDR) — Productos libres de deforestación",
       "url_hint": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX%3A32023R1115"
     },
     {
-      "celex": "32023R1116",
-      "short_title": "Reglamento (UE) 2023/1116 (ejecución / complementario — verificar denominación vigente)",
-      "url_hint": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX%3A32023R1116"
-    }
-  ],
-  "portals": [
-    {
-      "name": "EUR-Lex",
-      "url": "https://eur-lex.europa.eu/"
+      "celex": "C2025/4524",
+      "short_title": "Documento de Orientación de la Comisión (2ª ed., ago 2025) — OJ C/2025/4524",
+      "url_hint": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX%3AC2025%2F4524"
     },
     {
-      "name": "Comisión Europea — Medio ambiente",
-      "url": "https://environment.ec.europa.eu/topics/forests/deforestation_en"
+      "celex": "32013R0952",
+      "short_title": "Reglamento (UE) 952/2013 — Código Aduanero de la Unión (CAU)",
+      "url_hint": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX%3A32013R0952"
+    },
+    {
+      "celex": "32018R0848",
+      "short_title": "Reglamento (UE) 2018/848 — Producción ecológica y etiquetado",
+      "url_hint": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX%3A32018R0848"
     }
+  ],
+  "acts_peru": [
+    { "id": "ley-29763", "entity": "SERFOR", "short_title": "Ley 29763 — Ley Forestal y de Fauna Silvestre", "url_hint": "https://www.gob.pe/serfor" },
+    { "id": "ds-020-2015-minagri", "entity": "SERFOR", "short_title": "DS 020-2015-MINAGRI — Plantaciones y Sistemas Agroforestales", "url_hint": "https://www.gob.pe/serfor" },
+    { "id": "ley-27322", "entity": "SENASA", "short_title": "Ley 27322 — Ley de Sanidad Agraria", "url_hint": "https://www.gob.pe/senasa" },
+    { "id": "ley-31075", "entity": "MIDAGRI", "short_title": "Ley 31075 — Ley de Organizaciones Agrarias", "url_hint": "https://www.gob.pe/midagri" },
+    { "id": "ley-27446", "entity": "MINAM", "short_title": "Ley 27446 — Ley del SEIA", "url_hint": "https://www.gob.pe/minam" },
+    { "id": "ley-26834", "entity": "MINAM", "short_title": "Ley 26834 — Ley de Áreas Naturales Protegidas", "url_hint": "https://www.gob.pe/minam" },
+    { "id": "dl-1053", "entity": "SUNAT", "short_title": "DL 1053 — Ley General de Aduanas", "url_hint": "https://www.gob.pe/sunat" },
+    { "id": "ley-26366", "entity": "SUNARP", "short_title": "Ley 26366 — Registros Públicos", "url_hint": "https://www.gob.pe/sunarp" }
+  ],
+  "portals": [
+    { "name": "EUR-Lex", "url": "https://eur-lex.europa.eu/" },
+    { "name": "Comisión Europea — EUDR Implementation", "url": "https://environment.ec.europa.eu/topics/forests/deforestation_en" },
+    { "name": "EU Forest Observatory", "url": "https://forest-observatory.ec.europa.eu/" },
+    { "name": "Global Forest Watch", "url": "https://www.globalforestwatch.org/" },
+    { "name": "TRACES — Sistema de Información EUDR", "url": "https://webgate.ec.europa.eu/tracesnt/" },
+    { "name": "GeoBosques Perú (MINAM/SERFOR)", "url": "https://geobosques.minam.gob.pe/" },
+    { "name": "MIDAGRI — Plataforma del Agro", "url": "https://www.gob.pe/midagri" },
+    { "name": "SENASA — Trámites y Servicios", "url": "https://www.gob.pe/senasa" },
+    { "name": "SUNARP — Consulta de Propiedad en Línea", "url": "https://www.gob.pe/sunarp" },
+    { "name": "SUNAT — Consulta RUC", "url": "https://e-consultaruc.sunat.gob.pe/" },
+    { "name": "PROMPERÚ — Guía de Mercado UE", "url": "https://www.gob.pe/promperu" }
   ]
 }

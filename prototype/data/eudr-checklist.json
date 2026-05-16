@@ -1,84 +1,161 @@
 {
-  "version": "2026-04-19",
-  "purpose": "Lista de preparación documental — no constituye dictamen legal. Cada ítem debe contrastarse con EUR-Lex y asesoría cualificada.",
+  "version": "2026-05-15",
+  "purpose": "Lista de preparación documental — no constituye dictamen legal. Cada ítem debe contrastarse con EUR-Lex, el Documento de Orientación OJ C/2025/4524, y asesoría cualificada.",
   "items": [
     {
       "id": "legal-text-access",
       "category": "Gobernanza",
       "label": "Acceso al texto oficial y seguimiento de modificaciones",
-      "hint": "Designar responsable de revisar EUR-Lex / DOUE para el Reglamento y actos relacionados aplicables a su rol.",
+      "hint": "Designar responsable de revisar EUR-Lex/DOUE para el Reglamento (UE) 2023/1115, el Documento de Orientación C/2025/4524 (2ª ed.) y actos relacionados aplicables a su rol.",
       "severity": "medium"
     },
     {
       "id": "operator-role",
       "category": "Rol",
       "label": "Claridad de rol (operador vs comerciante / importador)",
-      "hint": "El alcance de obligaciones depende del rol en la cadena según el Reglamento; documentarlo internamente.",
-      "severity": "high"
+      "hint": "El alcance de obligaciones depende del rol: Operador (introduce/exporta → DD plena), Comerciante PYME (comercializa → trazabilidad), Transformador downstream (nuevo código SA → nuevo operador). Documentar rol y responsabilidades. Art. 7: si el importador no está en la UE, el primer comercializador intra-UE asume todas las obligaciones.",
+      "severity": "critical"
     },
     {
       "id": "product-scope",
       "category": "Producto",
-      "label": "Encaje del producto y partida en Anexo / categorías reguladas",
-      "hint": "Verificar categoría exacta (p. ej. café/cacao según formas incluidas) antes de aplicar checklist EUDR.",
-      "severity": "high"
+      "label": "Encaje del producto y partida en Anexo I / categorías reguladas",
+      "hint": "Verificar código SA exacto (4 dígitos): café 0901, cacao 1801-1806. En productos compuestos, la DD aplica SOLO a componentes del Anexo I. Material de envase exento si solo protege/transporta otro producto. Consultar OJ C/2025/4524, Cap. 7 y 9.",
+      "severity": "critical"
     },
     {
       "id": "geo-evidence",
       "category": "Datos",
-      "label": "Evidencia geográfica de producción",
-      "hint": "Coordenadas o geometrías según política acordada con comprador y requisitos del sistema de información UE.",
-      "severity": "high",
+      "label": "Evidencia geográfica de producción — coordenadas WGS84",
+      "hint": "Parcelas <4 ha: punto central. Parcelas ≥4 ha: polígono completo. Formato grados decimales WGS84. ID único por parcela. No se permiten promedios zonales. En productos compuestos: geolocalización de TODAS las parcelas de cada componente pertinente.",
+      "severity": "critical",
       "lot_field": "geo"
+    },
+    {
+      "id": "deforestation-cutoff-validation",
+      "category": "Deforestación",
+      "label": "Validación de fecha de corte (31 dic 2020) y uso de suelo",
+      "hint": "Evidencia de que el producto no proviene de tierras deforestadas post-2020. Los sistemas agroforestales (café/cacao bajo sombra) califican como uso agrario, no bosque — pero debe documentarse. Validación con fuentes satelitales (Global Forest Watch, Satelligence, GeoBosques).",
+      "severity": "critical"
+    },
+    {
+      "id": "legality-land-tenure",
+      "category": "Legalidad (Art. 2.40)",
+      "label": "Ámbito (a): Derechos de uso del suelo y tenencia de tierra",
+      "hint": "Títulos de propiedad, certificados de posesión, contratos de arrendamiento, acuerdos de usufructo. Verificar con MIDAGRI/Padrón de Productores.",
+      "severity": "critical"
+    },
+    {
+      "id": "legality-environment",
+      "category": "Legalidad (Art. 2.40)",
+      "label": "Ámbito (b): Protección del medio ambiente",
+      "hint": "Permisos ambientales, planes de manejo, evaluaciones de impacto. Cumplimiento de normativa forestal y de biodiversidad peruana (SERFOR, MINAM).",
+      "severity": "high"
+    },
+    {
+      "id": "legality-third-party-rights",
+      "category": "Legalidad (Art. 2.40)",
+      "label": "Ámbito (c): Derechos de terceros — Consentimiento Libre, Previo e Informado (FPIC/CLPI)",
+      "hint": "Si la producción afecta tierras de pueblos indígenas o comunidades tradicionales, verificar consulta previa según Convenio 169 OIT y legislación peruana. Documentar actas de consulta y acuerdos.",
+      "severity": "critical"
+    },
+    {
+      "id": "legality-labor",
+      "category": "Legalidad (Art. 2.40)",
+      "label": "Ámbito (d): Legislación laboral",
+      "hint": "Contratos de trabajo, registros de seguridad social, cumplimiento de salario mínimo, prohibición de trabajo infantil y forzoso. Alineación con estándares OIT.",
+      "severity": "high"
+    },
+    {
+      "id": "legality-human-rights",
+      "category": "Legalidad (Art. 2.40)",
+      "label": "Ámbito (e): Derechos humanos protegidos por derecho internacional",
+      "hint": "Evidencia de no violación de derechos humanos en la zona de producción. Vigilancia de conflictos armados o desplazamientos forzados en la región.",
+      "severity": "critical"
+    },
+    {
+      "id": "legality-tax",
+      "category": "Legalidad (Art. 2.40)",
+      "label": "Ámbito (f): Normativa tributaria",
+      "hint": "Registro único de contribuyente (RUC), declaraciones de impuestos, comprobantes de pago. Cumplimiento con SUNAT.",
+      "severity": "high"
+    },
+    {
+      "id": "legality-anticorruption",
+      "category": "Legalidad (Art. 2.40)",
+      "label": "Ámbito (g): Legislación anticorrupción",
+      "hint": "Políticas internas anticorrupción, debida diligencia de contrapartes, registros de pagos transparentes. Índice de percepción de corrupción (Transparencia Internacional) del país/región.",
+      "severity": "high"
+    },
+    {
+      "id": "legality-trade-customs",
+      "category": "Legalidad (Art. 2.40)",
+      "label": "Ámbito (h): Normativa comercial y aduanera",
+      "hint": "Licencias de exportación, certificados fitosanitarios (SENASA), declaraciones aduaneras, cumplimiento de códigos SA. Permisos de exportación vigentes.",
+      "severity": "critical"
+    },
+    {
+      "id": "mass-balance-check",
+      "category": "Trazabilidad",
+      "label": "Verificación de NO balance de masa — segregación o identidad preservada",
+      "hint": "Asegurar que el lote NO contiene mezcla de material conforme con material de origen desconocido. Si existe mezcla, el lote completo es no conforme. Solo segregación física o identidad preservada.",
+      "severity": "critical"
+    },
+    {
+      "id": "volume-vs-surface",
+      "category": "Riesgo",
+      "label": "Auditoría de volumen vs. superficie geolocalizada",
+      "hint": "Verificar que el rendimiento declarado (toneladas) coincide con el área geolocalizada (hectáreas). Un aumento de volumen sin aumento de superficie puede indicar triangulación de producción no conforme.",
+      "severity": "high"
     },
     {
       "id": "dds-process",
       "category": "DDS",
-      "label": "Proceso interno de debida diligencia documentado",
-      "hint": "Recopilación, evaluación de riesgo, mitigación y trazabilidad de decisiones respecto a lotes.",
-      "severity": "high"
+      "label": "Proceso interno de debida diligencia documentado (3 fases)",
+      "hint": "Fase I: recopilación de información (Art. 9). Fase II: evaluación de riesgo caso por caso (Art. 10). Fase III: mitigación si riesgo > despreciable (Art. 11). Documentar cada decisión con trazabilidad.",
+      "severity": "critical"
     },
     {
-      "id": "deforestation-risk",
-      "category": "Riesgo",
-      "label": "Evaluación de riesgo de deforestación / degradación",
-      "hint": "Evidencia y metodología trazable; conservar fuentes y fecha de corte legal aplicable.",
+      "id": "supply-chain-complexity",
+      "category": "Cadena",
+      "label": "Mapa de cadena de suministro y evaluación de complejidad",
+      "hint": "Identificar todos los intermediarios, transformadores y países de tránsito. Documentar código SA de cada producto en cada eslabón. A mayor número de eslabones no identificados, mayor riesgo.",
       "severity": "high"
-    },
-    {
-      "id": "national-legality",
-      "category": "Legalidad país",
-      "label": "Documentación de legalidad en país de origen (según marco)",
-      "hint": "Ámbitos típicos: tenencia, ambiental, laboral, tributario — según exigencias aplicables al caso.",
-      "severity": "high"
-    },
-    {
-      "id": "custody-records",
-      "category": "Trazabilidad",
-      "label": "Registros de cadena de custodia entre eslabones",
-      "hint": "Identificadores de lote, cantidades, fechas y responsables entre finca y exportación.",
-      "severity": "medium"
     },
     {
       "id": "supplier-mapping",
       "category": "Cadena",
-      "label": "Mapa de proveedores y contratos",
-      "hint": "Saber quién provee qué lote y bajo qué condiciones contractuales de evidencia.",
+      "label": "Mapa de proveedores con contratos y condiciones de evidencia",
+      "hint": "Saber quién provee qué lote y bajo qué condiciones contractuales de evidencia. Incluir cláusulas de compliance EUDR en contratos con proveedores.",
       "severity": "medium"
     },
     {
-      "id": "eu-system",
+      "id": "certification-verification",
+      "category": "Certificación",
+      "label": "Validación de certificaciones de terceros como apoyo (no sustituto)",
+      "hint": "Las certificaciones (orgánico, FSC, Fair Trade) son apoyo pero NO sustituyen la DD ni crean 'corredor verde'. Verificar: alineación con fecha de corte 2020, frecuencia de auditorías, independencia del certificador, controles de volumen.",
+      "severity": "high"
+    },
+    {
+      "id": "eu-system-prep",
       "category": "Declaración",
-      "label": "Preparación para sistema de información / DDS según estado del reglamento",
-      "hint": "Campos y plazos según especificación vigente de la Comisión — verificar antes de declarar.",
+      "label": "Preparación para el Sistema de Información de la UE",
+      "hint": "Campos requeridos: nº referencia DDS, código SA, país productor, geolocalización de TODAS las parcelas, intervalo temporal de producción, nombre científico de especies (madera). El Art. 33 permite referenciar declaraciones previas.",
+      "severity": "critical"
+    },
+    {
+      "id": "annual-review",
+      "category": "Gobernanza",
+      "label": "Sistema de revisión anual del SDD por entidad independiente (Art. 12.2)",
+      "hint": "Designar responsable o entidad independiente para revisión anual. Conservar toda documentación por mínimo 5 años. Actualizar SDD ante cambios en la cadena de suministro o situación sociopolítica del país de origen.",
       "severity": "high"
     },
     {
       "id": "audit-trail",
       "category": "Auditoría",
-      "label": "Pista de auditoría interna (quién cambió qué y cuándo)",
-      "hint": "Logs y versionado reducen disputas ante compradores y auditores externos.",
-      "severity": "medium"
+      "label": "Pista de auditoría interna completa (quién cambió qué y cuándo)",
+      "hint": "Logs y versionado de cada decisión de compliance, cambios en datos de lote, y modificaciones de evidencia. Debe permitir reconstruir la historia completa ante auditor externo.",
+      "severity": "high"
     }
   ]
 }

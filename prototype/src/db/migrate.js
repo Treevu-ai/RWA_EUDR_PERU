@@ -7,15 +7,37 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const run = async () => {
-  const sqlPath = path.join(__dirname, "schema.sql");
-  const sql = await fs.readFile(sqlPath, "utf8");
-  await query(sql);
-  console.log("Database schema ready.");
+  // 1. Run base schema
+  const schemaPath = path.join(__dirname, "schema.sql");
+  const schemaSql = await fs.readFile(schemaPath, "utf8");
+  await query(schemaSql);
+  console.log("[migrate] Base schema applied.");
+
+  // 2. Run numbered migration files in order
+  const migrationsDir = path.join(__dirname, "migrations");
+  let migrations = [];
+  try {
+    const entries = await fs.readdir(migrationsDir);
+    migrations = entries
+      .filter((f) => f.endsWith(".sql"))
+      .sort();
+  } catch {
+    console.log("[migrate] No migrations directory found — skipping.");
+  }
+
+  for (const file of migrations) {
+    const filePath = path.join(migrationsDir, file);
+    const sql = await fs.readFile(filePath, "utf8");
+    await query(sql);
+    console.log(`[migrate] Applied: ${file}`);
+  }
+
+  console.log("[migrate] Done.");
 };
 
 run()
   .catch((error) => {
-    console.error("Migration failed:", error.message);
+    console.error("[migrate] Failed:", error.message);
     process.exitCode = 1;
   })
   .finally(async () => {

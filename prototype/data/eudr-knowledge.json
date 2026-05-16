@@ -1,62 +1,174 @@
 {
-  "version": "2026-04-19",
-  "corpus_note": "Fragmentos orientativos para preparación documental. Verificar siempre el texto oficial en EUR-Lex y la normativa peruana aplicable.",
+  "version": "2026-05-15",
+  "corpus_note": "Fragmentos orientativos para preparación documental. Verificar siempre el texto oficial en EUR-Lex y la normativa peruana aplicable. Incorpora extractos del Documento de Orientación OJ C/2025/4524 (2ª ed., agosto 2025) y guías técnicas del corpus DEFO REGU EUDR.",
   "chunks": [
     {
       "id": "eurlex-eudr",
       "title": "Texto jurídico de referencia",
       "tags": ["marco", "fuente"],
-      "source_citation": "Reglamento (UE) 2023/1115 — consultar versión consolidada en EUR-Lex.",
-      "text": "El marco jurídico vinculante es el Reglamento (UE) 2023/1115 y actos delegados/complementarios publicados en el DOUE. Ningún resumen interno sustituye la lectura del texto oficial ni la interpretación por asesor legal cualificado."
+      "source_citation": "Reglamento (UE) 2023/1115; Documento de Orientación OJ C/2025/4524 (2ª ed., ago 2025). Consultar versión consolidada en EUR-Lex.",
+      "text": "El marco jurídico vinculante es el Reglamento (UE) 2023/1115 y actos delegados/complementarios publicados en el DOUE. El Documento de Orientación C/2025/4524 (2ª ed.) proporciona directrices interpretativas no vinculantes pero técnicamente armonizadas. Ningún resumen interno sustituye la lectura del texto oficial ni la interpretación por asesor legal cualificado."
+    },
+    {
+      "id": "negligible-risk",
+      "title": "Riesgo despreciable (Art. 2.26)",
+      "tags": ["riesgo", "dds", "umbral"],
+      "source_citation": "Reg (UE) 2023/1115, Art. 2.26; OJ C/2025/4524, Cap. 4(b).",
+      "text": "El 'riesgo despreciable' se alcanza solo cuando, tras una evaluación completa y la aplicación de medidas correctoras, los productos no suscitan preocupación alguna respecto a su legalidad o su condición de libres de deforestación. No es un mero score numérico: requiere nexo causal entre recopilación de datos, análisis de riesgo y mitigación. Si persiste cualquier duda razonable, el producto tiene prohibido el acceso al mercado de la Unión."
     },
     {
       "id": "dds-obligation",
-      "title": "Debida diligencia (concepto operativo)",
+      "title": "Debida diligencia — proceso operativo",
       "tags": ["dds", "operador"],
-      "source_citation": "Reg (UE) 2023/1115 — obligaciones de operadores y comerciantes (consultar artículos aplicables en EUR-Lex).",
-      "text": "Los operadores deben aplicar un sistema de debida diligencia que incluya recopilación de información, evaluación de riesgo de deforestación y degradación forestal, y mitigación cuando proceda, antes de colocar productos en el mercado UE. La DDS se formaliza según los requisitos del sistema de información de la UE vigente."
+      "source_citation": "Reg (UE) 2023/1115, Arts. 8-12; OJ C/2025/4524, Cap. 4.",
+      "text": "El sistema de DD se compone de tres fases: (1) Recopilación de información (Art. 9): descripción del producto, geolocalización de TODAS las parcelas, nombre científico de especies, pruebas de legalidad. (2) Evaluación del riesgo (Art. 10): caso por caso y por geolocalización individualizada, ponderando riesgo país, prevalencia de deforestación, complejidad de cadena, nivel de corrupción y fiabilidad documental. (3) Mitigación (Art. 11): si el riesgo no es despreciable, medidas adicionales obligatorias antes de comercializar."
+    },
+    {
+      "id": "legality-domains",
+      "title": "Ocho ámbitos de legalidad (Art. 2.40)",
+      "tags": ["legalidad", "cumplimiento", "perú"],
+      "source_citation": "Reg (UE) 2023/1115, Art. 2.40; OJ C/2025/4524, Cap. 6(a); Informe Técnico DEFO REGU EUDR.",
+      "text": "La legislación pertinente del país de producción cubre 8 ámbitos: (a) derechos de uso del suelo y tenencia; (b) protección del medio ambiente; (c) derechos de terceros incluyendo Consentimiento Libre, Previo e Informado (FPIC/CLPI); (d) legislación laboral; (e) derechos humanos protegidos por el derecho internacional; (f) normativa tributaria; (g) legislación anticorrupción; (h) normativa comercial y aduanera. La legislación es 'pertinente' solo si afecta el estatuto jurídico de la zona de producción."
+    },
+    {
+      "id": "mass-balance-prohibition",
+      "title": "Prohibición del balance de masa",
+      "tags": ["trazabilidad", "mezcla", "segregación"],
+      "source_citation": "Reg (UE) 2023/1115; OJ C/2025/4524, Cap. 10; Protocolo de Cumplimiento DEFO REGU EUDR, Sec. 6.",
+      "text": "El balance de masa (Mass Balance) NO está permitido bajo el EUDR. Si se mezcla material conforme con material de origen desconocido o no verificado, el lote completo se considera no conforme. Solo son aceptables los modelos de Segregación o Identidad Preservada. Las certificaciones basadas en 'etiquetas por porcentajes' donde solo una fracción es certificada no son aceptables para demostrar cumplimiento EUDR."
+    },
+    {
+      "id": "composite-products",
+      "title": "Productos compuestos",
+      "tags": ["producto", "componentes", "trazabilidad"],
+      "source_citation": "Reg (UE) 2023/1115, Art. 9; OJ C/2025/4524, Cap. 9 y Anexo I.",
+      "text": "En productos compuestos (ej. chocolate con cacao y palma), la DD se aplica SOLO a los componentes del Anexo I. Si contiene aceite de babasú (Attalea spp.), este NO requiere DD. Si un solo componente — aunque represente porcentaje mínimo — proviene de parcela deforestada o ilegal, el producto compuesto completo incumple. Debe declararse geolocalización de TODAS las parcelas de origen de cada componente pertinente."
+    },
+    {
+      "id": "operator-vs-trader",
+      "title": "Operador vs Comerciante — distinción crítica",
+      "tags": ["rol", "responsabilidad", "cadena"],
+      "source_citation": "Reg (UE) 2023/1115, Arts. 2(15), 2(17), 4, 5, 7; OJ C/2025/4524, Cap. 2 y Anexo I.",
+      "text": "Operador: introduce por primera vez o exporta. Responsabilidad total de DD. Comerciante PYME: comercializa productos ya introducidos; obligación de trazabilidad (conservar proveedores/clientes y nº de referencia DDS). Art. 7 — 'red de seguridad': si el importador no está establecido en la UE, el primer comercializador intra-UE asume todas las obligaciones del operador. Un transformador que cambia el código SA se convierte en nuevo operador."
+    },
+    {
+      "id": "timeline-application",
+      "title": "Calendario de aplicación (actualizado ago 2025)",
+      "tags": ["plazos", "pyme", "fechas"],
+      "source_citation": "Reg (UE) 2023/1115, Arts. 1(2), 37, 38; OJ C/2025/4524, Cap. 3; Guía Cronológica DEFO REGU EUDR.",
+      "text": "Fechas clave: 29 jun 2023 — entrada en vigor / fecha de corte de producción (productos anteriores exentos). 30 dic 2025 — obligaciones para grandes y medianas empresas. 30 jun 2026 — PYMES establecidas antes del 31 dic 2020. 31 dic 2028 — fin transitorio madera; a partir de aquí toda la madera debe cumplir Art. 3 EUDR. La fecha de producción se define como: nacimiento (bovinos) o cosecha/aprovechamiento (resto de materias primas)."
+    },
+    {
+      "id": "deforestation-cutoff",
+      "title": "Fecha de corte deforestación y definiciones técnicas",
+      "tags": ["deforestación", "bosque", "uso-agrario"],
+      "source_citation": "Reg (UE) 2023/1115, Art. 2; OJ C/2025/4524, Cap. 4(d); Guía Pedagógica DEFO REGU EUDR.",
+      "text": "Corte: 31 dic 2020. Definición de bosque: >0.5 ha, árboles >5m, cobertura dosel >10%. Excluye plantaciones agrícolas. Los sistemas agroforestales (café/cacao bajo sombra) NO son bosque — son uso agrario. Esto es crucial para Perú: sistemas agroforestales de café y cacao, si cumplen la definición FAO de sistema agroforestal (interacciones ecológicas y económicas entre componentes leñosos y cultivos), están fuera de la definición de bosque y por tanto no sujetos a verificación de deforestación en el sentido de 'pérdida de bosque'."
+    },
+    {
+      "id": "supply-chain-complexity",
+      "title": "Complejidad de la cadena como multiplicador de riesgo",
+      "tags": ["riesgo", "cadena", "intermediarios"],
+      "source_citation": "Reg (UE) 2023/1115, Art. 10; OJ C/2025/4524, Cap. 5; Informe Técnico DEFO REGU EUDR.",
+      "text": "La complejidad de la cadena actúa como multiplicador de riesgo directo. Preguntas de diagnóstico: ¿Existen materiales de fases de transformación no identificadas? ¿Es un material altamente procesado que oculta su origen? ¿Contiene materias primas de múltiples parcelas o países? ¿Hay discrepancia entre volumen declarado y capacidad productiva de la parcela geolocalizada? A mayor número de transformadores y países de tránsito, mayor dificultad para alcanzar 'riesgo despreciable'."
+    },
+    {
+      "id": "certification-limits",
+      "title": "Límites de certificaciones de terceros",
+      "tags": ["certificación", "fsc", "orgánico"],
+      "source_citation": "Reg (UE) 2023/1115, Art. 10; OJ C/2025/4524, Cap. 10; Protocolo de Cumplimiento DEFO REGU EUDR, Sec. 6.",
+      "text": "Las certificaciones (FSC, PEFC, orgánico, Fair Trade) son herramientas de apoyo pero NO sustituyen la responsabilidad legal del operador ni crean un 'corredor verde'. En jurisdicciones con altos índices de corrupción o falsificación, los documentos oficiales NO se consideran evidencia suficiente por sí mismos: es obligatoria la verificación secundaria mediante imágenes satelitales, análisis de ADN/isótopos o auditorías independientes de campo. Criterios de credibilidad: (1) alineación con fecha de corte 31 dic 2020, (2) auditorías de campo frecuentes con controles de volumen, (3) independencia total del organismo certificador."
+    },
+    {
+      "id": "annual-review",
+      "title": "Revisión anual obligatoria del SDD (Art. 12)",
+      "tags": ["mantenimiento", "auditoría", "gobernanza"],
+      "source_citation": "Reg (UE) 2023/1115, Art. 12; OJ C/2025/4524, Cap. 8; Protocolo de Cumplimiento DEFO REGU EUDR, Sec. 7.",
+      "text": "El sistema de DD debe revisarse al menos UNA VEZ AL AÑO. La revisión debe ser realizada por persona o entidad INDEPENDIENTE de quienes ejecutan los procedimientos diarios. Toda la documentación y actualizaciones deben conservarse por un mínimo de 5 AÑOS. El Art. 33 permite referenciar declaraciones de DD previas mediante su número de referencia en el Sistema de Información de la UE."
+    },
+    {
+      "id": "wood-regime",
+      "title": "Régimen especial de la madera (transición EUTR→EUDR)",
+      "tags": ["madera", "transición", "eutr"],
+      "source_citation": "Reg (UE) 2023/1115, Art. 37; OJ C/2025/4524, Cap. 3; Guía Cronológica DEFO REGU EUDR.",
+      "text": "Transición madera: (1) Aprovechada antes del 29 jun 2023 e introducida antes del 31 dic 2028 → rige EUTR. (2) Aprovechada entre jun 2023 y dic 2025 e introducida después del 30 dic 2025 → rige EUDR. (3) A partir del 31 dic 2028 → TODA la madera, sin importar antigüedad, debe cumplir Art. 3 EUDR. Madera de demolición 100% reciclada (que agotó su ciclo de vida) está EXCLUIDA del EUDR; cualquier porcentaje de fibra virgen anula esta exención."
     },
     {
       "id": "geo-information",
-      "title": "Información geográfica",
-      "tags": ["geo", "parcela", "trazabilidad"],
-      "source_citation": "Reg (UE) 2023/1115 y guías de la Comisión sobre localización de parcelas.",
-      "text": "Es necesario disponer de información geográfica suficiente para localizar la producción (p. ej. coordenadas o geometrías según lo exija el sistema). La precisión debe ser coherente con lo solicitado por compradores y sistema de información; conviene acordar política interna de precisión y fuentes."
-    },
-    {
-      "id": "cutoff-2020",
-      "title": "Fecha de corte deforestación",
-      "tags": ["deforestación", "riesgo"],
-      "source_citation": "Reg (UE) 2023/1115 — definiciones y cronología aplicables.",
-      "text": "La cadena debe poder demostrar que el producto relevante no procede de tierras sometidas a deforestación tras la fecha de corte legalmente definida (referencia temporal fijada en el Reglamento). La evidencia suele combinar datos geo, histórico de uso del suelo y documentación del país de origen."
-    },
-    {
-      "id": "chain-of-custody",
-      "title": "Cadena de suministro y custodia",
-      "tags": ["custodia", "lote"],
-      "source_citation": "Buenas prácticas de trazabilidad alineadas con DDS y reclamaciones del comprador.",
-      "text": "Registrar actores, transformaciones y transferencias entre finca, acopio, industrial y exportación reduce lagunas que impiden reconstruir el lote ante auditoría. Identificadores de lote únicos y vínculos entre documentos físicos y digitales son práctica habitual."
-    },
-    {
-      "id": "annex-products",
-      "title": "Productos en el ámbito (Anexo)",
-      "tags": ["café", "cacao", "anexo"],
-      "source_citation": "Reg (UE) 2023/1115 — Anexo I y aclaraciones posteriores en actos delegados.",
-      "text": "El Reglamento enumera commodities incluidos (entre ellos café y cacao en las formas previstas). Verificar que la partida arancelaria y el producto colocado en el mercado UE corresponden a las categorías reguladas para aplicar los requisitos correctos."
-    },
-    {
-      "id": "sme-timeline",
-      "title": "Calendario de aplicación por tipo de actor",
-      "tags": ["pyme", "plazos"],
-      "source_citation": "Reg (UE) 2023/1115 y actualizaciones — verificar fechas vigentes en EUR-Lex.",
-      "text": "Las fechas plenas de obligación pueden diferir entre grandes empresas y pymes. El plan interno debe cruzar tamaño de empresa, rol (operador vs comerciante) y producto. Las fechas de referencia en documentación interna deben revisarse ante cada convocatoria o auditoría."
+      "title": "Geolocalización — requisitos de precisión",
+      "tags": ["geo", "parcela", "coordenadas"],
+      "source_citation": "Reg (UE) 2023/1115, Art. 9; OJ C/2025/4524, Cap. 6; docs/requirements.md.",
+      "text": "Parcelas <4 ha: punto central (lat/lon). Parcelas ≥4 ha: polígono completo. Formato estándar WGS84 grados decimales. Formatos aceptados: GeoJSON, CSV, Excel. Cada parcela requiere ID único y persistente. El polígono debe ser forma cerrada clara; no debe solaparse con zonas residenciales, cuerpos de agua ni parcelas ajenas. Se recomiendan dispositivos GPS profesionales sobre apps móviles (Maps.me, ODK) para reducir falsas alertas de deforestación en monitoreo satelital."
     },
     {
       "id": "peru-alignment",
-      "title": "Alineación con Perú",
-      "tags": ["perú", "certificación"],
-      "source_citation": "Normativa nacional aplicable; iniciativas sectoriales (MIDAGRI, certificadoras).",
-      "text": "La evidencia para UE debe ser coherente con registros locales (origen, contratos, guías de remisión cuando aplique) y con esquemas voluntarios que el comprador reconozca. Evitar duplicar datos contradictorios entre sistemas internos y declaraciones externas."
+      "title": "Alineación con Perú — sistemas y actores",
+      "tags": ["perú", "midagri", "certificación"],
+      "source_citation": "Normativa nacional aplicable; MIDAGRI, AgroDigital, PPA, SENASA; docs/requirements.md.",
+      "text": "La evidencia para UE debe ser coherente con registros locales: MIDAGRI (Identidad Digital del Productor, Padrón de Productores), AgroDigital, PPA. De ~2M de productores peruanos, solo ~100K tienen parcelas geolocalizadas. Los Sistemas de Control Interno (SCI) de certificación orgánica existentes deben aprovecharse como vehículo primario para el cumplimiento EUDR. Evitar duplicar datos contradictorios entre sistemas internos y declaraciones externas."
+    },
+    {
+      "id": "peru-midagri",
+      "title": "MIDAGRI — Identidad Digital y Padrón de Productores",
+      "tags": ["perú", "midagri", "productor"],
+      "source_citation": "MIDAGRI — Padrón de Productores Agrarios (PPA); proyecto Identidad Digital del Productor; Ley 31075 de Organizaciones Agrarias.",
+      "text": "El MIDAGRI administra el Padrón de Productores Agrarios (PPA) con geolocalización de parcelas. Solo ~100K de ~2M de productores están registrados — esta brecha es el principal riesgo de exclusión del mercado UE. El proyecto de Identidad Digital del Productor asigna identidad única trazable a cada productor, alineado con EUDR Art. 9. AgroDigital es la plataforma de interoperabilidad de datos agropecuarios, potencial fuente primaria de verificación para Forest Trace."
+    },
+    {
+      "id": "peru-serfor",
+      "title": "SERFOR — Clasificación de uso de suelo y sistemas agroforestales",
+      "tags": ["perú", "serfor", "agroforestal"],
+      "source_citation": "Ley 29763 — Ley Forestal y de Fauna Silvestre; DS 020-2015-MINAGRI — Reglamento de Plantaciones y Sistemas Agroforestales; GeoBosques.",
+      "text": "SERFOR es la autoridad forestal nacional. Su clasificación de uso de suelo es DETERMINANTE para EUDR: define si una parcela es bosque, plantación o sistema agroforestal. Punto crítico para Perú: los sistemas agroforestales de café y cacao bajo sombra NO son bosque bajo la definición FAO (EUDR Art. 2(6), OJ C/2025/4524 Cap. 4(d)). La norma más relevante es el DS 020-2015-MINAGRI (Reglamento de Plantaciones y Sistemas Agroforestales). Una parcela de café bajo sombra en San Martín no perdió bosque si siempre fue sistema agroforestal. La evidencia de SERFOR (plan de manejo, clasificación de uso) es la prueba documental clave ante la UE."
+    },
+    {
+      "id": "peru-senasa",
+      "title": "SENASA — Certificación Fitosanitaria de Exportación",
+      "tags": ["perú", "senasa", "fitosanitario"],
+      "source_citation": "Ley 27322 — Ley de Sanidad Agraria; DS 018-2008-AG; Certificado Fitosanitario de Exportación; Registro de Exportadores SENASA.",
+      "text": "SENASA emite el Certificado Fitosanitario de Exportación, documento obligatorio para exportar café y cacao a la UE. Este certificado es evidencia directa del ámbito (h) de legalidad EUDR: normativa comercial y aduanera del país de producción. El exportador debe estar registrado en SENASA. El sistema de trazabilidad sanitaria de SENASA sigue el producto desde origen hasta embarque y es interoperable con Forest Trace. La UE reconoce los certificados fitosanitarios emitidos por SENASA como prueba de conformidad sanitaria bajo el Acuerdo Comercial Perú-UE."
+    },
+    {
+      "id": "peru-sunarp",
+      "title": "SUNARP — Títulos de propiedad y certificados de posesión",
+      "tags": ["perú", "sunarp", "tenencia"],
+      "source_citation": "Ley 26366 — Ley del Sistema Nacional de Registros Públicos; COFOPRI; Gobierno Regional.",
+      "text": "SUNARP es la fuente oficial de títulos de propiedad sobre predios. Un título registrado en SUNARP es la evidencia más robusta de tenencia legal (Art. 2.40, ámbito a). Nota técnica para Perú: en zonas rurales de San Martín y Cajamarca, muchos productores tienen certificados de posesión (no títulos formalizados). La UE acepta documentación de tenencia según la legislación del país de producción. El certificado de posesión emitido por COFOPRI o el Gobierno Regional es evidencia válida si la legislación peruana lo reconoce. Forest Trace debe documentar qué tipo de documento respalda cada parcela."
+    },
+    {
+      "id": "peru-sunat",
+      "title": "SUNAT — RUC, DUA y cumplimiento tributario-exportador",
+      "tags": ["perú", "sunat", "aduanas"],
+      "source_citation": "DL 1053 — Ley General de Aduanas; DS 010-2009-EF; DUA de exportación; RUC.",
+      "text": "SUNAT gestiona el RUC (evidencia de cumplimiento tributario, ámbito f EUDR) y la Declaración Única de Aduanas (DUA) para exportación definitiva. Para café el código SA es 0901; para cacao 1801-1806. La DUA es el documento aduanero peruano que acredita la exportación legal. El RUC activo y habido del exportador y la cooperativa es requisito indispensable. Forest Trace debe cruzar el código SA declarado en la DUA con el Anexo I EUDR para activar las obligaciones de DD correctas."
+    },
+    {
+      "id": "peru-minam",
+      "title": "MINAM — Evaluación ambiental, áreas protegidas y GeoBosques",
+      "tags": ["perú", "minam", "geobosques"],
+      "source_citation": "Ley 27446 — Ley del SEIA; Ley 26834 — Ley de ANP; GeoBosques (MINAM/SERFOR).",
+      "text": "MINAM administra el Sistema de Evaluación de Impacto Ambiental (SEIA) — evidencia del ámbito (b) EUDR. La Ley de Áreas Naturales Protegidas (26834) debe consultarse para verificar que la parcela NO está dentro de ANP donde la producción está prohibida. GeoBosques (https://geobosques.minam.gob.pe/) es la plataforma oficial peruana de monitoreo de deforestación, co-gestionada con SERFOR. Es la fuente PRIMARIA y OFICIAL para validación satelital de no deforestación post-2020 en parcelas peruanas. Sus alertas y capas son integrables vía API en Forest Trace."
+    },
+    {
+      "id": "peru-mincetur-promperu",
+      "title": "MINCETUR y PROMPERÚ — Acuerdo Perú-UE y guías de cumplimiento",
+      "tags": ["perú", "mincetur", "promperú"],
+      "source_citation": "Acuerdo Comercial Multipartes Perú-UE (2013); Guía PROMPERÚ de Cumplimiento EUDR.",
+      "text": "El Acuerdo Comercial Perú-UE (vigente desde 2013) es el marco de preferencias arancelarias y cooperación regulatoria entre Perú y la Unión Europea. PROMPERÚ ha publicado guías específicas de cumplimiento EUDR para exportadores peruanos, incluyendo manuales de DDS y geolocalización. Forest Trace debe alinear su lenguaje, etiquetas y flujos con la Guía PROMPERÚ para coherencia con el ecosistema exportador peruano. El acuerdo permite el reconocimiento mutuo de certificaciones fitosanitarias (SENASA) y estándares."
+    },
+    {
+      "id": "peru-agroforestal-argumento",
+      "title": "Argumento técnico: sistemas agroforestales peruanos ante la UE",
+      "tags": ["perú", "agroforestal", "café", "cacao"],
+      "source_citation": "EUDR Art. 2(6); OJ C/2025/4524 Cap. 4(d); FAO definición de sistemas agroforestales; DS 020-2015-MINAGRI; Ley 29763.",
+      "text": "ARGUMENTO TÉCNICO PARA EL PILOTO: El café y cacao peruanos se cultivan mayoritariamente en sistemas agroforestales (bajo sombra de árboles nativos). Bajo el EUDR Art. 2(6), las plantaciones agrícolas y sistemas agroforestales están EXCLUIDOS de la definición de bosque. El OJ C/2025/4524 Cap. 4(d) confirma que los sistemas agroforestales (simultáneos y secuenciales) según definición FAO representan uso agrario, no bosque. Perú cuenta con el DS 020-2015-MINAGRI que define legalmente estos sistemas. Por tanto: una parcela de café/cacao bajo sombra que haya sido sistema agroforestal desde antes del 31 dic 2020 NO fue deforestada — siempre fue uso agrario. La evidencia a presentar: (1) clasificación SERFOR de la parcela como sistema agroforestal, (2) plan de manejo o documento equivalente, (3) historial satelital GeoBosques que muestre estabilidad de cobertura arbórea."
+    },
+    {
+      "id": "enforcement-risks",
+      "title": "Riesgos de enforcement y sanciones",
+      "tags": ["sanción", "riesgo", "cumplimiento"],
+      "source_citation": "Reg (UE) 2023/1115; Protocolo de Cumplimiento DEFO REGU EUDR, Sec. 1.",
+      "text": "Las sanciones por incumplimiento pueden alcanzar el 4% del volumen de negocios anual del operador en la UE. Riesgos adicionales: confiscación de productos, exclusión temporal de contratación pública y financiación UE, prohibición de comercialización. La carga financiera estimada de cumplimiento es de 97-107 €/tonelada en países comparables (Ecuador, Costa de Marfil/Ghana)."
     }
   ]
 }

@@ -10,11 +10,34 @@ export const complianceRouter = Router();
 complianceRouter.post("/check", requireRole("operator"), async (req, res, next) => {
   try {
     const { orgId, actorId } = resolveContext(req);
-    const { batchId, ndviChange, locationRisk, dataQuality, metadata } = req.body ?? {};
+    const {
+      batchId,
+      ndviChange,
+      locationRisk,
+      dataQuality,
+      supplyChainComplexity,
+      corruptionIndex,
+      metadata
+    } = req.body ?? {};
+
     if (!batchId) return res.status(400).json({ error: "batchId is required" });
 
-    const result = evaluateRisk({ ndviChange, locationRisk, dataQuality });
-    const inputPayload = { ndviChange, locationRisk, dataQuality, metadata: metadata ?? null };
+    const result = evaluateRisk({
+      ndviChange,
+      locationRisk,
+      dataQuality,
+      supplyChainComplexity,
+      corruptionIndex
+    });
+
+    const inputPayload = {
+      ndviChange,
+      locationRisk,
+      dataQuality,
+      supplyChainComplexity,
+      corruptionIndex,
+      metadata: metadata ?? null
+    };
 
     const run = await complianceRepository.createRun(orgId, {
       batchId,
@@ -26,6 +49,7 @@ complianceRouter.post("/check", requireRole("operator"), async (req, res, next) 
     const record = await complianceRepository.createRecord(orgId, {
       batchId,
       status: result.status,
+      eudrLevel: result.eudrLevel,
       score: result.score,
       scoringVersion: result.scoringVersion
     });
@@ -40,6 +64,7 @@ complianceRouter.post("/check", requireRole("operator"), async (req, res, next) 
         batchId,
         score: result.score,
         status: result.status,
+        eudrLevel: result.eudrLevel,
         scoringVersion: result.scoringVersion
       }
     });
