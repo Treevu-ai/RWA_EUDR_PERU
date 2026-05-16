@@ -11,9 +11,13 @@ export function FeatureGrid() {
   return (
     <section className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:px-12 lg:py-20">
       <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
-        <span className="text-[8px] sm:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-mono">{"// SECCION: DATOS_BRUTOS"}</span>
+        <span className="text-[8px] sm:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-mono">{"// COMO FUNCIONA: LA PLATAFORMA"}</span>
         <div className="flex-1 border-t border-border" />
         <span className="text-[8px] sm:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-mono">004</span>
+      </div>
+      <div className="mb-6 sm:mb-8">
+        <h2 className="text-lg sm:text-2xl lg:text-3xl font-mono font-bold tracking-tight uppercase text-balance mb-2">Tu DDS en cuatro pasos</h2>
+        <p className="text-[10px] sm:text-xs font-mono text-muted-foreground leading-relaxed max-w-xl">Asi convierte Forest Trace AI los datos de tu finca en un paquete de evidencia listo para el comprador europeo.</p>
       </div>
       <div className="border-2 border-foreground">
         <div className="grid grid-cols-1 md:grid-cols-2">
