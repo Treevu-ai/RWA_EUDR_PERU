@@ -1,0 +1,23 @@
+# Forest Trace AI
+> Plataforma SaaS de trazabilidad, diligencia debida y evidencia agroexportadora.
+> Cumplimiento EUDR (Reglamento UE 2023/1115) para cafe y cacao peruano.
+> MIDAGRI · SERFOR · SENASA · GeoBosques · PROMPERU · SUNARP · SUNAT.
+
+## Docs
+- Pagina principal: https://foresttrace-ai.vercel.app
+- Como funciona: https://foresttrace-ai.vercel.app/como-funciona (flujo DDS completo)
+- Planes: DIAGNOSTICO ($0) | PILOTO ($499/mes) | ENTERPRISE (custom)
+- FAQ: Preguntas frecuentes sobre EUDR, plazos PYMES (30 jun 2026), entidades peruanas
+
+## Product
+Forest Trace AI es una plataforma SaaS que automatiza el Sistema de Diligencia Debida (DDS) exigido por el Reglamento EUDR. Integra geolocalizacion WGS84, scoring de riesgo con 5 factores, verificacion de 8 ambitos de legalidad (Art. 2.40 EUDR), generacion de DDS exportable en PDF, y copiloto documental con citas del Diario Oficial de la UE.
+
+## Context
+- $800M+ en exportaciones agro peruanas a la UE estan en riesgo
+- Solo ~100K de 2M de productores tienen parcelas geolocalizadas
+- Los sistemas agroforestales peruanos (DS 020-2015-MINAGRI) NO son bosque bajo EUDR
+- La ventana para PYMES cierra el 30 de junio de 2026
+
+## Optional
+- GitHub: https://github.com/Treevu-ai/RWA_EUDR_PERU
+- Contacto: sinapsisinnovadoraperu@gmail.com | +51 902 126 765
