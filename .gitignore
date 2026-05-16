@@ -44,3 +44,4 @@ prototype/data/eudr-knowledge.embeddings.json
 
 # Catálogo externo empaquetado (subrepo ajeno; excluir del remoto principal)
 agentic-ai-apis/
+*.Zone.Identifier

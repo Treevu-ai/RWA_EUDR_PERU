@@ -1,0 +1,5 @@
+"use client"
+import { Leaf } from "lucide-react"
+import { motion } from "framer-motion"
+import { ThemeToggle } from "@/components/theme-toggle"
+export function Navbar() { return (<motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="w-full px-4 pt-4 lg:px-6 lg:pt-6"><nav className="w-full border border-foreground/20 bg-background/80 backdrop-blur-sm px-6 py-3 lg:px-8"><div className="flex items-center justify-between"><div className="flex items-center gap-3"><Leaf size={16} /><span className="text-xs font-mono tracking-[0.15em] uppercase font-bold">Forest Trace AI</span></div><div className="hidden md:flex items-center gap-8">{[1,2,3,4].map(i=><span key={i} className="text-xs font-mono tracking-widest uppercase text-muted-foreground">{"Plataforma|DDS|Peru|Planes".split("|")[i-1]}</span>)}</div><div className="flex items-center gap-4"><ThemeToggle /><button className="bg-foreground text-background px-4 py-2 text-xs font-mono tracking-widest uppercase">Pedir Demo</button></div></div></nav></motion.div>) }
