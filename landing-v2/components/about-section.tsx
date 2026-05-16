@@ -29,7 +29,7 @@ export function AboutSection() {
     <div className="flex flex-col lg:flex-row gap-0 border-2 border-foreground">
       <div className="relative w-full lg:w-1/2 min-h-[180px] sm:min-h-[280px] lg:min-h-[420px] border-b-2 lg:border-b-0 lg:border-r-2 border-foreground overflow-hidden bg-foreground">
         <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-2 sm:px-4 py-1.5 sm:py-2 bg-foreground/80 backdrop-blur-sm"><span className="text-[8px] sm:text-[10px] tracking-[0.15em] uppercase text-background/60 font-mono">AGROFORESTAL_PERU</span><span className="text-[8px] sm:text-[10px] tracking-[0.2em] uppercase text-[#ea580c] font-mono">ACTIVO</span></div>
-        <Image src="/images/about-isometric.jpg" alt="Sistemas agroforestales cafe cacao Peru" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" priority />
+        <Image src="/images/agroforestal-peru.png" alt="Sistemas agroforestales cafe cacao Peru" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" priority />
         <div className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between px-2 sm:px-4 py-1.5 sm:py-2 bg-foreground/80 backdrop-blur-sm"><span className="text-[7px] sm:text-[10px] tracking-[0.15em] uppercase text-background/40 font-mono">SAN MARTIN / CAJAMARCA</span><span className="text-[7px] sm:text-[10px] tracking-[0.15em] uppercase text-background/40 font-mono">DS 020-2015</span></div>
       </div>
       <div className="flex flex-col w-full lg:w-1/2">
