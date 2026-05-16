@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 280" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#063d33"/>
+      <stop offset="0.45" stop-color="#0a5c4a"/>
+      <stop offset="1" stop-color="#1a6b8c"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="900" y1="-20" x2="1100" y2="200">
+      <stop offset="0" stop-color="#e8c468" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#e8c468" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="280" rx="16" fill="url(#bg)"/>
+  <rect width="1200" height="280" rx="16" fill="url(#grid)" opacity="0.9"/>
+  <circle cx="1050" cy="40" r="140" fill="url(#glow)"/>
+  <path d="M80 200c40-80 120-120 220-120s140 60 240 60 140-80 260-80 160 80 260 120" stroke="rgba(232,196,104,0.35)" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <text x="80" y="118" fill="#faf8f5" font-family="Georgia, Times New Roman, serif" font-size="52" font-weight="600" letter-spacing="-0.03em">RWA EUDR · Perú</text>
+  <text x="80" y="168" fill="rgba(250,248,245,0.82)" font-family="Segoe UI, system-ui, sans-serif" font-size="22" font-weight="400">Trazabilidad verificable para café, cacao y la canasta agroexportadora</text>
+  <text x="80" y="212" fill="rgba(232,196,104,0.95)" font-family="Segoe UI, system-ui, sans-serif" font-size="15" letter-spacing="0.12em" text-transform="uppercase">Documentación · prototipo · cooperación UE</text>
+</svg>

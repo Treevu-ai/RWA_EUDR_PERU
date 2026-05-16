@@ -1,0 +1,46 @@
+name: Deploy landing to Vercel
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "landing/**"
+      - ".github/workflows/deploy-landing.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Deploy to Vercel (production)
+        working-directory: landing
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          # Slug o ID del equipo; obligatorio en CI (--scope). Ej.: acuba0103-7161s-projects
+          VERCEL_TEAM: ${{ secrets.VERCEL_TEAM }}
+          VERCEL_LANDING_PROJECT_NAME: ${{ secrets.VERCEL_LANDING_PROJECT_NAME }}
+        run: |
+          set -e
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::error::Secret VERCEL_TOKEN no está definido (GitHub → Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+          if [ -z "$VERCEL_TEAM" ]; then
+            echo "::error::Secret VERCEL_TEAM no está definido. En Vercel → tu equipo: el slug aparece en la URL (vercel.com/<slug>/...) o en el mensaje de error del CLI (missing_scope → choices)."
+            exit 1
+          fi
+          PROJECT_NAME="${VERCEL_LANDING_PROJECT_NAME:-landing-five-teal-76}"
+          rm -rf .vercel
+          vercel link --yes --non-interactive --scope "$VERCEL_TEAM" --project "$PROJECT_NAME"
+          vercel deploy --prod --yes

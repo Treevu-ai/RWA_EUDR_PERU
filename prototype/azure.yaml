@@ -1,0 +1,14 @@
+name: rwa-eudr
+metadata:
+  template: azd-prod-container-apps
+services:
+  app:
+    project: .
+    path: .
+    language: js
+    host: containerapps
+    runtime: node:18
+    output: build
+    docker:
+      path: Dockerfile
+      context: .

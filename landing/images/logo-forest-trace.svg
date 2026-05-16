@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">Forest Trace AI</title>
+  <defs>
+    <linearGradient id="g1" x1="6" y1="4" x2="50" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0b5a49" />
+      <stop offset="1" stop-color="#1a6b8c" />
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="52" height="52" rx="12" fill="url(#g1)" />
+  <circle cx="23" cy="28" r="12.5" fill="none" stroke="#d9ece7" stroke-width="2.2" opacity="0.9" />
+  <circle cx="23" cy="28" r="7.2" fill="none" stroke="#f3fbf8" stroke-width="1.8" opacity="0.95" />
+  <circle cx="23" cy="28" r="3.2" fill="#f3fbf8" />
+  <path d="M34 16c6 2 9 8 6 14" fill="none" stroke="#e9f7f2" stroke-width="2.2" stroke-linecap="round" />
+  <circle cx="40" cy="31" r="3.3" fill="#d7b553" stroke="#fff7de" stroke-width="1" />
+</svg>

@@ -1,0 +1,30 @@
+{
+  "name": "foresttrace-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "ForestTrace Sprint 1 base API with Postgres/PostGIS.",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "build": "node -e \"console.log('No build step required for serverless API')\"",
+    "db:migrate": "node src/db/migrate.js",
+    "db:seed": "node src/db/seed.js",
+    "check": "node --check src/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.5.1",
+    "helmet": "^8.0.0",
+    "pdfkit": "^0.18.0",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.2.2"
+  }
+}

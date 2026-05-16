@@ -1,0 +1,42 @@
+# Environment variables (NO COMMIT)
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build
+dist/
+*.build
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (local persistence)
+prototype/data/*.json
+!prototype/data/.gitkeep
+!prototype/data/eudr-knowledge.json
+!prototype/data/eudr-checklist.json
+!prototype/data/eurlex-references.json
+
+# Copiloto: auditoría local (no versionar)
+prototype/data/copilot-audit.jsonl
+
+# Embeddings generados (opcional: quitar esta línea y commitear el índice si se desea)
+prototype/data/eudr-knowledge.embeddings.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Catálogo externo empaquetado (subrepo ajeno; excluir del remoto principal)
+agentic-ai-apis/

@@ -1,0 +1,48 @@
+name: Deploy prototype to Vercel
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "prototype/**"
+      - ".github/workflows/deploy-prototype.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-deploy-prototype
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Deploy prototype to Vercel (production)
+        working-directory: prototype
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_TEAM: ${{ secrets.VERCEL_TEAM }}
+          VERCEL_PROTOTYPE_PROJECT_NAME: ${{ secrets.VERCEL_PROTOTYPE_PROJECT_NAME }}
+        run: |
+          set -e
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::error::Secret VERCEL_TOKEN no está definido (GitHub → Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+          if [ -z "$VERCEL_TEAM" ]; then
+            echo "::error::Secret VERCEL_TEAM no está definido. En Vercel → tu equipo: el slug aparece en la URL (vercel.com/<slug>/...)."
+            exit 1
+          fi
+          PROJECT_NAME="${VERCEL_PROTOTYPE_PROJECT_NAME:-rwa-eudr-prototype}"
+          rm -rf .vercel
+          vercel link --yes --non-interactive --scope "$VERCEL_TEAM" --project "$PROJECT_NAME"
+          vercel deploy --prod --yes

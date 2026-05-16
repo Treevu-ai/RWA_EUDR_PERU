@@ -1,0 +1,84 @@
+{
+  "version": "2026-04-19",
+  "purpose": "Lista de preparación documental — no constituye dictamen legal. Cada ítem debe contrastarse con EUR-Lex y asesoría cualificada.",
+  "items": [
+    {
+      "id": "legal-text-access",
+      "category": "Gobernanza",
+      "label": "Acceso al texto oficial y seguimiento de modificaciones",
+      "hint": "Designar responsable de revisar EUR-Lex / DOUE para el Reglamento y actos relacionados aplicables a su rol.",
+      "severity": "medium"
+    },
+    {
+      "id": "operator-role",
+      "category": "Rol",
+      "label": "Claridad de rol (operador vs comerciante / importador)",
+      "hint": "El alcance de obligaciones depende del rol en la cadena según el Reglamento; documentarlo internamente.",
+      "severity": "high"
+    },
+    {
+      "id": "product-scope",
+      "category": "Producto",
+      "label": "Encaje del producto y partida en Anexo / categorías reguladas",
+      "hint": "Verificar categoría exacta (p. ej. café/cacao según formas incluidas) antes de aplicar checklist EUDR.",
+      "severity": "high"
+    },
+    {
+      "id": "geo-evidence",
+      "category": "Datos",
+      "label": "Evidencia geográfica de producción",
+      "hint": "Coordenadas o geometrías según política acordada con comprador y requisitos del sistema de información UE.",
+      "severity": "high",
+      "lot_field": "geo"
+    },
+    {
+      "id": "dds-process",
+      "category": "DDS",
+      "label": "Proceso interno de debida diligencia documentado",
+      "hint": "Recopilación, evaluación de riesgo, mitigación y trazabilidad de decisiones respecto a lotes.",
+      "severity": "high"
+    },
+    {
+      "id": "deforestation-risk",
+      "category": "Riesgo",
+      "label": "Evaluación de riesgo de deforestación / degradación",
+      "hint": "Evidencia y metodología trazable; conservar fuentes y fecha de corte legal aplicable.",
+      "severity": "high"
+    },
+    {
+      "id": "national-legality",
+      "category": "Legalidad país",
+      "label": "Documentación de legalidad en país de origen (según marco)",
+      "hint": "Ámbitos típicos: tenencia, ambiental, laboral, tributario — según exigencias aplicables al caso.",
+      "severity": "high"
+    },
+    {
+      "id": "custody-records",
+      "category": "Trazabilidad",
+      "label": "Registros de cadena de custodia entre eslabones",
+      "hint": "Identificadores de lote, cantidades, fechas y responsables entre finca y exportación.",
+      "severity": "medium"
+    },
+    {
+      "id": "supplier-mapping",
+      "category": "Cadena",
+      "label": "Mapa de proveedores y contratos",
+      "hint": "Saber quién provee qué lote y bajo qué condiciones contractuales de evidencia.",
+      "severity": "medium"
+    },
+    {
+      "id": "eu-system",
+      "category": "Declaración",
+      "label": "Preparación para sistema de información / DDS según estado del reglamento",
+      "hint": "Campos y plazos según especificación vigente de la Comisión — verificar antes de declarar.",
+      "severity": "high"
+    },
+    {
+      "id": "audit-trail",
+      "category": "Auditoría",
+      "label": "Pista de auditoría interna (quién cambió qué y cuándo)",
+      "hint": "Logs y versionado reducen disputas ante compradores y auditores externos.",
+      "severity": "medium"
+    }
+  ]
+}

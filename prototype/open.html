@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EUDR Trace - Prototipo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: Inter, system-ui, sans-serif; 
+      background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+      min-height: 100vh;
+      color: white;
+      padding: 2rem;
+    }
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .subtitle { font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .stat {
+      background: rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+    .stat strong { display: block; font-size: 2rem; }
+    .stat span { opacity: 0.8; font-size: 0.9rem; }
+    .markets {
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    .note {
+      background: #fbbf24;
+      color: #92400e;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <p style="text-transform:uppercase;letter-spacing:0.2em;font-size:0.8rem">Prototype</p>
+    <h1>EUDR Trace</h1>
+    <p class="subtitle">Plataforma de trazabilidad blockchain para exportaciones agroexportadoras Perú → UE</p>
+    
+    <div class="stats">
+      <div class="stat">
+        <strong>$1.5B</strong>
+        <span>Exportaciones cacao 2025</span>
+      </div>
+      <div class="stat">
+        <strong>+22%</strong>
+        <span>Crecimiento YoY</span>
+      </div>
+      <div class="stat">
+        <strong>34%</strong>
+        <span>Share Unión Europea</span>
+      </div>
+      <div class="stat">
+        <strong>4</strong>
+        <span>Cooperativas conectadas</span>
+      </div>
+    </div>
+
+    <div class="markets">
+      <p><strong>Principales mercados UE:</strong> Países Bajos, Bélgica, Italia, Alemania, España</p>
+      <p style="margin-top:0.5rem;opacity:0.8;font-size:0.9rem">Fuente: MINCETUR, PROMPERÚ 2025</p>
+    </div>
+
+    <div class="note">
+      API corriendo en http://localhost:3000 | Dashboard, Trazabilidad y Trazas disponibles
+    </div>
+  </div>
+</body>
+</html>
