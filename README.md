@@ -1,3 +1,10 @@
+<!-- readme-hero -->
+<div align="center">
+
+<img src="assets/readme-hero.svg" alt="RWA EUDR PERU" width="100%" />
+
+</div>
+
 <div align="center">
 
 > ⚠️ **REPOSITORIO PRIVADO Y CONFIDENCIAL**
